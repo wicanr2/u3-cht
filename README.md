@@ -34,9 +34,23 @@ PoC 會輸出 `poc_out.png`:左側 tile 拼圖 + 右側中文文字,一次驗證
 | P3a–d | compat 層 (型別/幾何/GWorld/CopyBits/CJK 文字/Carbon umbrella) | ✅ |
 | P3e | 上游編譯狀態:6/11 檔對 compat 乾淨編譯 (含繪圖引擎) | ✅ |
 | P4a | 字串管線 (.u3s) + 讀取器 + 端到端中文渲染 | ✅ |
-| 後續 | 核心邏輯三檔補齊 / SDL 主迴圈 / 資源載入 / 全量翻譯 / 遊玩驗證 | 進行中 |
+| P5 | SDL 平台層 + 資源 fork 讀取器 + present:遊戲可執行並渲染 | ✅ |
+| P5b | 遊戲內字串表文字渲染 (DrawThemeTextBox → SDL_ttf) | ✅ |
+| P5d | 滑鼠點擊導航:可進入世界畫面 | ✅ |
+| P6 | 字串表全量翻譯 (主要遊戲文字) | ✅ |
+| 後續 | 組隊→啟程完整遊玩流程 / 選單按鈕圖片中文化 / 翻譯潤飾 | 進行中 |
 
-詳見 `docs/P3-compat-compile-status.md`。
+詳見 `docs/P3-compat-compile-status.md`。截圖見 `docs/screenshots/`。
+
+## 執行 (容器內)
+
+```bash
+docker build -t u3cht docker/
+docker run --rm --user "$(id -u):$(id -g)" -v "$PWD":/work u3cht bash /work/u3-cht/tools/build_game.sh
+# 背景測試 (game tester):截圖 + 腳本輸入
+docker run --rm --user "$(id -u):$(id -g)" -v "$PWD":/work -e XDG_RUNTIME_DIR=/tmp u3cht \
+  bash tools/game_tester.sh build/u3 20 tests/scripts/tomenu.txt
+```
 
 ## 授權
 
