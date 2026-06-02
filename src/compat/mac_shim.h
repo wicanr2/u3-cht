@@ -110,13 +110,43 @@ enum {
     dmOnlyActiveDisplays = 1,
     /* HI command / 視窗位置 / script */
     kHICommandPreferences = 0x70726566, kWindowDefaultPosition = 0,
-    smSystemScript = -1
+    smSystemScript = -1,
+    /* 視窗類型 / 系統視窗 / 轉場 */
+    plainDBox = 2, altDBoxProc = 3, documentProc = 0, inSysWindow = 2,
+    kWindowHideTransitionAction = 1, kWindowShowTransitionAction = 0,
+    /* Gestalt selectors / QD 版本 */
+    gestalt32BitQD = 5, gestaltQuickdrawVersion = 0x71642020,
+    gestaltQuickTimeVersion = 0x71747320, gestaltProcessorType = 0x70726f63,
+    gestaltAddressingModeAttr = 0x61646472,
+    gestalt68000 = 0, gd2BitQD = 1
 };
+#define kCFNotFound (-1)
 /* CoreGraphics 顯示常數 */
 #define kCGDirectMainDisplay ((CGDirectDisplayID)0)
 #define kCGErrorSuccess      (0)
 #define kCGDisplayWidth      ((CFStringRef)"Width")
 #define kCGDisplayHeight     ((CFStringRef)"Height")
+
+/* WindowPeek:Classic 視窗結構窺視 (僅用到 goAwayFlag);移植期供型別解析 */
+typedef struct WindowRecord {
+    GrafPort port;
+    Boolean  goAwayFlag;
+    Boolean  visible;
+} WindowRecord;
+typedef WindowRecord *WindowPeek;
+
+/* QuickDraw 全域 (qd.thePort / qd.randSeed) */
+typedef struct QDGlobals {
+    GrafPtr thePort;
+    SInt32  randSeed;
+    BitMap  screenBits;
+} QDGlobals;
+extern QDGlobals qd;
+
+typedef struct NumVersion { UInt8 majorRev, minorAndBugRev, stage, nonRelRev; } NumVersion;
+typedef Handle MCTableHandle;
+typedef struct CFRange { long location, length; } CFRange;
+NumVersion SndSoundManagerVersion(void);
 
 /* ===== Carbon 雜項型別/常數 (移植期型別解析用) ===== */
 typedef SInt32 Size;
@@ -148,6 +178,7 @@ typedef const void *CFTypeRef;
 typedef const struct __CFString *CFStringRef;
 typedef const struct __CFURL    *CFURLRef;
 typedef const struct __CFArray  *CFArrayRef;
+typedef struct __CFArray  *CFMutableArrayRef;
 typedef const struct __CFDictionary *CFDictionaryRef;
 typedef struct __CFDictionary *CFMutableDictionaryRef;
 typedef struct __CFBundle *CFBundleRef;
@@ -157,6 +188,8 @@ typedef const struct __CFNumber *CFNumberRef;
 typedef SInt32 CFNumberType;
 enum { kCFNumberShortType = 3, kCFNumberIntType = 9, kCFNumberSInt32Type = 3 };
 typedef unsigned long CFIndex;
+CFRange CFStringFind(CFStringRef s, CFStringRef find, UInt32 flags);
+CFRange CFRangeMake(CFIndex loc, CFIndex len);
 typedef UInt32 CFStringEncoding;
 typedef Boolean CFComparisonResult; /* 簡化 */
 
