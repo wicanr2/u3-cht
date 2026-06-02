@@ -10,6 +10,8 @@ pkg_check_modules(SDL2 REQUIRED sdl2)
 pkg_check_modules(SDL2_IMAGE REQUIRED SDL2_image)
 pkg_check_modules(SDL2_TTF REQUIRED SDL2_ttf)
 
+set(U3COMPAT_SDL_INCLUDES ${SDL2_INCLUDE_DIRS} ${SDL2_TTF_INCLUDE_DIRS})
+
 # --- P0 smoke: hello-SDL，驗證工具鏈 ---
 add_executable(hello_sdl tests/hello_sdl.c)
 target_include_directories(hello_sdl PRIVATE ${SDL2_INCLUDE_DIRS})
@@ -20,9 +22,10 @@ add_library(u3compat STATIC
     src/compat/qd_geometry.c
     src/compat/qd_port.c
     src/compat/qd_draw.c
+    src/compat/qd_text.c
 )
-target_include_directories(u3compat PUBLIC src/compat ${SDL2_INCLUDE_DIRS})
-target_link_libraries(u3compat PUBLIC ${SDL2_LIBRARIES})
+target_include_directories(u3compat PUBLIC src/compat ${U3COMPAT_SDL_INCLUDES})
+target_link_libraries(u3compat PUBLIC ${SDL2_LIBRARIES} ${SDL2_TTF_LIBRARIES})
 
 # --- compat 單元測試 ---
 add_executable(test_geometry tests/test_geometry.c)
@@ -33,6 +36,10 @@ add_test(NAME geometry COMMAND test_geometry)
 add_executable(test_qd_blit tests/test_qd_blit.c)
 target_include_directories(test_qd_blit PRIVATE ${SDL2_IMAGE_INCLUDE_DIRS})
 target_link_libraries(test_qd_blit PRIVATE u3compat ${SDL2_IMAGE_LIBRARIES})
+
+add_executable(test_qd_text tests/test_qd_text.c)
+target_include_directories(test_qd_text PRIVATE ${SDL2_IMAGE_INCLUDE_DIRS})
+target_link_libraries(test_qd_text PRIVATE u3compat ${SDL2_IMAGE_LIBRARIES})
 
 # --- P1 垂直切片 PoC ---
 add_executable(poc

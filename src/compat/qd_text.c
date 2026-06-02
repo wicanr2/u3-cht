@@ -1,0 +1,149 @@
+/* qd_text.c — 文字 / 主題字串 shim 實作 (SDL_ttf, UTF-8/CJK) */
+#include "qd_text.h"
+#include "quickdraw.h"
+#include <SDL.h>
+#include <SDL_ttf.h>
+#include <string.h>
+#include <stdlib.h>
+
+#define DEFAULT_FONT "/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc"
+
+static char gFontPath[1024] = DEFAULT_FONT;
+
+/* 字型快取:依點數開檔 */
+#define MAX_FONTS 16
+static struct { int size; TTF_Font *font; } gCache[MAX_FONTS];
+static int gCacheN = 0;
+static Boolean gTTFInit = false;
+
+void U3_SetFontPath(const char *path) {
+    if (path && *path) {
+        strncpy(gFontPath, path, sizeof(gFontPath) - 1);
+        gFontPath[sizeof(gFontPath) - 1] = '\0';
+    }
+}
+
+static TTF_Font *font_for_size(int size) {
+    if (size <= 0) size = 12;
+    if (!gTTFInit) {
+        if (TTF_Init() != 0) return NULL;
+        gTTFInit = true;
+    }
+    for (int i = 0; i < gCacheN; i++)
+        if (gCache[i].size == size) return gCache[i].font;
+    if (gCacheN >= MAX_FONTS) return gCache[0].font; /* 退而求其次 */
+    TTF_Font *f = TTF_OpenFont(gFontPath, size);
+    if (!f) return NULL;
+    gCache[gCacheN].size = size;
+    gCache[gCacheN].font = f;
+    gCacheN++;
+    return f;
+}
+
+void U3_TextShutdown(void) {
+    for (int i = 0; i < gCacheN; i++)
+        if (gCache[i].font) TTF_CloseFont(gCache[i].font);
+    gCacheN = 0;
+    if (gTTFInit) { TTF_Quit(); gTTFInit = false; }
+}
+
+/* Pascal → C (UTF-8 視之);回傳指向靜態緩衝 */
+static const char *pascal_to_c(ConstStr255Param p) {
+    static char buf[512];
+    if (!p) { buf[0] = '\0'; return buf; }
+    int len = p[0];
+    if (len > 510) len = 510;
+    memcpy(buf, p + 1, len);
+    buf[len] = '\0';
+    return buf;
+}
+
+/* ThemeFontID → 點數:current port 用埠 txSize,其餘給預設 */
+static int size_for_theme(ThemeFontID id) {
+    CGrafPtr port = CurrentPort();
+    int portSize = (port && port->txSize > 0) ? port->txSize : 12;
+    switch (id) {
+        case kThemeSmallSystemFont: return 11;
+        case kThemeSystemFont:      return 12;
+        case kThemeCurrentPortFont:
+        default:                    return portSize;
+    }
+}
+
+/* 核心:UTF-8 在 (h,v) 以 baseline 對齊繪入目前埠 */
+static void draw_utf8_at(const char *utf8, int h, int v, int ptSize) {
+    CGrafPtr port = CurrentPort();
+    if (!port || !port->surface || !utf8 || !*utf8) return;
+    TTF_Font *f = font_for_size(ptSize);
+    if (!f) return;
+
+    SDL_Color col = { 0, 0, 0, 255 };
+    col.r = (Uint8)(port->fgColor.red   >> 8);
+    col.g = (Uint8)(port->fgColor.green >> 8);
+    col.b = (Uint8)(port->fgColor.blue  >> 8);
+
+    SDL_Surface *txt = TTF_RenderUTF8_Blended(f, utf8, col);
+    if (!txt) return;
+
+    /* pen.v 視為 baseline → 上緣 = v - ascent */
+    int ascent = TTF_FontAscent(f);
+    SDL_Rect dst = { h - port->portRect.left,
+                     v - ascent - port->portRect.top,
+                     txt->w, txt->h };
+    SDL_SetSurfaceBlendMode(txt, SDL_BLENDMODE_BLEND);
+    SDL_BlitSurface(txt, NULL, port->surface, &dst);
+    SDL_FreeSurface(txt);
+}
+
+static int utf8_width(const char *utf8, int ptSize) {
+    TTF_Font *f = font_for_size(ptSize);
+    if (!f || !utf8) return 0;
+    int w = 0, h = 0;
+    TTF_SizeUTF8(f, utf8, &w, &h);
+    return w;
+}
+
+/* ===== 文字狀態 ===== */
+void TextFont(SInt16 font) { CGrafPtr p = CurrentPort(); if (p) p->txFont = font; }
+void TextSize(SInt16 size) { CGrafPtr p = CurrentPort(); if (p) p->txSize = size; }
+void TextMode(SInt16 mode) { CGrafPtr p = CurrentPort(); if (p) p->txMode = mode; }
+void TextFace(SInt16 face) { (void)face; }
+
+/* ===== 經典 DrawString ===== */
+void DrawString(ConstStr255Param s) {
+    CGrafPtr p = CurrentPort();
+    if (!p) return;
+    int sz = (p->txSize > 0) ? p->txSize : 12;
+    const char *c = pascal_to_c(s);
+    draw_utf8_at(c, p->pen.h, p->pen.v, sz);
+    p->pen.h += (SInt16)utf8_width(c, sz);  /* 推進畫筆 */
+}
+
+SInt16 StringWidth(ConstStr255Param s) {
+    CGrafPtr p = CurrentPort();
+    int sz = (p && p->txSize > 0) ? p->txSize : 12;
+    return (SInt16)utf8_width(pascal_to_c(s), sz);
+}
+
+/* ===== 主題字串 (主要繪字出口) ===== */
+OSStatus UDrawThemePascalString(ConstStr255Param inPString, ThemeFontID inFontID) {
+    CGrafPtr p = CurrentPort();
+    if (!p) return -1;
+    int sz = size_for_theme(inFontID);
+    const char *c = pascal_to_c(inPString);
+    draw_utf8_at(c, p->pen.h, p->pen.v, sz);
+    p->pen.h += (SInt16)utf8_width(c, sz);
+    return noErr;
+}
+
+SInt16 UThemePascalStringWidth(ConstStr255Param inPString, ThemeFontID inFontID) {
+    return (SInt16)utf8_width(pascal_to_c(inPString), size_for_theme(inFontID));
+}
+
+/* ===== UTF-8 直繪輔助 (新中文化碼用) ===== */
+void U3_DrawUTF8(const char *utf8, SInt16 h, SInt16 v, SInt16 ptSize) {
+    draw_utf8_at(utf8, h, v, ptSize);
+}
+SInt16 U3_UTF8Width(const char *utf8, SInt16 ptSize) {
+    return (SInt16)utf8_width(utf8, ptSize);
+}
