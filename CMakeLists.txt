@@ -15,6 +15,18 @@ add_executable(hello_sdl tests/hello_sdl.c)
 target_include_directories(hello_sdl PRIVATE ${SDL2_INCLUDE_DIRS})
 target_link_libraries(hello_sdl PRIVATE ${SDL2_LIBRARIES})
 
+# --- compat 層 (QuickDraw/Mac shim) ---
+add_library(u3compat STATIC
+    src/compat/qd_geometry.c
+)
+target_include_directories(u3compat PUBLIC src/compat)
+
+# --- compat 單元測試 ---
+add_executable(test_geometry tests/test_geometry.c)
+target_link_libraries(test_geometry PRIVATE u3compat)
+enable_testing()
+add_test(NAME geometry COMMAND test_geometry)
+
 # --- P1 垂直切片 PoC ---
 add_executable(poc
     src/poc/main.c
