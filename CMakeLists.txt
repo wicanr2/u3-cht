@@ -18,14 +18,21 @@ target_link_libraries(hello_sdl PRIVATE ${SDL2_LIBRARIES})
 # --- compat 層 (QuickDraw/Mac shim) ---
 add_library(u3compat STATIC
     src/compat/qd_geometry.c
+    src/compat/qd_port.c
+    src/compat/qd_draw.c
 )
-target_include_directories(u3compat PUBLIC src/compat)
+target_include_directories(u3compat PUBLIC src/compat ${SDL2_INCLUDE_DIRS})
+target_link_libraries(u3compat PUBLIC ${SDL2_LIBRARIES})
 
 # --- compat 單元測試 ---
 add_executable(test_geometry tests/test_geometry.c)
 target_link_libraries(test_geometry PRIVATE u3compat)
 enable_testing()
 add_test(NAME geometry COMMAND test_geometry)
+
+add_executable(test_qd_blit tests/test_qd_blit.c)
+target_include_directories(test_qd_blit PRIVATE ${SDL2_IMAGE_INCLUDE_DIRS})
+target_link_libraries(test_qd_blit PRIVATE u3compat ${SDL2_IMAGE_LIBRARIES})
 
 # --- P1 垂直切片 PoC ---
 add_executable(poc
