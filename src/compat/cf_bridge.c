@@ -13,7 +13,7 @@ void GetPascalStringFromArrayByIndex(StringPtr pstringPtr, CFStringRef identifie
     Strings_GetPascal(pstringPtr, table ? table : "", index);
 }
 
-short Absolute(short x) { return x < 0 ? (short)-x : x; }  /* 對齊 UltimaMisc.h */
+/* Absolute 由上游 UltimaMisc.c 定義,此處不重複 */
 
 /* --- CFPreferences:暫以預設值回應,不持久化 --- */
 CFStringRef kCFPreferencesCurrentApplication = (CFStringRef)"U3CHT";

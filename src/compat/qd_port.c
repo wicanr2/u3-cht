@@ -2,6 +2,7 @@
 #include "quickdraw.h"
 #include <SDL.h>
 #include <stdlib.h>
+#include <stdio.h>
 #include <string.h>
 
 static CGrafPtr gCurrentPort = NULL;
@@ -78,12 +79,31 @@ void DisposeGWorld(GWorldPtr gw) {
     free(gw);
 }
 
-void SetGWorld(CGrafPtr port, GDHandle dev) { (void)dev; gCurrentPort = port; }
+/* 假主螢幕 GDevice:遊戲讀 (*(*mainDevice)->gdPMap)->pixelSize 判斷色深。
+ * 直繪路徑已停用,給 32-bit 即可,僅需可安全解參。 */
+static PixMap     gScreenPM   = { 0 };
+static PixMapPtr  gScreenPMPtr = &gScreenPM;
+static GDevice    gScreenGD   = { 0 };
+static GDPtr      gScreenGDPtr = &gScreenGD;
+static GDHandle   gScreenGDH  = &gScreenGDPtr;
+static int        gScreenGDInit = 0;
+static GDHandle screen_device(void) {
+    if (!gScreenGDInit) {
+        gScreenPM.pixelSize = 32;
+        gScreenGD.gdPMap = &gScreenPMPtr;
+        gScreenGDInit = 1;
+    }
+    return gScreenGDH;
+}
+
+/* 忽略 nil:nil port 非有效繪圖目標,設 nil 通常是 save/restore 還原了
+ * 早期(視窗尚未建立時)捕捉到的 nil,會誤清掉主視窗埠 → 全畫面無渲染。 */
+void SetGWorld(CGrafPtr port, GDHandle dev) { (void)dev; if (port) gCurrentPort = port; }
 void GetGWorld(CGrafPtr *port, GDHandle *dev) {
     if (port) *port = gCurrentPort;
-    if (dev)  *dev = NULL;
+    if (dev)  *dev = screen_device();
 }
-void SetPort(GrafPtr port) { gCurrentPort = port; }
+void SetPort(GrafPtr port) { if (port) gCurrentPort = port; }
 void GetPort(GrafPtr *port) { if (port) *port = gCurrentPort; }
 CGrafPtr CurrentPort(void) { return gCurrentPort; }
 

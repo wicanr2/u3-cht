@@ -16,6 +16,10 @@ echo "== 編譯上游遊戲檔 =="
 for f in $GAME; do
   gcc $CFLAGS -c $SRC/$f.c -o $OUT/$f.o 2>/dev/null || echo "  編譯失敗: $f"
 done
+# UltimaText.c 自帶 Mac 版 UDrawThemePascalString/UThemePascalStringWidth,
+# 弱化之,讓 compat/qd_text.c 的 SDL_ttf 中文版全域勝出。
+objcopy --weaken-symbol=UDrawThemePascalString \
+        --weaken-symbol=UThemePascalStringWidth $OUT/UltimaText.o 2>/dev/null
 
 echo "== 編譯 compat + text =="
 gcc $CFLAGS -c $COMPAT/qd_geometry.c -o $OUT/qd_geometry.o

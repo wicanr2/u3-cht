@@ -214,4 +214,7 @@ extern CFStringRef kCFPreferencesCurrentApplication;
 /* 宣告與 src/text/strings.h 對齊;identifier 為 CFStringRef(實為 C 字串) */
 void GetPascalStringFromArrayByIndex(StringPtr pstringPtr, CFStringRef identifier, int index);
 
+/* ===== 平台層原型 (回傳指標/handle/CFTypeRef 者務必正確宣告) ===== */
+#include "../platform_sdl/plat.h"
+
 #endif /* U3_COMPAT_MAC_SHIM_H */

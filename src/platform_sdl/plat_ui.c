@@ -1,0 +1,269 @@
+/* plat_ui.c — 視窗 / 對話框 / 控制項 / 選單 / 游標 / 文字 / Init / 顯示模式 /
+ *              多邊形 / CarbonShunts (LW*) / 專案 Cocoa stub
+ *
+ * 規則 (見任務說明):
+ *   視窗:NewWindow/GetNewCWindow 用 compat NewGWorld 建緩衝當視窗,回傳該 GrafPort;
+ *         不開真 SDL_Window (由 main.c 統一顯示)。GetWindowPort/SetPortWindowPort = 視窗即埠。
+ *   其餘 (對話框/控制項/選單/游標/多邊形/顯示模式/Movie 元件) 全 no-op。
+ *
+ * ⚠ 之後做「可玩」需補:游標顯示 (SetCursorNamed→SDL_Cursor)、
+ *    對話框 (角色建立/Game Options→自繪 UI)。事件迴圈與 present 由 main.c/plat_event.c 處理。
+ */
+#include "mac_shim.h"
+#include <SDL.h>
+
+/* ===== 視窗 ===== */
+/* 用 compat NewGWorld 建一塊與 bounds 同尺寸的 GrafPort 當視窗緩衝。 */
+static WindowPtr make_window(const Rect *bounds) {
+    Rect r;
+    if (bounds) {
+        r = *bounds;
+    } else {
+        r.left = r.top = 0; r.right = 640; r.bottom = 480;
+    }
+    /* NewGWorld 預期 bounds 由 0,0 起算的尺寸即可 */
+    Rect local;
+    local.left = 0; local.top = 0;
+    local.right = r.right - r.left;
+    local.bottom = r.bottom - r.top;
+    GWorldPtr gw = NULL;
+    NewGWorld(&gw, 32, &local, NULL, NULL, 0);
+    return (WindowPtr)gw;
+}
+
+WindowPtr NewWindow(void *storage, const Rect *bounds, ConstStringPtr title,
+                    Boolean visible, SInt16 procID, WindowPtr behind,
+                    Boolean goAway, SInt32 refCon) {
+    (void)storage; (void)title; (void)visible; (void)procID;
+    (void)behind; (void)goAway; (void)refCon;
+    return make_window(bounds);
+}
+WindowPtr NewCWindow(void *storage, const Rect *bounds, ConstStringPtr title,
+                     Boolean visible, SInt16 procID, WindowPtr behind,
+                     Boolean goAway, SInt32 refCon) {
+    (void)storage; (void)title; (void)visible; (void)procID;
+    (void)behind; (void)goAway; (void)refCon;
+    return make_window(bounds);
+}
+WindowPtr GetNewCWindow(SInt16 windowID, void *storage, WindowPtr behind) {
+    (void)windowID; (void)storage; (void)behind;
+    return make_window(NULL);
+}
+CGrafPtr GetWindowPort(WindowPtr win) { return (CGrafPtr)win; }
+void SetPortWindowPort(WindowPtr win) { if (win) SetGWorld((CGrafPtr)win, NULL); }
+
+/* 視窗顯示 / 搬移 / 標題 / 更新 — no-op (main.c 處理顯示) */
+void ShowWindow(WindowPtr w)               { (void)w; }
+void HideWindow(WindowPtr w)               { (void)w; }
+void DisposeWindow(WindowPtr w)            { if (w) DisposeGWorld((GWorldPtr)w); }
+void BringToFront(WindowPtr w)             { (void)w; }
+void MoveWindow(WindowPtr w, SInt16 h, SInt16 v, Boolean front) { (void)w; (void)h; (void)v; (void)front; }
+void SizeWindow(WindowPtr w, SInt16 width, SInt16 height, Boolean update) { (void)w; (void)width; (void)height; (void)update; }
+void DragWindow(WindowPtr w, Point startPt, const Rect *bounds) { (void)w; (void)startPt; (void)bounds; }
+void SetWTitle(WindowPtr w, ConstStr255Param title) { (void)w; (void)title; }
+void BeginUpdate(WindowPtr w)              { (void)w; }
+void EndUpdate(WindowPtr w)                { (void)w; }
+void InvalWindowRect(WindowPtr w, const Rect *r) { (void)w; (void)r; }
+void TransitionWindow(WindowPtr w, UInt32 effect, UInt32 action, const void *opts) {
+    (void)w; (void)effect; (void)action; (void)opts;
+}
+SInt16 FindWindow(Point thePoint, WindowPtr *theWindow) {
+    (void)thePoint; if (theWindow) *theWindow = NULL; return 0; /* inDesk */
+}
+Boolean TrackGoAway(WindowPtr w, Point thePt) { (void)w; (void)thePt; return false; }
+
+/* ===== 對話框 ===== */
+DialogPtr GetNewDialog(SInt16 dialogID, void *storage, WindowPtr behind) {
+    (void)dialogID; (void)storage; (void)behind; return NULL;
+}
+WindowPtr GetDialogWindow(DialogPtr dlg) { return (WindowPtr)dlg; }
+void DisposeDialog(DialogPtr dlg) { (void)dlg; }
+void ModalDialog(ModalFilterUPP filter, SInt16 *itemHit) {
+    (void)filter; if (itemHit) *itemHit = kAlertStdAlertCancelButton;
+}
+/* 回非 1:HandleError 在 button==1 時會 ExitToShell,移植期避免誤退出 */
+SInt16 Alert(SInt16 alertID, ModalFilterUPP filter) { (void)alertID; (void)filter; return 2; }
+OSErr StandardAlert(AlertType type, ConstStringPtr error, ConstStringPtr explanation,
+                    const AlertStdAlertParamRec *param, SInt16 *itemHit) {
+    (void)type; (void)error; (void)explanation; (void)param;
+    if (itemHit) *itemHit = kAlertStdAlertOKButton;
+    return noErr;
+}
+void GetDialogItem(DialogPtr dlg, SInt16 item, SInt16 *kind, Handle *h, Rect *r) {
+    (void)dlg; (void)item;
+    if (kind) *kind = 0;
+    if (h) *h = NULL;
+    if (r) { r->left = r->top = r->right = r->bottom = 0; }
+}
+OSErr GetDialogItemAsControl(DialogPtr dlg, SInt16 item, ControlRef *outControl) {
+    (void)dlg; (void)item; if (outControl) *outControl = NULL; return noErr;
+}
+void GetDialogItemText(Handle item, StringPtr text) { (void)item; if (text) text[0] = 0; }
+void SetDialogItemText(Handle item, ConstStr255Param text) { (void)item; (void)text; }
+void SelectDialogItemText(DialogPtr dlg, SInt16 item, SInt16 strtSel, SInt16 endSel) {
+    (void)dlg; (void)item; (void)strtSel; (void)endSel;
+}
+void ParamText(ConstStr255Param a, ConstStr255Param b, ConstStr255Param c, ConstStr255Param d) {
+    (void)a; (void)b; (void)c; (void)d;
+}
+
+/* ===== 控制項 ===== */
+SInt16 GetControlValue(ControlRef c)                  { (void)c; return 0; }
+void   SetControlValue(ControlRef c, SInt16 v)        { (void)c; (void)v; }
+void   SetControlMaximum(ControlRef c, SInt16 m)      { (void)c; (void)m; }
+void   GetControlTitle(ControlRef c, StringPtr title) { (void)c; if (title) title[0] = 0; }
+void   SetControlTitle(ControlRef c, ConstStr255Param title) { (void)c; (void)title; }
+void   HiliteControl(ControlRef c, SInt16 part)       { (void)c; (void)part; }
+MenuRef GetControlPopupMenuHandle(ControlRef ctrl)    { (void)ctrl; return NULL; }
+
+/* ===== 選單 ===== */
+MenuHandle GetMenuHandle(SInt16 menuID)                  { (void)menuID; return NULL; }
+MenuHandle GetNewMBar(SInt16 menuBarID)                  { (void)menuBarID; return NULL; }
+void  SetMenuBar(MenuHandle mbar)                        { (void)mbar; }
+void  DrawMenuBar(void)                                  {}
+void  AppendMenu(MenuRef menu, ConstStr255Param data)    { (void)menu; (void)data; }
+void  AppendResMenu(MenuRef menu, ResType type)          { (void)menu; (void)type; }
+void  AppendMenuItemTextWithCFString(MenuRef menu, CFStringRef str, UInt32 attr,
+                                     UInt32 cmdID, MenuItemIndex *outIndex) {
+    (void)menu; (void)str; (void)attr; (void)cmdID;
+    if (outIndex) *outIndex = 0;
+}
+void  DeleteMenuItem(MenuRef menu, SInt16 item)          { (void)menu; (void)item; }
+void  CheckMenuItem(MenuRef menu, SInt16 item, Boolean checked) { (void)menu; (void)item; (void)checked; }
+void  EnableMenuCommand(MenuRef menu, UInt32 cmdID)      { (void)menu; (void)cmdID; }
+void  HiliteMenu(SInt16 menuID)                          { (void)menuID; }
+SInt32 MenuSelect(Point startPt)                         { (void)startPt; return 0; }
+SInt32 MenuKey(SInt16 ch)                                { (void)ch; return 0; }
+SInt16 GetMBarHeight(void)                               { return 0; }
+void  LMSetMBarHeight(SInt16 h)                          { (void)h; }
+Boolean IsMenuBarVisible(void)                           { return false; }
+/* 遊戲用法為 orgMenuColors = GetMCInfo();(無參數,取回傳 handle)。
+ * 回非 NULL,否則 MenuBarInit 判定失敗 → HandleError → ExitToShell。 */
+static char gDummyMCData[8];
+static Ptr  gDummyMCPtr = gDummyMCData;
+MCTableHandle GetMCInfo(void)                            { return (MCTableHandle)&gDummyMCPtr; }
+
+/* ===== 游標 ===== */
+void InitCursor(void)                  {}
+void HideCursor(void)                  {}
+void ShowCursor(void)                  {}
+void ObscureCursor(void)               {}
+void SetCursor(const void *crsr)       { (void)crsr; }
+Boolean SetCursorNamed(CFStringRef name, float scale) { (void)name; (void)scale; return true; }
+void LWSetArrowCursor(void)            {}
+
+/* ===== 文字 (theme text / TextEdit / 字型);中文化繪字走 compat qd_text.c ===== */
+void DrawText(const void *textBuf, SInt16 firstByte, SInt16 byteCount) {
+    (void)textBuf; (void)firstByte; (void)byteCount;
+}
+OSStatus DrawThemeTextBox(CFStringRef str, ThemeFontID font, UInt32 state,
+                          Boolean wrap, const Rect *bounds, SInt16 just, void *ctx) {
+    (void)str; (void)font; (void)state; (void)wrap; (void)bounds; (void)just; (void)ctx;
+    return noErr;
+}
+OSStatus GetThemeTextDimensions(CFStringRef str, ThemeFontID font, UInt32 state,
+                                Boolean wrap, Point *ioBounds, SInt16 *baseline) {
+    (void)str; (void)font; (void)state; (void)wrap;
+    if (ioBounds) { ioBounds->h = 0; ioBounds->v = 0; }
+    if (baseline) *baseline = 0;
+    return noErr;
+}
+OSStatus SetAntiAliasedTextEnabled(Boolean enable, SInt16 minSize) { (void)enable; (void)minSize; return noErr; }
+void TEInit(void) {}
+void InitFonts(void) {}
+void GetFNum(ConstStr255Param name, SInt16 *familyID) { (void)name; if (familyID) *familyID = 0; }
+
+/* ===== 繪圖補充 (CopyBits 圈外) ===== */
+void DrawPicture(PicHandle pic, const Rect *r) { (void)pic; (void)r; }
+void FrameRoundRect(const Rect *r, SInt16 ovalWidth, SInt16 ovalHeight) {
+    (void)r; (void)ovalWidth; (void)ovalHeight;
+}
+void InvertRect(const Rect *r)   { (void)r; }
+void ScrollRect(const Rect *r, SInt16 dh, SInt16 dv, RgnHandle updateRgn) {
+    (void)r; (void)dh; (void)dv; (void)updateRgn;
+}
+void OpColor(const RGBColor *c)  { (void)c; }
+void GetCPixel(SInt16 h, SInt16 v, RGBColor *cPix) {
+    (void)h; (void)v; if (cPix) { cPix->red = cPix->green = cPix->blue = 0; }
+}
+/* 座標轉換 (視窗即埠,座標等同) */
+void LocalToGlobal(Point *pt) { (void)pt; }
+void GlobalToLocal(Point *pt) { (void)pt; }
+void GetPen(Point *pt) { if (pt) { CGrafPtr p = CurrentPort(); pt->h = p ? p->pen.h : 0; pt->v = p ? p->pen.v : 0; } }
+
+/* ===== 多邊形 (U3 用於某些繪圖;移植期 no-op) ===== */
+PolyHandle OpenPoly(void)                  { return NULL; }
+void ClosePoly(void)                       {}
+void KillPoly(PolyHandle poly)             { (void)poly; }
+void PaintPoly(PolyHandle poly)            { (void)poly; }
+
+/* ===== Init 類 ===== */
+void InitGraf(void *globalsPtr)            { (void)globalsPtr; }
+void InitWindows(void)                     {}
+void InitMenus(void)                       {}
+void InitDialogs(void *resumeProc)         { (void)resumeProc; }
+Boolean InitializeAEHandlers(void)         { return true; }
+OSErr AEProcessAppleEvent(const void *event) { (void)event; return noErr; }
+
+/* ===== 顯示模式 (CoreGraphics / Display Manager;停用) ===== */
+CFDictionaryRef CGDisplayCurrentMode(CGDirectDisplayID display) { (void)display; return NULL; }
+CFDictionaryRef CGDisplayBestModeForParameters(CGDirectDisplayID display, size_t bpp,
+                                               size_t width, size_t height, Boolean *exactMatch) {
+    (void)display; (void)bpp; (void)width; (void)height;
+    if (exactMatch) *exactMatch = false;
+    return NULL;
+}
+CGError CGDisplaySwitchToMode(CGDirectDisplayID display, CFDictionaryRef mode) {
+    (void)display; (void)mode; return kCGErrorSuccess;
+}
+OSErr DMGetFirstScreenDevice(Boolean activeOnly, GDHandle *theDevice) {
+    (void)activeOnly; if (theDevice) *theDevice = NULL; return noErr;
+}
+OSErr DMGetNextScreenDevice(GDHandle *theDevice, Boolean activeOnly) {
+    (void)activeOnly; if (theDevice) *theDevice = NULL; return noErr;
+}
+
+/* ===== CarbonShunts (LW*) — 原定義於排除的 CarbonShunts.c =====
+ * 注意:ForceUpdateMain 由 coordinator 在 main.c 實作 (present 到視窗),此處不實作。 */
+void LWSetDialogPort(DialogPtr theDialog)                   { (void)theDialog; }
+void LWGetScreenRect(Rect *rect) {
+    if (rect) { rect->left = 0; rect->top = 0; rect->right = 640; rect->bottom = 480; }
+}
+OSErr LWGetDialogControl(DialogRef inDialog, SInt16 inItemNo, ControlRef *outControl) {
+    (void)inDialog; (void)inItemNo; if (outControl) *outControl = NULL; return noErr;
+}
+void LWGetPortForeColor(CGrafPtr port, RGBColor *color) {
+    if (color) { *color = port ? port->fgColor : (RGBColor){0,0,0}; }
+}
+void LWGetPortBackColor(CGrafPtr port, RGBColor *color) {
+    if (color) { *color = port ? port->bgColor : (RGBColor){0xFFFF,0xFFFF,0xFFFF}; }
+}
+void LWGetPortBounds(CGrafPtr port, Rect *bounds) {
+    if (bounds) { *bounds = port ? port->portRect : (Rect){0,0,0,0}; }
+}
+void LWGetPortPenLocation(CGrafPtr port, Point *point) {
+    if (point) { *point = port ? port->pen : (Point){0,0}; }
+}
+void LWGetWindowBounds(WindowRef window, Rect *bounds) {
+    if (bounds) { *bounds = window ? window->portRect : (Rect){0,0,0,0}; }
+}
+Boolean LWIsControlActive(ControlHandle control)            { (void)control; return false; }
+Boolean LWIsMenuItemEnabled(MenuRef menu, MenuItemIndex item) { (void)menu; (void)item; return true; }
+void LWDisableMenuItem(MenuRef theMenu, short item)         { (void)theMenu; (void)item; }
+void LWEnableMenuItem(MenuRef theMenu, short item)          { (void)theMenu; (void)item; }
+OSStatus LWValidWindowRect(WindowRef window, const Rect *bounds) { (void)window; (void)bounds; return noErr; }
+OSStatus LWInvalWindowRect(WindowRef window, const Rect *bounds) { (void)window; (void)bounds; return noErr; }
+Boolean GoodHandle(Handle h)                               { return h != NULL; }
+void LWBlockZero(void *destPtr, Size byteCount) {
+    if (destPtr && byteCount > 0) memset(destPtr, 0, (size_t)byteCount);
+}
+void DefineDefaultItem(DialogPtr theDialog, short item)    { (void)theDialog; (void)item; }
+
+/* ===== 專案 Cocoa stub (原定義於排除的 .m / CocoaBridge) ===== */
+void LWOpenURL(CFStringRef urlString)      { (void)urlString; }
+void SetRefMenuIcons(MenuRef theMenu)      { (void)theMenu; }
+int  EducateAboutFullScreen(void)          { return 0; }
+void GameOptionsDialog(void)               {}
+
+/* ===== 系統事件雜項 (非 main.c 範圍的) ===== */
+void SystemClick(const EventRecord *event, WindowPtr window) { (void)event; (void)window; }
