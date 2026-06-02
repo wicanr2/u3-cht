@@ -14,6 +14,7 @@ extern int gU3Done;
 void U3_PlatPresent(void);
 extern void HandleMouseDown(void);   /* UltimaMacIF.c:原由 Cocoa 事件迴圈呼叫 */
 extern EventRecord gTheEvent;        /* 上游全域事件記錄 */
+extern short gUpdateWhere;           /* 上游目前畫面狀態:5=主選單,6=Organize,3=世界 */
 
 /* --- 腳本輸入 (game tester) ---
  * 行導向迷你語言 (每行一指令,每次 WaitNextEvent 處理一步):
@@ -21,6 +22,7 @@ extern EventRecord gTheEvent;        /* 上游全域事件記錄 */
  *   C x y     送滑鼠點擊於 (x,y)
  *   R         送 Return
  *   W <n>     等待 n 次 (不送事件)
+ *   U <n>     等到 gUpdateWhere == n (5=主選單,6=組隊選單,3=世界)
  *   #...      註解 / 空行 略過
  */
 static FILE *gScript = NULL;
@@ -29,6 +31,7 @@ static int   gScriptInit = 0;
 static char  gLine[256];
 static int   gLinePos = -1;     /* >=0 表示正在送 K 行的字元 */
 static int   gWait = 0;
+static int   gWaitUpdate = -1;
 static int   gPendClickX = -1, gPendClickY = -1;
 
 static void script_init(void) {
@@ -41,6 +44,10 @@ static int script_next_key(void) {
     if (!gScriptInit) script_init();
     if (!gScript || gScriptDone) return -1;
     if (gWait > 0) { gWait--; return -1; }
+    if (gWaitUpdate >= 0) {
+        if (gUpdateWhere != gWaitUpdate) return -1;
+        gWaitUpdate = -1;
+    }
     /* 正在送 K 行 */
     if (gLinePos >= 0) {
         char c = gLine[gLinePos];
@@ -55,7 +62,9 @@ static int script_next_key(void) {
         while (*s==' ') s++;
         if (cmd=='K') { gLinePos = (int)(s - gLine); return script_next_key(); }
         if (cmd=='R') return 0x0D;
+        if (cmd=='M') { int k = atoi(s); return k > 0 ? k : -1; }  /* 原始 Mac 鍵碼 (方向鍵 28-31) */
         if (cmd=='W') { gWait = atoi(s); return -1; }
+        if (cmd=='U') { gWaitUpdate = atoi(s); return script_next_key(); }
         if (cmd=='C') { int x=0,y=0; if(sscanf(s,"%d %d",&x,&y)==2){gPendClickX=x;gPendClickY=y;} return -1; }
     }
     gScriptDone = 1; fclose(gScript); gScript = NULL;

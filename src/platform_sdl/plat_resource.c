@@ -73,10 +73,15 @@ Handle GetResource(ResType type, SInt16 id) {
     if (!gRsrcTried) rsrc_load();
     gResErr = noErr;
     if (!gRsrc) { gResErr = -192 /*resNotFound*/; return nil; }
-    /* 本發行版資源編號與程式 BASERES 慣例不一致 (MISC 差 -100、ROST/PRTY 差 +100,
-     * MENU/MAPS 精確)。後備:先精確,再試 id-100 / id+100。 */
-    static const int delta[3] = { 0, -100, +100 };
-    for (int pass = 0; pass < 3; pass++) {
+    /* 本發行版的「目前 Sosaria」MAPS/MONS 419 不在資源檔中;Mac 版會由重設/寫檔建立。
+     * 移植期資源寫入是 no-op,所以讀 419 時回退到原始 Sosaria 420,讓 Journey 可進世界。
+     * 其他類型保留舊後備:ROST/PRTY 等可能與 BASERES 慣例差 ±100。 */
+    int delta[4] = { 0, -100, +100, 0 };
+    int deltaN = 3;
+    if (((uint32_t)type == (uint32_t)'MAPS' || (uint32_t)type == (uint32_t)'MONS') && id == 419) {
+        delta[0] = 1; delta[1] = 0; delta[2] = -100; delta[3] = +100; deltaN = 4;
+    }
+    for (int pass = 0; pass < deltaN; pass++) {
         int want = (int)id + delta[pass];
         for (int i=0;i<gEntN;i++){
             if (gEnt[i].type == (uint32_t)type && gEnt[i].id == want) {

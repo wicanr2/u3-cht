@@ -76,14 +76,44 @@ SInt16 FindWindow(Point thePoint, WindowPtr *theWindow) {
 }
 Boolean TrackGoAway(WindowPtr w, Point thePt) { (void)w; (void)thePt; return false; }
 
-/* ===== 對話框 ===== */
+/* ===== 對話框 =====
+ * 組隊對話框 (FormPartyDialog, GetNewDialog(BASERES+21=421)) 原為 Mac Dialog +
+ * popup 選單,需玩家選 4 名角色。移植期以「自動選名冊前 4 名有效角色」協同驅動,
+ * 讓 Journey 可進行 (Party[7]!=0)。FormPartyDialog 用 IDFP: FORM=1,MEM1..4=3..6。 */
+extern unsigned char Player[21][65];   /* 上游名冊 (UltimaMain.c) */
+static int  gAutoForm = 0;       /* 是否在組隊對話框自動模式 */
+static int  gFormSeq = 0;        /* ModalDialog 步驟 */
+static SInt16 gLastItem = 0;     /* 上次 ModalDialog 回的 item (供 GetControlValue) */
+static char gDlgDummy;           /* 非 NULL dialog 佔位 */
+
+static int roster_valid_count(void) {
+    int n = 0;
+    for (int i = 1; i < 21; i++) if (Player[i][0] > 22) n++;
+    return n;
+}
+
 DialogPtr GetNewDialog(SInt16 dialogID, void *storage, WindowPtr behind) {
-    (void)dialogID; (void)storage; (void)behind; return NULL;
+    (void)storage; (void)behind;
+    if (dialogID == 421) {       /* FormPartyDialog (BASERES+21) */
+        gAutoForm = 1; gFormSeq = 0; gLastItem = 0;
+        return (DialogPtr)&gDlgDummy;
+    }
+    return NULL;
 }
 WindowPtr GetDialogWindow(DialogPtr dlg) { return (WindowPtr)dlg; }
-void DisposeDialog(DialogPtr dlg) { (void)dlg; }
+void DisposeDialog(DialogPtr dlg) { (void)dlg; gAutoForm = 0; }
 void ModalDialog(ModalFilterUPP filter, SInt16 *itemHit) {
-    (void)filter; if (itemHit) *itemHit = kAlertStdAlertCancelButton;
+    (void)filter;
+    if (gAutoForm) {
+        /* 序列:MEM1(3)→MEM2(4)→MEM3(5)→MEM4(6)→FORM(1) */
+        static const SInt16 seq[5] = { 3, 4, 5, 6, 1 };
+        SInt16 it = (gFormSeq < 5) ? seq[gFormSeq] : 1;
+        gFormSeq++;
+        gLastItem = it;
+        if (itemHit) *itemHit = it;
+        return;
+    }
+    if (itemHit) *itemHit = kAlertStdAlertCancelButton;
 }
 /* 回非 1:HandleError 在 button==1 時會 ExitToShell,移植期避免誤退出 */
 SInt16 Alert(SInt16 alertID, ModalFilterUPP filter) { (void)alertID; (void)filter; return 2; }
@@ -112,7 +142,17 @@ void ParamText(ConstStr255Param a, ConstStr255Param b, ConstStr255Param c, Const
 }
 
 /* ===== 控制項 ===== */
-SInt16 GetControlValue(ControlRef c)                  { (void)c; return 0; }
+SInt16 GetControlValue(ControlRef c) {
+    (void)c;
+    /* 自動組隊:第 k 個名冊 popup (gLastItem=MEM1..4=3..6 → k=0..3)。
+     * popup value v: 1=不選;v>=2 → FormPartyDialog 取 menuEntry[v-2] (第 v-1 個有效角色)。
+     * 名冊有第 (k+1) 個有效角色時回 k+2,否則回 1 (該槽空)。 */
+    if (gAutoForm && gLastItem >= 3 && gLastItem <= 6) {
+        int k = gLastItem - 3;
+        return (roster_valid_count() > k) ? (SInt16)(k + 2) : (SInt16)1;
+    }
+    return 0;
+}
 void   SetControlValue(ControlRef c, SInt16 v)        { (void)c; (void)v; }
 void   SetControlMaximum(ControlRef c, SInt16 m)      { (void)c; (void)m; }
 void   GetControlTitle(ControlRef c, StringPtr title) { (void)c; if (title) title[0] = 0; }

@@ -4,3 +4,15 @@ build/
 poc_out.png
 compile_commands.json
 .DS_Store
+tests/shots/
+*_out.png
+assets/MainResources.rsrc
+assets/CharacterRecord.jpg
+assets/Disk-Background.jpg
+assets/DungeonShapes.jpg
+assets/Fountain.jpg
+assets/RaceClassInfo.gif
+assets/Rod.jpg
+assets/Shrine.jpg
+assets/SosariaMap.jpg
+assets/TimeLord.jpg

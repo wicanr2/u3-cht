@@ -48,14 +48,21 @@ void U3_TextShutdown(void) {
     if (gTTFInit) { TTF_Quit(); gTTFInit = false; }
 }
 
-/* Pascal → C (UTF-8 視之);回傳指向靜態緩衝 */
+/* Pascal → C (UTF-8 視之);回傳指向靜態緩衝。
+ * 過濾 0x01-0x1F:UPrint 路徑的文字已 &0x7f,剩餘控制碼只會讓 SDL_ttf 顯示 [X]。
+ * UTF-8 多位元組序列 (0x80-0xFF) 原樣保留,供翻譯後的中文字串正確渲染。 */
 static const char *pascal_to_c(ConstStr255Param p) {
     static char buf[512];
     if (!p) { buf[0] = '\0'; return buf; }
     int len = p[0];
     if (len > 510) len = 510;
-    memcpy(buf, p + 1, len);
-    buf[len] = '\0';
+    int out = 0;
+    for (int i = 0; i < len; i++) {
+        unsigned char c = (unsigned char)p[1 + i];
+        if (c >= 0x20) buf[out++] = (char)c;
+        /* 0x00-0x1F:Mac 格式控制碼/空字元,跳過;0x80-0xFF:UTF-8 多位元組,保留 */
+    }
+    buf[out] = '\0';
     return buf;
 }
 

@@ -18,6 +18,18 @@
 #include <SDL_image.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
+#include <signal.h>
+#include <execinfo.h>
+
+/* 崩潰時印 backtrace (除錯用;-g -rdynamic 時有符號名) */
+static void crash_handler(int sig) {
+    void *bt[64];
+    int n = backtrace(bt, 64);
+    fprintf(stderr, "\n[CRASH] signal %d, backtrace (%d frames):\n", sig, n);
+    backtrace_symbols_fd(bt, n, 2);
+    _exit(139);
+}
 
 extern int Ultima3_main(void);
 extern WindowPtr gMainWindow;   /* 上游全域:主視窗 (= GrafPort*) */
@@ -66,6 +78,8 @@ void U3_PlatPresent(void) {
 
 int main(int argc, char *argv[]) {
     (void)argc; (void)argv;
+    signal(SIGSEGV, crash_handler);
+    signal(SIGABRT, crash_handler);
     if (SDL_Init(SDL_INIT_VIDEO) != 0) {
         fprintf(stderr, "SDL_Init 失敗: %s\n", SDL_GetError());
         return 1;
