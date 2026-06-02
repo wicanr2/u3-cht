@@ -1,0 +1,1322 @@
+[
+ {
+  "i": 0,
+  "en": "Steph Chakerian",
+  "zh": ""
+ },
+ {
+  "i": 1,
+  "en": "Dann Cutter",
+  "zh": ""
+ },
+ {
+  "i": 2,
+  "en": "Weldon Dodd",
+  "zh": ""
+ },
+ {
+  "i": 3,
+  "en": "Seth Grenald",
+  "zh": ""
+ },
+ {
+  "i": 4,
+  "en": "Ken Hill",
+  "zh": ""
+ },
+ {
+  "i": 5,
+  "en": "Bryan Horling",
+  "zh": ""
+ },
+ {
+  "i": 6,
+  "en": "TIME IS BENEATH YOU",
+  "zh": ""
+ },
+ {
+  "i": 7,
+  "en": "Chris Hwang",
+  "zh": ""
+ },
+ {
+  "i": 8,
+  "en": "Michael Jen",
+  "zh": ""
+ },
+ {
+  "i": 9,
+  "en": "Eric King",
+  "zh": ""
+ },
+ {
+  "i": 10,
+  "en": "Dan Lorca-Martinez",
+  "zh": ""
+ },
+ {
+  "i": 11,
+  "en": "Ouch, that hurt.",
+  "zh": ""
+ },
+ {
+  "i": 12,
+  "en": "Brian David Olson",
+  "zh": ""
+ },
+ {
+  "i": 13,
+  "en": "Doug Miles",
+  "zh": ""
+ },
+ {
+  "i": 14,
+  "en": "Shawn Scanlon",
+  "zh": ""
+ },
+ {
+  "i": 15,
+  "en": "Chris Soeffing",
+  "zh": ""
+ },
+ {
+  "i": 16,
+  "en": "Dismount\n",
+  "zh": ""
+ },
+ {
+  "i": 17,
+  "en": "David Huberman",
+  "zh": ""
+ },
+ {
+  "i": 18,
+  "en": "Victor E. Aldridge III",
+  "zh": ""
+ },
+ {
+  "i": 19,
+  "en": "Read John Varley",
+  "zh": ""
+ },
+ {
+  "i": 20,
+  "en": "Scirocco Six",
+  "zh": ""
+ },
+ {
+  "i": 21,
+  "en": "Refer to the \"Ultima III Manual\" for help choosing a race, type, etc.",
+  "zh": ""
+ },
+ {
+  "i": 22,
+  "en": "Pass\n",
+  "zh": ""
+ },
+ {
+  "i": 23,
+  "en": "North\n",
+  "zh": ""
+ },
+ {
+  "i": 24,
+  "en": "South\n",
+  "zh": ""
+ },
+ {
+  "i": 25,
+  "en": "East\n",
+  "zh": ""
+ },
+ {
+  "i": 26,
+  "en": "West\n",
+  "zh": ""
+ },
+ {
+  "i": 27,
+  "en": "Attack-",
+  "zh": ""
+ },
+ {
+  "i": 28,
+  "en": "Board",
+  "zh": ""
+ },
+ {
+  "i": 29,
+  "en": "Mount horse!\n",
+  "zh": ""
+ },
+ {
+  "i": 30,
+  "en": "Board frigate!\n",
+  "zh": ""
+ },
+ {
+  "i": 31,
+  "en": "Descend",
+  "zh": ""
+ },
+ {
+  "i": 32,
+  "en": "Enter ",
+  "zh": ""
+ },
+ {
+  "i": 33,
+  "en": "dungeon!\n",
+  "zh": ""
+ },
+ {
+  "i": 34,
+  "en": "town!\n",
+  "zh": ""
+ },
+ {
+  "i": 35,
+  "en": "castle!\n",
+  "zh": ""
+ },
+ {
+  "i": 36,
+  "en": "shrine!\nWho enters?-",
+  "zh": ""
+ },
+ {
+  "i": 37,
+  "en": "Fire",
+  "zh": ""
+ },
+ {
+  "i": 38,
+  "en": "\nDirect-",
+  "zh": ""
+ },
+ {
+  "i": 39,
+  "en": "Get chest!\nPlr to search-",
+  "zh": ""
+ },
+ {
+  "i": 40,
+  "en": "No such player!\n",
+  "zh": ""
+ },
+ {
+  "i": 41,
+  "en": "ACID TRAP!\n",
+  "zh": ""
+ },
+ {
+  "i": 42,
+  "en": "POISON TRAP!\n",
+  "zh": ""
+ },
+ {
+  "i": 43,
+  "en": "BOMB TRAP!\n",
+  "zh": ""
+ },
+ {
+  "i": 44,
+  "en": "GAS TRAP!\n",
+  "zh": ""
+ },
+ {
+  "i": 45,
+  "en": "Trap evaded!\n",
+  "zh": ""
+ },
+ {
+  "i": 46,
+  "en": "GOLD+",
+  "zh": ""
+ },
+ {
+  "i": 47,
+  "en": "(overflowing!)\n",
+  "zh": ""
+ },
+ {
+  "i": 48,
+  "en": "and a ",
+  "zh": ""
+ },
+ {
+  "i": 49,
+  "en": "and ",
+  "zh": ""
+ },
+ {
+  "i": 50,
+  "en": "Hand Equipment!\nFrom plr-",
+  "zh": ""
+ },
+ {
+  "i": 51,
+  "en": " to plr-",
+  "zh": ""
+ },
+ {
+  "i": 52,
+  "en": "F,G,E,W,A:",
+  "zh": ""
+ },
+ {
+  "i": 53,
+  "en": "Amount-",
+  "zh": ""
+ },
+ {
+  "i": 54,
+  "en": "Not enough!\n",
+  "zh": ""
+ },
+ {
+  "i": 55,
+  "en": "Too much!\n",
+  "zh": ""
+ },
+ {
+  "i": 56,
+  "en": "Done!\n",
+  "zh": ""
+ },
+ {
+  "i": 57,
+  "en": "G,K,P,T:",
+  "zh": ""
+ },
+ {
+  "i": 58,
+  "en": "None!\n",
+  "zh": ""
+ },
+ {
+  "i": 59,
+  "en": "How many-",
+  "zh": ""
+ },
+ {
+  "i": 60,
+  "en": "Which weapon:",
+  "zh": ""
+ },
+ {
+  "i": 61,
+  "en": "Which armour:",
+  "zh": ""
+ },
+ {
+  "i": 62,
+  "en": "In use!\n",
+  "zh": ""
+ },
+ {
+  "i": 63,
+  "en": "Ignite a torch\n",
+  "zh": ""
+ },
+ {
+  "i": 64,
+  "en": "Whose torch-",
+  "zh": ""
+ },
+ {
+  "i": 65,
+  "en": "Join gold to-",
+  "zh": ""
+ },
+ {
+  "i": 66,
+  "en": "None left!\n",
+  "zh": ""
+ },
+ {
+  "i": 67,
+  "en": "Klimb ",
+  "zh": ""
+ },
+ {
+  "i": 68,
+  "en": "Look-",
+  "zh": ""
+ },
+ {
+  "i": 69,
+  "en": "Modify order!\nPlr:-",
+  "zh": ""
+ },
+ {
+  "i": 70,
+  "en": "\nAborted!\n",
+  "zh": ""
+ },
+ {
+  "i": 71,
+  "en": "\nPlr:-",
+  "zh": ""
+ },
+ {
+  "i": 72,
+  "en": "\nExchanged!\n",
+  "zh": ""
+ },
+ {
+  "i": 73,
+  "en": "Negate time!\nWhose powd?-",
+  "zh": ""
+ },
+ {
+  "i": 74,
+  "en": "Peer at gem!\nWhose gem-",
+  "zh": ""
+ },
+ {
+  "i": 75,
+  "en": "Quit & save...\n",
+  "zh": ""
+ },
+ {
+  "i": 76,
+  "en": "Only on surface!\n",
+  "zh": ""
+ },
+ {
+  "i": 77,
+  "en": " Moves\n",
+  "zh": ""
+ },
+ {
+  "i": 78,
+  "en": "Ready for # - ",
+  "zh": ""
+ },
+ {
+  "i": 79,
+  "en": "Weapon-",
+  "zh": ""
+ },
+ {
+  "i": 80,
+  "en": "\nNot owned!\n",
+  "zh": ""
+ },
+ {
+  "i": 81,
+  "en": "\nNot allowed!\n",
+  "zh": ""
+ },
+ {
+  "i": 82,
+  "en": " Ready\n",
+  "zh": ""
+ },
+ {
+  "i": 83,
+  "en": "Plr to steal-",
+  "zh": ""
+ },
+ {
+  "i": 84,
+  "en": "Direct-",
+  "zh": ""
+ },
+ {
+  "i": 85,
+  "en": "Failed!\n",
+  "zh": ""
+ },
+ {
+  "i": 86,
+  "en": "Watch out!\n",
+  "zh": ""
+ },
+ {
+  "i": 87,
+  "en": "Who will\nTransact-",
+  "zh": ""
+ },
+ {
+  "i": 88,
+  "en": "\nGOOD DAY!\n\n",
+  "zh": ""
+ },
+ {
+  "i": 89,
+  "en": "WELCOME MY CHILD\n",
+  "zh": ""
+ },
+ {
+  "i": 90,
+  "en": "EXPERIENCE MORE!!\n\n",
+  "zh": ""
+ },
+ {
+  "i": 91,
+  "en": "NO MORE!\n",
+  "zh": ""
+ },
+ {
+  "i": 92,
+  "en": "SEEK YE, THE\nMARK OF KINGS!\n",
+  "zh": ""
+ },
+ {
+  "i": 93,
+  "en": "THOU ART GREATER\n\n",
+  "zh": ""
+ },
+ {
+  "i": 94,
+  "en": "Unlock-",
+  "zh": ""
+ },
+ {
+  "i": 95,
+  "en": "Whose key-",
+  "zh": ""
+ },
+ {
+  "i": 96,
+  "en": "Volume ",
+  "zh": ""
+ },
+ {
+  "i": 97,
+  "en": "ON!\n",
+  "zh": ""
+ },
+ {
+  "i": 98,
+  "en": "OFF!\n",
+  "zh": ""
+ },
+ {
+  "i": 99,
+  "en": "Wear for # - ",
+  "zh": ""
+ },
+ {
+  "i": 100,
+  "en": "Armour-",
+  "zh": ""
+ },
+ {
+  "i": 101,
+  "en": "X-it ",
+  "zh": ""
+ },
+ {
+  "i": 102,
+  "en": "X-it craft\n",
+  "zh": ""
+ },
+ {
+  "i": 103,
+  "en": "Yell, whom?-",
+  "zh": ""
+ },
+ {
+  "i": 104,
+  "en": "Ztats for #-",
+  "zh": ""
+ },
+ {
+  "i": 105,
+  "en": "WHAT?\n",
+  "zh": ""
+ },
+ {
+  "i": 106,
+  "en": "<-WHAT?\n",
+  "zh": ""
+ },
+ {
+  "i": 107,
+  "en": "Not here!\n",
+  "zh": ""
+ },
+ {
+  "i": 108,
+  "en": "\n\nALL PLAYERS OUT!\n",
+  "zh": ""
+ },
+ {
+  "i": 109,
+  "en": "\nA ship was\ndestroyed!\n ",
+  "zh": ""
+ },
+ {
+  "i": 110,
+  "en": "\nA HUGE SWIRLING\n --WHIRLPOOL--\n  ENGULFS YOU\n AND YOUR SHIP\n DRAGGING BOTH\n     TO A\n WATERY GRAVE!",
+  "zh": ""
+ },
+ {
+  "i": 111,
+  "en": "\n\n AS THE WATER\n ENTERS  YOUR\nLUNGS YOU PASS\nINTO DARKNESS!\n\n",
+  "zh": ""
+ },
+ {
+  "i": 112,
+  "en": "\n You awaken on\n the shores of\n  a forgotten\nland. Your ship\n and crew lost\n  to the sea!\n ",
+  "zh": ""
+ },
+ {
+  "i": 113,
+  "en": "\n\n\n\n\n All is dark!\n\n",
+  "zh": ""
+ },
+ {
+  "i": 114,
+  "en": " You made it!\n",
+  "zh": ""
+ },
+ {
+  "i": 115,
+  "en": "INVALID MOVE!\n",
+  "zh": ""
+ },
+ {
+  "i": 116,
+  "en": "\ndestroyed!\n",
+  "zh": ""
+ },
+ {
+  "i": 117,
+  "en": "OFF only!\n",
+  "zh": ""
+ },
+ {
+  "i": 118,
+  "en": "Cast by whom?-",
+  "zh": ""
+ },
+ {
+  "i": 119,
+  "en": "Cancelled.\n",
+  "zh": ""
+ },
+ {
+  "i": 120,
+  "en": "Not a mage!\n",
+  "zh": ""
+ },
+ {
+  "i": 121,
+  "en": "M.P. too low!\n",
+  "zh": ""
+ },
+ {
+  "i": 122,
+  "en": "Spell type W/C-",
+  "zh": ""
+ },
+ {
+  "i": 123,
+  "en": "Cleric Spell-",
+  "zh": ""
+ },
+ {
+  "i": 124,
+  "en": "Wizard Spell-",
+  "zh": ""
+ },
+ {
+  "i": 125,
+  "en": "Incapacitated!\n",
+  "zh": ""
+ },
+ {
+  "i": 126,
+  "en": "Cure whom?-",
+  "zh": ""
+ },
+ {
+  "i": 127,
+  "en": "Resurect whom?-",
+  "zh": ""
+ },
+ {
+  "i": 128,
+  "en": "Recall whom?-",
+  "zh": ""
+ },
+ {
+  "i": 129,
+  "en": "Heal whom?-",
+  "zh": ""
+ },
+ {
+  "i": 130,
+  "en": "KILLED! Exp.+",
+  "zh": ""
+ },
+ {
+  "i": 131,
+  "en": "\n****VICTORY!****\n\n",
+  "zh": ""
+ },
+ {
+  "i": 132,
+  "en": "\n---CONFLICT!!---\n->",
+  "zh": ""
+ },
+ {
+  "i": 133,
+  "en": "----PLAYER-",
+  "zh": ""
+ },
+ {
+  "i": 134,
+  "en": "----\n ",
+  "zh": ""
+ },
+ {
+  "i": 135,
+  "en": "Cast Spell!\n",
+  "zh": ""
+ },
+ {
+  "i": 136,
+  "en": "Negate Time!\n",
+  "zh": ""
+ },
+ {
+  "i": 137,
+  "en": "Ready a Weapon!\n",
+  "zh": ""
+ },
+ {
+  "i": 138,
+  "en": "Ztats\n",
+  "zh": ""
+ },
+ {
+  "i": 139,
+  "en": "NOT USABLE CMD!\n ",
+  "zh": ""
+ },
+ {
+  "i": 140,
+  "en": "Plr-",
+  "zh": ""
+ },
+ {
+  "i": 141,
+  "en": "-Missed!\n",
+  "zh": ""
+ },
+ {
+  "i": 142,
+  "en": "-HIT!\n",
+  "zh": ""
+ },
+ {
+  "i": 143,
+  "en": "KILLED!!!\n",
+  "zh": ""
+ },
+ {
+  "i": 144,
+  "en": " attack\nDir-",
+  "zh": ""
+ },
+ {
+  "i": 145,
+  "en": "\nHIT!\n",
+  "zh": ""
+ },
+ {
+  "i": 146,
+  "en": "Missed!\n",
+  "zh": ""
+ },
+ {
+  "i": 147,
+  "en": "-PILFERED!\n",
+  "zh": ""
+ },
+ {
+  "i": 148,
+  "en": "-POISONED!\n",
+  "zh": ""
+ },
+ {
+  "i": 149,
+  "en": "It's dark!\n",
+  "zh": ""
+ },
+ {
+  "i": 150,
+  "en": "You see a vision\nof the Time Lord\n  He tells you\n the one way is\n   Love, Sol,\n Moons & Death,\n all else fails.",
+  "zh": ""
+ },
+ {
+  "i": 151,
+  "en": "\nA fountain, who\nwill drink?-",
+  "zh": ""
+ },
+ {
+  "i": 152,
+  "en": "Can't\n",
+  "zh": ""
+ },
+ {
+  "i": 153,
+  "en": "YUCK! HORRIBLE!\n",
+  "zh": ""
+ },
+ {
+  "i": 154,
+  "en": "How wonderful!\n",
+  "zh": ""
+ },
+ {
+  "i": 155,
+  "en": "ARGH! BLAH! YUK!\n",
+  "zh": ""
+ },
+ {
+  "i": 156,
+  "en": "Ah! That's nice!\n",
+  "zh": ""
+ },
+ {
+  "i": 157,
+  "en": "Strange wind!\n",
+  "zh": ""
+ },
+ {
+  "i": 158,
+  "en": "ARGH!! A TRAP!!\n",
+  "zh": ""
+ },
+ {
+  "i": 159,
+  "en": "Evaded!!\n",
+  "zh": ""
+ },
+ {
+  "i": 160,
+  "en": "A red hot rod\nin the wall, who\nwill touch?-",
+  "zh": ""
+ },
+ {
+  "i": 161,
+  "en": "It left a mark!\n",
+  "zh": ""
+ },
+ {
+  "i": 162,
+  "en": "Gremlins!\n",
+  "zh": ""
+ },
+ {
+  "i": 163,
+  "en": "Misty Writing:\n",
+  "zh": ""
+ },
+ {
+  "i": 164,
+  "en": "Advance\n",
+  "zh": ""
+ },
+ {
+  "i": 165,
+  "en": "Retreat\n",
+  "zh": ""
+ },
+ {
+  "i": 166,
+  "en": "Turn right\n",
+  "zh": ""
+ },
+ {
+  "i": 167,
+  "en": "Turn left\n",
+  "zh": ""
+ },
+ {
+  "i": 168,
+  "en": "Descend\n",
+  "zh": ""
+ },
+ {
+  "i": 169,
+  "en": "Klimb\n",
+  "zh": ""
+ },
+ {
+  "i": 170,
+  "en": "INVALID CMD!\n",
+  "zh": ""
+ },
+ {
+  "i": 171,
+  "en": "NOT A DNG CMD!\n",
+  "zh": ""
+ },
+ {
+  "i": 172,
+  "en": "None\n",
+  "zh": ""
+ },
+ {
+  "i": 173,
+  "en": "Strength",
+  "zh": ""
+ },
+ {
+  "i": 174,
+  "en": "Dexterity",
+  "zh": ""
+ },
+ {
+  "i": 175,
+  "en": "Intelligence",
+  "zh": ""
+ },
+ {
+  "i": 176,
+  "en": "Wisdom",
+  "zh": ""
+ },
+ {
+  "i": 177,
+  "en": "Offering*100-",
+  "zh": ""
+ },
+ {
+  "i": 178,
+  "en": "\nThen be off!\n",
+  "zh": ""
+ },
+ {
+  "i": 179,
+  "en": "\nYOU CAN'T CHEAT\nTHE GODS!\n",
+  "zh": ""
+ },
+ {
+  "i": 180,
+  "en": "\nSHAZAM!\n",
+  "zh": ""
+ },
+ {
+  "i": 181,
+  "en": "Exit to Sosaria!\n",
+  "zh": ""
+ },
+ {
+  "i": 182,
+  "en": "POISON!\n",
+  "zh": ""
+ },
+ {
+  "i": 183,
+  "en": "\nSTARVING!\n",
+  "zh": ""
+ },
+ {
+  "i": 184,
+  "en": "\nWELCOME TO\nTHE PUB!\n",
+  "zh": ""
+ },
+ {
+  "i": 185,
+  "en": "\nHere friend,\nhave a drink!\nIt cost 7 g.p.\nYOU PAY?-",
+  "zh": ""
+ },
+ {
+  "i": 186,
+  "en": "LEAVE MY SHOP!\nYOU SCUM!!\n",
+  "zh": ""
+ },
+ {
+  "i": 187,
+  "en": "WHAT? CAN'T PAY!\nOUT YOU SCUM!\n",
+  "zh": ""
+ },
+ {
+  "i": 188,
+  "en": "\nanother drink?",
+  "zh": ""
+ },
+ {
+  "i": 189,
+  "en": "\n\nIts been a\npleasure!!\n",
+  "zh": ""
+ },
+ {
+  "i": 190,
+  "en": "    YE LOCAL\n     GROCER\n\n",
+  "zh": ""
+ },
+ {
+  "i": 191,
+  "en": "RATIONS:\n1 g.p. EACH,\nHow many would\nyou like?-",
+  "zh": ""
+ },
+ {
+  "i": 192,
+  "en": "\n\nWHAT? CAN'T PAY!\nOUT! YOU SCUM!!!\n",
+  "zh": ""
+ },
+ {
+  "i": 193,
+  "en": "\n\nThank you,\nanything else?",
+  "zh": ""
+ },
+ {
+  "i": 194,
+  "en": "very well,\ncome again!\n",
+  "zh": ""
+ },
+ {
+  "i": 195,
+  "en": "\nCLERICAL HEALING\nSACRAMENTS:\n",
+  "zh": ""
+ },
+ {
+  "i": 196,
+  "en": " 1-Curing,\n 2-Healing,\n 3-Resurrection,\n 4-Recallings.\nYour needs:",
+  "zh": ""
+ },
+ {
+  "i": 197,
+  "en": "1\n\nA curing will\ncost 100 g.p.\nWilt thou pay? ",
+  "zh": ""
+ },
+ {
+  "i": 198,
+  "en": "Cure whom?-",
+  "zh": ""
+ },
+ {
+  "i": 199,
+  "en": "2\n\nHealings cost\n200 g.p. Wilt\nthou pay? ",
+  "zh": ""
+ },
+ {
+  "i": 200,
+  "en": "Heal whom?-",
+  "zh": ""
+ },
+ {
+  "i": 201,
+  "en": "3\n\nResurrection\ncost 500 g.p.\nWilt thou pay? ",
+  "zh": ""
+ },
+ {
+  "i": 202,
+  "en": "Resurrect whom?-",
+  "zh": ""
+ },
+ {
+  "i": 203,
+  "en": "4\n\nRecallings\ncost 900 g.p.\nWilt thou pay? ",
+  "zh": ""
+ },
+ {
+  "i": 204,
+  "en": "Recall whom?-",
+  "zh": ""
+ },
+ {
+  "i": 205,
+  "en": "\nWelcome to the\nWEAPONS SHOP!\n\nlist (Y/N)?-",
+  "zh": ""
+ },
+ {
+  "i": 206,
+  "en": "\nBuy or Sell?-",
+  "zh": ""
+ },
+ {
+  "i": 207,
+  "en": "\n\nYour interest?-",
+  "zh": ""
+ },
+ {
+  "i": 208,
+  "en": "\n\nI'm very sorry\nbut you haven't\nthe gold!\n",
+  "zh": ""
+ },
+ {
+  "i": 209,
+  "en": "\n\nHere you are\nmay it serve\nyou well!\n",
+  "zh": ""
+ },
+ {
+  "i": 210,
+  "en": "\n\nfor sale?-",
+  "zh": ""
+ },
+ {
+  "i": 211,
+  "en": "\n\nYou don't own\none of those!\n",
+  "zh": ""
+ },
+ {
+  "i": 212,
+  "en": "\n\nThank you!\n",
+  "zh": ""
+ },
+ {
+  "i": 213,
+  "en": "\nMore gold than\nthou can carry!\nSale cancelled.\n",
+  "zh": ""
+ },
+ {
+  "i": 214,
+  "en": "\noh well, maybe\nnext time.\n",
+  "zh": ""
+ },
+ {
+  "i": 215,
+  "en": "\nWelcome to the\nARMOUR SHOP!\n\nlist (Y/N)?-",
+  "zh": ""
+ },
+ {
+  "i": 216,
+  "en": "\nTHE GUILD SHOP\nWE HAVE:",
+  "zh": ""
+ },
+ {
+  "i": 217,
+  "en": "Your need: ",
+  "zh": ""
+ },
+ {
+  "i": 218,
+  "en": "Thank you,\ncome again!\n",
+  "zh": ""
+ },
+ {
+  "i": 219,
+  "en": "\nAnything else? ",
+  "zh": ""
+ },
+ {
+  "i": 220,
+  "en": "\n    RADRION:\nPROPHET OF LIFE!\n",
+  "zh": ""
+ },
+ {
+  "i": 221,
+  "en": "\nHow many 100gp\nis your\noffering?",
+  "zh": ""
+ },
+ {
+  "i": 222,
+  "en": "\nMore offering?",
+  "zh": ""
+ },
+ {
+  "i": 223,
+  "en": "\nFare thee well\nand good luck!\n",
+  "zh": ""
+ },
+ {
+  "i": 224,
+  "en": "EQUINE EMPORIUM:\n",
+  "zh": ""
+ },
+ {
+  "i": 225,
+  "en": "-Horses cost,\n",
+  "zh": ""
+ },
+ {
+  "i": 226,
+  "en": "gp. will you\nbuy? ",
+  "zh": ""
+ },
+ {
+  "i": 227,
+  "en": "Ah, too bad.\nThese are the\nbest in town!\n",
+  "zh": ""
+ },
+ {
+  "i": 228,
+  "en": "I'm sorry but\nyou haven't\nthe gold!\n",
+  "zh": ""
+ },
+ {
+  "i": 229,
+  "en": "May you ride\nfast and true\nfriend!\n",
+  "zh": ""
+ },
+ {
+  "i": 230,
+  "en": "\nI'm sorry,\nbut you have\nnot the funds!\n",
+  "zh": ""
+ },
+ {
+  "i": 231,
+  "en": "Without proper\nofferings I\ncan not help!\n",
+  "zh": ""
+ },
+ {
+  "i": 232,
+  "en": "I'm sorry but\nthou hast not\ngold enough.\n",
+  "zh": ""
+ },
+ {
+  "i": 233,
+  "en": "\nFare thee well,\nmy children.\n",
+  "zh": ""
+ },
+ {
+  "i": 234,
+  "en": "\n Welcome to the\n   Shrine  of\n",
+  "zh": ""
+ },
+ {
+  "i": 235,
+  "en": "Other command!\nWhose action-",
+  "zh": ""
+ },
+ {
+  "i": 236,
+  "en": "\n\nAVAILABLE:\n",
+  "zh": ""
+ },
+ {
+  "i": 237,
+  "en": "Cmd:-",
+  "zh": ""
+ },
+ {
+  "i": 238,
+  "en": "Dir-",
+  "zh": ""
+ },
+ {
+  "i": 239,
+  "en": "D, S, L, M-",
+  "zh": ""
+ },
+ {
+  "i": 240,
+  "en": "CONGRATULATIONS!\n   THOU  HAST\n   COMPLEATED\nEXODUS: ULTIMA 3\n       IN\n ",
+  "zh": ""
+ },
+ {
+  "i": 241,
+  "en": " MOVES\nREPORT THY FEAT!",
+  "zh": ""
+ },
+ {
+  "i": 242,
+  "en": "Exotics!\n",
+  "zh": ""
+ },
+ {
+  "i": 243,
+  "en": "A card, with\nstrange marks!\n",
+  "zh": ""
+ },
+ {
+  "i": 244,
+  "en": "Not enough gold!\n",
+  "zh": ""
+ },
+ {
+  "i": 245,
+  "en": "\nYell 'EVOCARE'\n\n",
+  "zh": ""
+ },
+ {
+  "i": 246,
+  "en": "Everyone\nhates you.\n",
+  "zh": ""
+ },
+ {
+  "i": 247,
+  "en": "No effect!\n",
+  "zh": ""
+ },
+ {
+  "i": 248,
+  "en": "\n\n\n\n\n\n  Resurrecting!\n\n\n",
+  "zh": ""
+ },
+ {
+  "i": 249,
+  "en": "Southwest\n",
+  "zh": ""
+ },
+ {
+  "i": 250,
+  "en": "Southeast\n",
+  "zh": ""
+ },
+ {
+  "i": 251,
+  "en": "Northwest\n",
+  "zh": ""
+ },
+ {
+  "i": 252,
+  "en": "Northeast\n",
+  "zh": ""
+ },
+ {
+  "i": 253,
+  "en": "All is calm.\n",
+  "zh": ""
+ },
+ {
+  "i": 254,
+  "en": "CONGRATULATIONS! Thou hast compleated EXODUS: ULTIMA III in\n ",
+  "zh": ""
+ },
+ {
+  "i": 255,
+  "en": "\n\n\n\nA huge swirling whirlpool engulfs you and your ship, dragging both to a watery grave!\n",
+  "zh": ""
+ },
+ {
+  "i": 256,
+  "en": "\n\n\n\nAs the water enters your lungs, you pass into darkness!\n",
+  "zh": ""
+ },
+ {
+  "i": 257,
+  "en": "\n\n\nYou awaken on the shores of a forgotten land, your ship and crew lost to the sea!\n",
+  "zh": ""
+ },
+ {
+  "i": 258,
+  "en": "\nWelcome to the Shrine of ",
+  "zh": ""
+ },
+ {
+  "i": 259,
+  "en": "\nNot enough room!",
+  "zh": ""
+ },
+ {
+  "i": 260,
+  "en": "\n Keys-50gp\n Torches-5/30gp\n Powders-90gp\n Gems-75gp\n",
+  "zh": ""
+ },
+ {
+  "i": 261,
+  "en": "\nExodus is\nno more!\n\n",
+  "zh": ""
+ },
+ {
+  "i": 262,
+  "en": "SOSARIA THANKS\nYOU!\n\n",
+  "zh": ""
+ },
+ {
+  "i": 263,
+  "en": "While in Full Screen mode, you can access the menu bar or the Dock by moving the mouse to an edge of the screen.\n\nYou can press Apple-F to leave Full Screen mode at any time.",
+  "zh": ""
+ }
+]

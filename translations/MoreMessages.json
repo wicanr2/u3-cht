@@ -1,0 +1,497 @@
+[
+ {
+  "i": 0,
+  "en": "JOURNEY ONWARD",
+  "zh": ""
+ },
+ {
+  "i": 1,
+  "en": "(Not formed)",
+  "zh": ""
+ },
+ {
+  "i": 2,
+  "en": "REGISTER",
+  "zh": ""
+ },
+ {
+  "i": 3,
+  "en": "FORM THE PARTY",
+  "zh": ""
+ },
+ {
+  "i": 4,
+  "en": "(Party in use)",
+  "zh": ""
+ },
+ {
+  "i": 5,
+  "en": "PLAYER-1-",
+  "zh": ""
+ },
+ {
+  "i": 6,
+  "en": "PLAYER-2-",
+  "zh": ""
+ },
+ {
+  "i": 7,
+  "en": "PLAYER-3-",
+  "zh": ""
+ },
+ {
+  "i": 8,
+  "en": "PLAYER-4-",
+  "zh": ""
+ },
+ {
+  "i": 9,
+  "en": "(Not a player)",
+  "zh": ""
+ },
+ {
+  "i": 10,
+  "en": "              ",
+  "zh": ""
+ },
+ {
+  "i": 11,
+  "en": "(Formed)",
+  "zh": ""
+ },
+ {
+  "i": 12,
+  "en": "DISPERSE THE PARTY",
+  "zh": ""
+ },
+ {
+  "i": 13,
+  "en": "(No one there)",
+  "zh": ""
+ },
+ {
+  "i": 14,
+  "en": "(Dispersed!)",
+  "zh": ""
+ },
+ {
+  "i": 15,
+  "en": "CREATE",
+  "zh": ""
+ },
+ {
+  "i": 16,
+  "en": "Entry#",
+  "zh": ""
+ },
+ {
+  "i": 17,
+  "en": "(1-20 only!)",
+  "zh": ""
+ },
+ {
+  "i": 18,
+  "en": "(Not empty!)",
+  "zh": ""
+ },
+ {
+  "i": 19,
+  "en": "Character creation aborted.",
+  "zh": ""
+ },
+ {
+  "i": 20,
+  "en": "Character created.",
+  "zh": ""
+ },
+ {
+  "i": 21,
+  "en": "TERMINATE!",
+  "zh": ""
+ },
+ {
+  "i": 22,
+  "en": "(No one there)",
+  "zh": ""
+ },
+ {
+  "i": 23,
+  "en": "(With a party)",
+  "zh": ""
+ },
+ {
+  "i": 24,
+  "en": "(Terminated)",
+  "zh": ""
+ },
+ {
+  "i": 25,
+  "en": "© 1983-2014 Lord British & LairWare",
+  "zh": ""
+ },
+ {
+  "i": 26,
+  "en": "FROM THE DEPTHS OF HELL...",
+  "zh": ""
+ },
+ {
+  "i": 27,
+  "en": "...HE COMES FOR VENGEANCE!",
+  "zh": ""
+ },
+ {
+  "i": 28,
+  "en": "Return to the view",
+  "zh": ""
+ },
+ {
+  "i": 29,
+  "en": "Organize a party",
+  "zh": ""
+ },
+ {
+  "i": 30,
+  "en": "Journey onward",
+  "zh": ""
+ },
+ {
+  "i": 31,
+  "en": "OPTIONS:",
+  "zh": ""
+ },
+ {
+  "i": 32,
+  "en": "PARTY ORGANIZATION",
+  "zh": ""
+ },
+ {
+  "i": 33,
+  "en": "Examine the register",
+  "zh": ""
+ },
+ {
+  "i": 34,
+  "en": "Create a character",
+  "zh": ""
+ },
+ {
+  "i": 35,
+  "en": "Form the party",
+  "zh": ""
+ },
+ {
+  "i": 36,
+  "en": "Disperse the party",
+  "zh": ""
+ },
+ {
+  "i": 37,
+  "en": "Terminate a character",
+  "zh": ""
+ },
+ {
+  "i": 38,
+  "en": "Main  menu",
+  "zh": ""
+ },
+ {
+  "i": 39,
+  "en": "OPTIONS:",
+  "zh": ""
+ },
+ {
+  "i": 40,
+  "en": "(Player is out!)",
+  "zh": ""
+ },
+ {
+  "i": 41,
+  "en": "                ",
+  "zh": ""
+ },
+ {
+  "i": 42,
+  "en": "CALM WINDS",
+  "zh": ""
+ },
+ {
+  "i": 43,
+  "en": "NORTH WIND",
+  "zh": ""
+ },
+ {
+  "i": 44,
+  "en": "EAST  WIND",
+  "zh": ""
+ },
+ {
+  "i": 45,
+  "en": "SOUTH WIND",
+  "zh": ""
+ },
+ {
+  "i": 46,
+  "en": "WEST  WIND",
+  "zh": ""
+ },
+ {
+  "i": 47,
+  "en": "Lvl:0",
+  "zh": ""
+ },
+ {
+  "i": 48,
+  "en": "HEAD-",
+  "zh": ""
+ },
+ {
+  "i": 49,
+  "en": "North",
+  "zh": ""
+ },
+ {
+  "i": 50,
+  "en": "-East",
+  "zh": ""
+ },
+ {
+  "i": 51,
+  "en": "South",
+  "zh": ""
+ },
+ {
+  "i": 52,
+  "en": "-West",
+  "zh": ""
+ },
+ {
+  "i": 53,
+  "en": "PRESS  <SPACE>",
+  "zh": ""
+ },
+ {
+  "i": 54,
+  "en": "ULTIMA III",
+  "zh": ""
+ },
+ {
+  "i": 55,
+  "en": "entered this place",
+  "zh": ""
+ },
+ {
+  "i": 56,
+  "en": "entered this dungeon",
+  "zh": ""
+ },
+ {
+  "i": 57,
+  "en": "entered this town",
+  "zh": ""
+ },
+ {
+  "i": 58,
+  "en": "entered this castle",
+  "zh": ""
+ },
+ {
+  "i": 59,
+  "en": "entered the whirlpool",
+  "zh": ""
+ },
+ {
+  "i": 60,
+  "en": "exited a location or saved the game",
+  "zh": ""
+ },
+ {
+  "i": 61,
+  "en": "Level ",
+  "zh": ""
+ },
+ {
+  "i": 62,
+  "en": "Good Health",
+  "zh": ""
+ },
+ {
+  "i": 63,
+  "en": "Poisoned",
+  "zh": ""
+ },
+ {
+  "i": 64,
+  "en": "Dead",
+  "zh": ""
+ },
+ {
+  "i": 65,
+  "en": "Ashes",
+  "zh": ""
+ },
+ {
+  "i": 66,
+  "en": "Female",
+  "zh": ""
+ },
+ {
+  "i": 67,
+  "en": "Male",
+  "zh": ""
+ },
+ {
+  "i": 68,
+  "en": "Other",
+  "zh": ""
+ },
+ {
+  "i": 69,
+  "en": "Magic Points",
+  "zh": ""
+ },
+ {
+  "i": 70,
+  "en": "Hit Points",
+  "zh": ""
+ },
+ {
+  "i": 71,
+  "en": "Experience",
+  "zh": ""
+ },
+ {
+  "i": 72,
+  "en": "Food",
+  "zh": ""
+ },
+ {
+  "i": 73,
+  "en": "Gold",
+  "zh": ""
+ },
+ {
+  "i": 74,
+  "en": "non-mage",
+  "zh": ""
+ },
+ {
+  "i": 75,
+  "en": "Card of Death",
+  "zh": ""
+ },
+ {
+  "i": 76,
+  "en": "Card of Sol",
+  "zh": ""
+ },
+ {
+  "i": 77,
+  "en": "Card of Love",
+  "zh": ""
+ },
+ {
+  "i": 78,
+  "en": "Card of Moons",
+  "zh": ""
+ },
+ {
+  "i": 79,
+  "en": "Mark of Force",
+  "zh": ""
+ },
+ {
+  "i": 80,
+  "en": "Mark of Fire",
+  "zh": ""
+ },
+ {
+  "i": 81,
+  "en": "Mark of the Snake",
+  "zh": ""
+ },
+ {
+  "i": 82,
+  "en": "Mark of Kings",
+  "zh": ""
+ },
+ {
+  "i": 83,
+  "en": " Torches",
+  "zh": ""
+ },
+ {
+  "i": 84,
+  "en": " Gems",
+  "zh": ""
+ },
+ {
+  "i": 85,
+  "en": " Keys",
+  "zh": ""
+ },
+ {
+  "i": 86,
+  "en": " Powders",
+  "zh": ""
+ },
+ {
+  "i": 87,
+  "en": "Ratings",
+  "zh": ""
+ },
+ {
+  "i": 88,
+  "en": "Values",
+  "zh": ""
+ },
+ {
+  "i": 89,
+  "en": "Weapons",
+  "zh": ""
+ },
+ {
+  "i": 90,
+  "en": "Armour",
+  "zh": ""
+ },
+ {
+  "i": 91,
+  "en": "Stuff",
+  "zh": ""
+ },
+ {
+  "i": 92,
+  "en": "Game Paused",
+  "zh": ""
+ },
+ {
+  "i": 93,
+  "en": "- empty -",
+  "zh": ""
+ },
+ {
+  "i": 94,
+  "en": "Click mouse or press a key to continue",
+  "zh": ""
+ },
+ {
+  "i": 95,
+  "en": "last saved the game outdoors",
+  "zh": ""
+ },
+ {
+  "i": 96,
+  "en": "From the depths of hell...",
+  "zh": ""
+ },
+ {
+  "i": 97,
+  "en": "...he comes for vengeance!",
+  "zh": ""
+ },
+ {
+  "i": 98,
+  "en": "This game is $5 to fully unlock.  See “Register…” under the Ultima III menu for information.",
+  "zh": ""
+ }
+]

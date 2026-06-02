@@ -1,0 +1,1097 @@
+[
+ {
+  "i": 0,
+  "en": "Avram",
+  "zh": ""
+ },
+ {
+  "i": 1,
+  "en": "Argaelia",
+  "zh": ""
+ },
+ {
+  "i": 2,
+  "en": "Aldwyn",
+  "zh": ""
+ },
+ {
+  "i": 3,
+  "en": "Allaenon",
+  "zh": ""
+ },
+ {
+  "i": 4,
+  "en": "Alarik",
+  "zh": ""
+ },
+ {
+  "i": 5,
+  "en": "Aedric",
+  "zh": ""
+ },
+ {
+  "i": 6,
+  "en": "Abelard",
+  "zh": ""
+ },
+ {
+  "i": 7,
+  "en": "Adalberon",
+  "zh": ""
+ },
+ {
+  "i": 8,
+  "en": "Athelwulf",
+  "zh": ""
+ },
+ {
+  "i": 9,
+  "en": "Aelfgar",
+  "zh": ""
+ },
+ {
+  "i": 10,
+  "en": "Balthazar",
+  "zh": ""
+ },
+ {
+  "i": 11,
+  "en": "Bedwyr",
+  "zh": ""
+ },
+ {
+  "i": 12,
+  "en": "Bohemond",
+  "zh": ""
+ },
+ {
+  "i": 13,
+  "en": "Briac",
+  "zh": ""
+ },
+ {
+  "i": 14,
+  "en": "Barracus",
+  "zh": ""
+ },
+ {
+  "i": 15,
+  "en": "Bjarni",
+  "zh": ""
+ },
+ {
+  "i": 16,
+  "en": "Baelric",
+  "zh": ""
+ },
+ {
+  "i": 17,
+  "en": "Balin",
+  "zh": ""
+ },
+ {
+  "i": 18,
+  "en": "Bealdgar",
+  "zh": ""
+ },
+ {
+  "i": 19,
+  "en": "Bjorn",
+  "zh": ""
+ },
+ {
+  "i": 20,
+  "en": "Calatin",
+  "zh": ""
+ },
+ {
+  "i": 21,
+  "en": "Coinneach",
+  "zh": ""
+ },
+ {
+  "i": 22,
+  "en": "Coriander",
+  "zh": ""
+ },
+ {
+  "i": 23,
+  "en": "Crimthann",
+  "zh": ""
+ },
+ {
+  "i": 24,
+  "en": "Caradoc",
+  "zh": ""
+ },
+ {
+  "i": 25,
+  "en": "Cedric",
+  "zh": ""
+ },
+ {
+  "i": 26,
+  "en": "Ceridwen",
+  "zh": ""
+ },
+ {
+  "i": 27,
+  "en": "Christoph",
+  "zh": ""
+ },
+ {
+  "i": 28,
+  "en": "Connor",
+  "zh": ""
+ },
+ {
+  "i": 29,
+  "en": "Cristoval",
+  "zh": ""
+ },
+ {
+  "i": 30,
+  "en": "Delvos",
+  "zh": ""
+ },
+ {
+  "i": 31,
+  "en": "Dafydd",
+  "zh": ""
+ },
+ {
+  "i": 32,
+  "en": "Dagmar",
+  "zh": ""
+ },
+ {
+  "i": 33,
+  "en": "Damien",
+  "zh": ""
+ },
+ {
+  "i": 34,
+  "en": "Darius",
+  "zh": ""
+ },
+ {
+  "i": 35,
+  "en": "Deorwulf",
+  "zh": ""
+ },
+ {
+  "i": 36,
+  "en": "Devin",
+  "zh": ""
+ },
+ {
+  "i": 37,
+  "en": "Donovan",
+  "zh": ""
+ },
+ {
+  "i": 38,
+  "en": "Duncan",
+  "zh": ""
+ },
+ {
+  "i": 39,
+  "en": "Dyvin",
+  "zh": ""
+ },
+ {
+  "i": 40,
+  "en": "Eirik",
+  "zh": ""
+ },
+ {
+  "i": 41,
+  "en": "Eadmund",
+  "zh": ""
+ },
+ {
+  "i": 42,
+  "en": "Edric",
+  "zh": ""
+ },
+ {
+  "i": 43,
+  "en": "Edwyn",
+  "zh": ""
+ },
+ {
+  "i": 44,
+  "en": "Einarr",
+  "zh": ""
+ },
+ {
+  "i": 45,
+  "en": "Eldred",
+  "zh": ""
+ },
+ {
+  "i": 46,
+  "en": "Emeric",
+  "zh": ""
+ },
+ {
+  "i": 47,
+  "en": "Eowulf",
+  "zh": ""
+ },
+ {
+  "i": 48,
+  "en": "Everard",
+  "zh": ""
+ },
+ {
+  "i": 49,
+  "en": "Eyjolfr",
+  "zh": ""
+ },
+ {
+  "i": 50,
+  "en": "Farin",
+  "zh": ""
+ },
+ {
+  "i": 51,
+  "en": "Fabian",
+  "zh": ""
+ },
+ {
+  "i": 52,
+  "en": "Fenwick",
+  "zh": ""
+ },
+ {
+  "i": 53,
+  "en": "Feodor",
+  "zh": ""
+ },
+ {
+  "i": 54,
+  "en": "Fergus",
+  "zh": ""
+ },
+ {
+  "i": 55,
+  "en": "Finnbarr",
+  "zh": ""
+ },
+ {
+  "i": 56,
+  "en": "Frydherik",
+  "zh": ""
+ },
+ {
+  "i": 57,
+  "en": "Fyodor",
+  "zh": ""
+ },
+ {
+  "i": 58,
+  "en": "Freowulf",
+  "zh": ""
+ },
+ {
+  "i": 59,
+  "en": "Franz",
+  "zh": ""
+ },
+ {
+  "i": 60,
+  "en": "Gareth",
+  "zh": ""
+ },
+ {
+  "i": 61,
+  "en": "Gerrick",
+  "zh": ""
+ },
+ {
+  "i": 62,
+  "en": "Gunnar",
+  "zh": ""
+ },
+ {
+  "i": 63,
+  "en": "Gunwaldt",
+  "zh": ""
+ },
+ {
+  "i": 64,
+  "en": "Gaelen",
+  "zh": ""
+ },
+ {
+  "i": 65,
+  "en": "Garick",
+  "zh": ""
+ },
+ {
+  "i": 66,
+  "en": "Giles",
+  "zh": ""
+ },
+ {
+  "i": 67,
+  "en": "Gawain",
+  "zh": ""
+ },
+ {
+  "i": 68,
+  "en": "Gavin",
+  "zh": ""
+ },
+ {
+  "i": 69,
+  "en": "Geoffrye",
+  "zh": ""
+ },
+ {
+  "i": 70,
+  "en": "Heinrich",
+  "zh": ""
+ },
+ {
+  "i": 71,
+  "en": "Hrothgar",
+  "zh": ""
+ },
+ {
+  "i": 72,
+  "en": "Haakon",
+  "zh": ""
+ },
+ {
+  "i": 73,
+  "en": "Hadrian",
+  "zh": ""
+ },
+ {
+  "i": 74,
+  "en": "Harald",
+  "zh": ""
+ },
+ {
+  "i": 75,
+  "en": "Helmut",
+  "zh": ""
+ },
+ {
+  "i": 76,
+  "en": "Heironymus",
+  "zh": ""
+ },
+ {
+  "i": 77,
+  "en": "Hrolf",
+  "zh": ""
+ },
+ {
+  "i": 78,
+  "en": "Hjalmar",
+  "zh": ""
+ },
+ {
+  "i": 79,
+  "en": "Holtmar",
+  "zh": ""
+ },
+ {
+  "i": 80,
+  "en": "Ian",
+  "zh": ""
+ },
+ {
+  "i": 81,
+  "en": "Inigo",
+  "zh": ""
+ },
+ {
+  "i": 82,
+  "en": "Iric",
+  "zh": ""
+ },
+ {
+  "i": 83,
+  "en": "Ichabod",
+  "zh": ""
+ },
+ {
+  "i": 84,
+  "en": "Ingolf",
+  "zh": ""
+ },
+ {
+  "i": 85,
+  "en": "Iohannes",
+  "zh": ""
+ },
+ {
+  "i": 86,
+  "en": "Isaac",
+  "zh": ""
+ },
+ {
+  "i": 87,
+  "en": "Isleif",
+  "zh": ""
+ },
+ {
+  "i": 88,
+  "en": "Ivarr",
+  "zh": ""
+ },
+ {
+  "i": 89,
+  "en": "Ivan",
+  "zh": ""
+ },
+ {
+  "i": 90,
+  "en": "Johann",
+  "zh": ""
+ },
+ {
+  "i": 91,
+  "en": "Julian",
+  "zh": ""
+ },
+ {
+  "i": 92,
+  "en": "Justinian",
+  "zh": ""
+ },
+ {
+  "i": 93,
+  "en": "Jared",
+  "zh": ""
+ },
+ {
+  "i": 94,
+  "en": "Jasper",
+  "zh": ""
+ },
+ {
+  "i": 95,
+  "en": "Jervaise",
+  "zh": ""
+ },
+ {
+  "i": 96,
+  "en": "Joerg",
+  "zh": ""
+ },
+ {
+  "i": 97,
+  "en": "Jurgen",
+  "zh": ""
+ },
+ {
+  "i": 98,
+  "en": "Jumare",
+  "zh": ""
+ },
+ {
+  "i": 99,
+  "en": "Jochen",
+  "zh": ""
+ },
+ {
+  "i": 100,
+  "en": "Koris",
+  "zh": ""
+ },
+ {
+  "i": 101,
+  "en": "Karl",
+  "zh": ""
+ },
+ {
+  "i": 102,
+  "en": "Kragon",
+  "zh": ""
+ },
+ {
+  "i": 103,
+  "en": "Karawin",
+  "zh": ""
+ },
+ {
+  "i": 104,
+  "en": "Kazimir",
+  "zh": ""
+ },
+ {
+  "i": 105,
+  "en": "Kelson",
+  "zh": ""
+ },
+ {
+  "i": 106,
+  "en": "Kenelm",
+  "zh": ""
+ },
+ {
+  "i": 107,
+  "en": "Kendric",
+  "zh": ""
+ },
+ {
+  "i": 108,
+  "en": "Kennyth",
+  "zh": ""
+ },
+ {
+  "i": 109,
+  "en": "Keredwen",
+  "zh": ""
+ },
+ {
+  "i": 110,
+  "en": "Laurent",
+  "zh": ""
+ },
+ {
+  "i": 111,
+  "en": "Lavan",
+  "zh": ""
+ },
+ {
+  "i": 112,
+  "en": "Lazarus",
+  "zh": ""
+ },
+ {
+  "i": 113,
+  "en": "Leif",
+  "zh": ""
+ },
+ {
+  "i": 114,
+  "en": "Landric",
+  "zh": ""
+ },
+ {
+  "i": 115,
+  "en": "Larrion",
+  "zh": ""
+ },
+ {
+  "i": 116,
+  "en": "Leofwin",
+  "zh": ""
+ },
+ {
+  "i": 117,
+  "en": "Leopold",
+  "zh": ""
+ },
+ {
+  "i": 118,
+  "en": "Liam",
+  "zh": ""
+ },
+ {
+  "i": 119,
+  "en": "Llewellyn",
+  "zh": ""
+ },
+ {
+  "i": 120,
+  "en": "Marcus",
+  "zh": ""
+ },
+ {
+  "i": 121,
+  "en": "Mordygan",
+  "zh": ""
+ },
+ {
+  "i": 122,
+  "en": "Magnus",
+  "zh": ""
+ },
+ {
+  "i": 123,
+  "en": "Malachi",
+  "zh": ""
+ },
+ {
+  "i": 124,
+  "en": "Malcolm",
+  "zh": ""
+ },
+ {
+  "i": 125,
+  "en": "Marten",
+  "zh": ""
+ },
+ {
+  "i": 126,
+  "en": "Merric",
+  "zh": ""
+ },
+ {
+  "i": 127,
+  "en": "Miles",
+  "zh": ""
+ },
+ {
+  "i": 128,
+  "en": "Monford",
+  "zh": ""
+ },
+ {
+  "i": 129,
+  "en": "Mordred",
+  "zh": ""
+ },
+ {
+  "i": 130,
+  "en": "Needham",
+  "zh": ""
+ },
+ {
+  "i": 131,
+  "en": "Nikolai",
+  "zh": ""
+ },
+ {
+  "i": 132,
+  "en": "Nethaniel",
+  "zh": ""
+ },
+ {
+  "i": 133,
+  "en": "Niall",
+  "zh": ""
+ },
+ {
+  "i": 134,
+  "en": "Nigel",
+  "zh": ""
+ },
+ {
+  "i": 135,
+  "en": "Njorbjorn",
+  "zh": ""
+ },
+ {
+  "i": 136,
+  "en": "Norric",
+  "zh": ""
+ },
+ {
+  "i": 137,
+  "en": "Nyilas",
+  "zh": ""
+ },
+ {
+  "i": 138,
+  "en": "Neil",
+  "zh": ""
+ },
+ {
+  "i": 139,
+  "en": "Nicodemus",
+  "zh": ""
+ },
+ {
+  "i": 140,
+  "en": "Ox",
+  "zh": ""
+ },
+ {
+  "i": 141,
+  "en": "Oengus",
+  "zh": ""
+ },
+ {
+  "i": 142,
+  "en": "Olaf",
+  "zh": ""
+ },
+ {
+  "i": 143,
+  "en": "Olexander",
+  "zh": ""
+ },
+ {
+  "i": 144,
+  "en": "Ozymandias",
+  "zh": ""
+ },
+ {
+  "i": 145,
+  "en": "Olwen",
+  "zh": ""
+ },
+ {
+  "i": 146,
+  "en": "Owen",
+  "zh": ""
+ },
+ {
+  "i": 147,
+  "en": "Oskar",
+  "zh": ""
+ },
+ {
+  "i": 148,
+  "en": "Ottar",
+  "zh": ""
+ },
+ {
+  "i": 149,
+  "en": "Otho",
+  "zh": ""
+ },
+ {
+  "i": 150,
+  "en": "Padraic",
+  "zh": ""
+ },
+ {
+  "i": 151,
+  "en": "Pagane",
+  "zh": ""
+ },
+ {
+  "i": 152,
+  "en": "Palymar",
+  "zh": ""
+ },
+ {
+  "i": 153,
+  "en": "Parthalon",
+  "zh": ""
+ },
+ {
+  "i": 154,
+  "en": "Percival",
+  "zh": ""
+ },
+ {
+  "i": 155,
+  "en": "Peredur",
+  "zh": ""
+ },
+ {
+  "i": 156,
+  "en": "Peregrynne",
+  "zh": ""
+ },
+ {
+  "i": 157,
+  "en": "Phelan",
+  "zh": ""
+ },
+ {
+  "i": 158,
+  "en": "Philippe",
+  "zh": ""
+ },
+ {
+  "i": 159,
+  "en": "Phineas",
+  "zh": ""
+ },
+ {
+  "i": 160,
+  "en": "Quentin",
+  "zh": ""
+ },
+ {
+  "i": 161,
+  "en": "Queron",
+  "zh": ""
+ },
+ {
+  "i": 162,
+  "en": "Questifor",
+  "zh": ""
+ },
+ {
+  "i": 163,
+  "en": "Quinlan",
+  "zh": ""
+ },
+ {
+  "i": 164,
+  "en": "Radnor",
+  "zh": ""
+ },
+ {
+  "i": 165,
+  "en": "Raedwulf",
+  "zh": ""
+ },
+ {
+  "i": 166,
+  "en": "Ragnar",
+  "zh": ""
+ },
+ {
+  "i": 167,
+  "en": "Raibeart",
+  "zh": ""
+ },
+ {
+  "i": 168,
+  "en": "Raimund",
+  "zh": ""
+ },
+ {
+  "i": 169,
+  "en": "Rainulf",
+  "zh": ""
+ },
+ {
+  "i": 170,
+  "en": "Randgar",
+  "zh": ""
+ },
+ {
+  "i": 171,
+  "en": "Randwulf",
+  "zh": ""
+ },
+ {
+  "i": 172,
+  "en": "Redhair",
+  "zh": ""
+ },
+ {
+  "i": 173,
+  "en": "Reinholdt",
+  "zh": ""
+ },
+ {
+  "i": 174,
+  "en": "Reynard",
+  "zh": ""
+ },
+ {
+  "i": 175,
+  "en": "Robear",
+  "zh": ""
+ },
+ {
+  "i": 176,
+  "en": "Roderic",
+  "zh": ""
+ },
+ {
+  "i": 177,
+  "en": "Rodney",
+  "zh": ""
+ },
+ {
+  "i": 178,
+  "en": "Roegnvaldr",
+  "zh": ""
+ },
+ {
+  "i": 179,
+  "en": "Rolf",
+  "zh": ""
+ },
+ {
+  "i": 180,
+  "en": "Saerlaith",
+  "zh": ""
+ },
+ {
+  "i": 181,
+  "en": "Stefan",
+  "zh": ""
+ },
+ {
+  "i": 182,
+  "en": "Stjerne",
+  "zh": ""
+ },
+ {
+  "i": 183,
+  "en": "Seamus",
+  "zh": ""
+ },
+ {
+  "i": 184,
+  "en": "Sigismund",
+  "zh": ""
+ },
+ {
+  "i": 185,
+  "en": "Sigvald",
+  "zh": ""
+ },
+ {
+  "i": 186,
+  "en": "Symond",
+  "zh": ""
+ },
+ {
+  "i": 187,
+  "en": "Stanislaw",
+  "zh": ""
+ },
+ {
+  "i": 188,
+  "en": "Starulf",
+  "zh": ""
+ },
+ {
+  "i": 189,
+  "en": "Strykar",
+  "zh": ""
+ },
+ {
+  "i": 190,
+  "en": "Tryggvi",
+  "zh": ""
+ },
+ {
+  "i": 191,
+  "en": "Torin",
+  "zh": ""
+ },
+ {
+  "i": 192,
+  "en": "Tassach",
+  "zh": ""
+ },
+ {
+  "i": 193,
+  "en": "Torlough",
+  "zh": ""
+ },
+ {
+  "i": 194,
+  "en": "Tarl",
+  "zh": ""
+ },
+ {
+  "i": 195,
+  "en": "Telbyrne",
+  "zh": ""
+ },
+ {
+  "i": 196,
+  "en": "Trystan",
+  "zh": ""
+ },
+ {
+  "i": 197,
+  "en": "Thaddeus",
+  "zh": ""
+ },
+ {
+  "i": 198,
+  "en": "Theodric",
+  "zh": ""
+ },
+ {
+  "i": 199,
+  "en": "Thierry",
+  "zh": ""
+ },
+ {
+  "i": 200,
+  "en": "Uther",
+  "zh": ""
+ },
+ {
+  "i": 201,
+  "en": "Ulfgard",
+  "zh": ""
+ },
+ {
+  "i": 202,
+  "en": "Vagn",
+  "zh": ""
+ },
+ {
+  "i": 203,
+  "en": "Valdemar",
+  "zh": ""
+ },
+ {
+  "i": 204,
+  "en": "Vhesper",
+  "zh": ""
+ },
+ {
+  "i": 205,
+  "en": "Vladimir",
+  "zh": ""
+ },
+ {
+  "i": 206,
+  "en": "Vardak",
+  "zh": ""
+ },
+ {
+  "i": 207,
+  "en": "Vargskol",
+  "zh": ""
+ },
+ {
+  "i": 208,
+  "en": "Walram",
+  "zh": ""
+ },
+ {
+  "i": 209,
+  "en": "Warin",
+  "zh": ""
+ },
+ {
+  "i": 210,
+  "en": "Wolfgang",
+  "zh": ""
+ },
+ {
+  "i": 211,
+  "en": "Wiglaf",
+  "zh": ""
+ },
+ {
+  "i": 212,
+  "en": "Wilfrith",
+  "zh": ""
+ },
+ {
+  "i": 213,
+  "en": "Wulf",
+  "zh": ""
+ },
+ {
+  "i": 214,
+  "en": "Wulfgar",
+  "zh": ""
+ },
+ {
+  "i": 215,
+  "en": "Wulfric",
+  "zh": ""
+ },
+ {
+  "i": 216,
+  "en": "Xenophon",
+  "zh": ""
+ },
+ {
+  "i": 217,
+  "en": "Yorick",
+  "zh": ""
+ },
+ {
+  "i": 218,
+  "en": "Ziegried",
+  "zh": ""
+ }
+]

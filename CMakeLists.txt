@@ -41,6 +41,14 @@ add_executable(test_qd_text tests/test_qd_text.c)
 target_include_directories(test_qd_text PRIVATE ${SDL2_IMAGE_INCLUDE_DIRS})
 target_link_libraries(test_qd_text PRIVATE u3compat ${SDL2_IMAGE_LIBRARIES})
 
+# --- 字串表讀取器 ---
+add_library(u3text STATIC src/text/strings.c)
+target_include_directories(u3text PUBLIC src/text)
+
+add_executable(test_strings_render tests/test_strings_render.c)
+target_include_directories(test_strings_render PRIVATE ${SDL2_IMAGE_INCLUDE_DIRS})
+target_link_libraries(test_strings_render PRIVATE u3compat u3text ${SDL2_IMAGE_LIBRARIES})
+
 # --- P1 垂直切片 PoC ---
 add_executable(poc
     src/poc/main.c
