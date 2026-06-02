@@ -52,6 +52,7 @@ typedef UInt16 EventKind;
 enum {
     nullEvent = 0, mouseDown = 1, mouseUp = 2, keyDown = 3, keyUp = 4,
     autoKey = 5, updateEvt = 6, activateEvt = 8,
+    osEvt = 15, app4Evt = 15, kHighLevelEvt = 23,
     mDownMask = 1<<mouseDown, mUpMask = 1<<mouseUp,
     keyDownMask = 1<<keyDown, keyUpMask = 1<<keyUp,
     autoKeyMask = 1<<autoKey, updateMask = 1<<updateEvt,
@@ -66,6 +67,56 @@ typedef struct EventRecord {
 } EventRecord;
 
 /* Absolute 由 UltimaMisc.h 宣告 (short Absolute(short)),實作在 cf_bridge.c */
+
+/* ===== 函式指標 / 雜項型別 ===== */
+typedef void *UniversalProcPtr;
+typedef void *ModalFilterUPP;
+typedef FourCharCode ResType;
+typedef Handle StringHandle;
+typedef SInt16 DialogItemType;
+typedef int boolean_t;
+typedef struct CGPoint { Float64 x, y; } CGPoint;
+typedef struct CGSize  { Float64 width, height; } CGSize;
+typedef struct CGRect  { CGPoint origin; CGSize size; } CGRect;
+typedef UInt32 CGDirectDisplayID;
+typedef SInt32 CGDisplayErr;
+typedef SInt32 CGError;
+typedef struct AlertStdAlertParamRec {
+    Boolean movable; Boolean helpButton; ModalFilterUPP filterProc;
+    ConstStringPtr defaultText, cancelText, otherText;
+    Boolean defaultButton, cancelButton; UInt16 position;
+} AlertStdAlertParamRec;
+
+/* ===== Carbon 常數批次 (移植期型別解析;相關函式多會以 SDL 重寫/停用) ===== */
+enum {
+    /* 文字 face / transfer 模式 */
+    normal = 0, bold = 1, italic = 2, underline = 4,
+    addOver = 35,
+    /* 事件 / 修飾鍵 */
+    kHighLevelEvent = 23, cmdKey = 0x0100, optionKey = 0x0800,
+    shiftKey = 0x0200, controlKey = 0x1000, charCodeMask = 0x000000FF,
+    /* 視窗部位 */
+    inDesk = 0, inMenuBar = 1, inContent = 3, inDrag = 4, inGoAway = 6,
+    kControlButtonPart = 10,
+    /* Alert 類型 / 按鈕 */
+    kAlertStopAlert = 0, kAlertNoteAlert = 1, kAlertCautionAlert = 2,
+    kAlertStdAlertOKButton = 1, kAlertStdAlertCancelButton = 2,
+    /* 檔案權限 / 定位 */
+    fsRdPerm = 1, fsRdWrPerm = 3, fsFromStart = 1, fsCurPerm = 0,
+    permErr = -54, kOnSystemDisk = -32768,
+    kDontCreateFolder = 0, kPreferencesFolderType = 0x70726566 /* 'pref' */,
+    /* Gestalt / 顯示管理 */
+    gestaltDisplayMgrPresent = 0, gestaltDisplayMgrAttr = 0x6473706c,
+    dmOnlyActiveDisplays = 1,
+    /* HI command / 視窗位置 / script */
+    kHICommandPreferences = 0x70726566, kWindowDefaultPosition = 0,
+    smSystemScript = -1
+};
+/* CoreGraphics 顯示常數 */
+#define kCGDirectMainDisplay ((CGDirectDisplayID)0)
+#define kCGErrorSuccess      (0)
+#define kCGDisplayWidth      ((CFStringRef)"Width")
+#define kCGDisplayHeight     ((CFStringRef)"Height")
 
 /* ===== Carbon 雜項型別/常數 (移植期型別解析用) ===== */
 typedef SInt32 Size;
@@ -102,6 +153,9 @@ typedef struct __CFDictionary *CFMutableDictionaryRef;
 typedef struct __CFBundle *CFBundleRef;
 typedef const struct __CFAllocator *CFAllocatorRef;
 #define kCFAllocatorDefault ((CFAllocatorRef)0)
+typedef const struct __CFNumber *CFNumberRef;
+typedef SInt32 CFNumberType;
+enum { kCFNumberShortType = 3, kCFNumberIntType = 9, kCFNumberSInt32Type = 3 };
 typedef unsigned long CFIndex;
 typedef UInt32 CFStringEncoding;
 typedef Boolean CFComparisonResult; /* 簡化 */
