@@ -12,6 +12,8 @@
 
 extern int gU3Done;
 void U3_PlatPresent(void);
+extern void HandleMouseDown(void);   /* UltimaMacIF.c:原由 Cocoa 事件迴圈呼叫 */
+extern EventRecord gTheEvent;        /* 上游全域事件記錄 */
 
 /* --- 腳本輸入 (game tester) ---
  * 行導向迷你語言 (每行一指令,每次 WaitNextEvent 處理一步):
@@ -98,12 +100,18 @@ Boolean WaitNextEvent(short mask, EventRecord *evt, unsigned long sleep, RgnHand
 
     /* 腳本輸入優先 */
     int sk = script_next_key();
-    if (gPendClickX >= 0 && evt) {   /* 腳本點擊 → 合成 mouseDown */
+    if (gPendClickX >= 0 && evt) {   /* 腳本點擊 → 合成 mouseDown 並自行分派 */
         evt->what = mouseDown;
         evt->where.h = (SInt16)gPendClickX;
         evt->where.v = (SInt16)gPendClickY;
         gSynthX = gPendClickX; gSynthY = gPendClickY; gSynthDown = 4;
         gPendClickX = gPendClickY = -1;
+        /* 原由 Cocoa 事件迴圈分派;此處補上:填 gTheEvent 後呼叫 HandleMouseDown。
+         * HandleButtonClick 同步輪詢 StillDown/GetMouse;處理完才清合成滑鼠,
+         * 確保整個輪詢期間 GetMouse 都回點擊座標 (放開時仍在按鈕上 → 判定成功)。 */
+        gTheEvent = *evt;
+        HandleMouseDown();
+        gSynthX = gSynthY = -1; gSynthDown = 0;
         return true;
     }
     if (sk >= 0 && evt) {
@@ -145,7 +153,7 @@ void FlushEvents(short eventMask, short stopMask) {
 }
 
 void GetMouse(Point *pt) {
-    if (gSynthDown > 0 && gSynthX >= 0) {   /* 合成點擊位置 */
+    if (gSynthX >= 0) {   /* 合成點擊期間始終回點擊座標 (含放開瞬間) */
         if (pt) { pt->h = (SInt16)gSynthX; pt->v = (SInt16)gSynthY; }
         return;
     }

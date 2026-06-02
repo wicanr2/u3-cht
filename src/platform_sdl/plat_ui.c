@@ -67,8 +67,12 @@ void InvalWindowRect(WindowPtr w, const Rect *r) { (void)w; (void)r; }
 void TransitionWindow(WindowPtr w, UInt32 effect, UInt32 action, const void *opts) {
     (void)w; (void)effect; (void)action; (void)opts;
 }
+extern WindowPtr gMainWindow;
 SInt16 FindWindow(Point thePoint, WindowPtr *theWindow) {
-    (void)thePoint; if (theWindow) *theWindow = NULL; return 0; /* inDesk */
+    (void)thePoint;
+    /* 回主視窗 (非 NULL):否則 HandleMouseDown 會因 whichWindow==gShroudWindow(NULL) 而 break */
+    if (theWindow) *theWindow = gMainWindow;
+    return 3; /* inContent → HandleMouseDown default 分支處理按鈕 */
 }
 Boolean TrackGoAway(WindowPtr w, Point thePt) { (void)w; (void)thePt; return false; }
 
