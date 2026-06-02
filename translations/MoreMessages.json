@@ -2,22 +2,22 @@
  {
   "i": 0,
   "en": "JOURNEY ONWARD",
-  "zh": ""
+  "zh": "啟程冒險"
  },
  {
   "i": 1,
   "en": "(Not formed)",
-  "zh": ""
+  "zh": "(未編組)"
  },
  {
   "i": 2,
   "en": "REGISTER",
-  "zh": ""
+  "zh": "註冊"
  },
  {
   "i": 3,
   "en": "FORM THE PARTY",
-  "zh": ""
+  "zh": "組成隊伍"
  },
  {
   "i": 4,
@@ -27,27 +27,27 @@
  {
   "i": 5,
   "en": "PLAYER-1-",
-  "zh": ""
+  "zh": "玩家-1-"
  },
  {
   "i": 6,
   "en": "PLAYER-2-",
-  "zh": ""
+  "zh": "玩家-2-"
  },
  {
   "i": 7,
   "en": "PLAYER-3-",
-  "zh": ""
+  "zh": "玩家-3-"
  },
  {
   "i": 8,
   "en": "PLAYER-4-",
-  "zh": ""
+  "zh": "玩家-4-"
  },
  {
   "i": 9,
   "en": "(Not a player)",
-  "zh": ""
+  "zh": "(非玩家)"
  },
  {
   "i": 10,
@@ -57,72 +57,72 @@
  {
   "i": 11,
   "en": "(Formed)",
-  "zh": ""
+  "zh": "(已編組)"
  },
  {
   "i": 12,
   "en": "DISPERSE THE PARTY",
-  "zh": ""
+  "zh": "解散隊伍"
  },
  {
   "i": 13,
   "en": "(No one there)",
-  "zh": ""
+  "zh": "(那裡沒有人)"
  },
  {
   "i": 14,
   "en": "(Dispersed!)",
-  "zh": ""
+  "zh": "(已解散!)"
  },
  {
   "i": 15,
   "en": "CREATE",
-  "zh": ""
+  "zh": "創建"
  },
  {
   "i": 16,
   "en": "Entry#",
-  "zh": ""
+  "zh": "編號#"
  },
  {
   "i": 17,
   "en": "(1-20 only!)",
-  "zh": ""
+  "zh": "(僅限 1-20!)"
  },
  {
   "i": 18,
   "en": "(Not empty!)",
-  "zh": ""
+  "zh": "(非空!)"
  },
  {
   "i": 19,
   "en": "Character creation aborted.",
-  "zh": ""
+  "zh": "角色創建已中止。"
  },
  {
   "i": 20,
   "en": "Character created.",
-  "zh": ""
+  "zh": "角色已創建。"
  },
  {
   "i": 21,
   "en": "TERMINATE!",
-  "zh": ""
+  "zh": "刪除!"
  },
  {
   "i": 22,
   "en": "(No one there)",
-  "zh": ""
+  "zh": "(那裡沒有人)"
  },
  {
   "i": 23,
   "en": "(With a party)",
-  "zh": ""
+  "zh": "(隊伍中)"
  },
  {
   "i": 24,
   "en": "(Terminated)",
-  "zh": ""
+  "zh": "(已刪除)"
  },
  {
   "i": 25,
@@ -172,37 +172,37 @@
  {
   "i": 34,
   "en": "Create a character",
-  "zh": ""
+  "zh": "創建角色"
  },
  {
   "i": 35,
   "en": "Form the party",
-  "zh": ""
+  "zh": "組成隊伍"
  },
  {
   "i": 36,
   "en": "Disperse the party",
-  "zh": ""
+  "zh": "解散隊伍"
  },
  {
   "i": 37,
   "en": "Terminate a character",
-  "zh": ""
+  "zh": "刪除角色"
  },
  {
   "i": 38,
   "en": "Main  menu",
-  "zh": ""
+  "zh": "主選單"
  },
  {
   "i": 39,
   "en": "OPTIONS:",
-  "zh": ""
+  "zh": "選項:"
  },
  {
   "i": 40,
   "en": "(Player is out!)",
-  "zh": ""
+  "zh": "(玩家不在!)"
  },
  {
   "i": 41,
@@ -212,272 +212,272 @@
  {
   "i": 42,
   "en": "CALM WINDS",
-  "zh": ""
+  "zh": "無風"
  },
  {
   "i": 43,
   "en": "NORTH WIND",
-  "zh": ""
+  "zh": "北風"
  },
  {
   "i": 44,
   "en": "EAST  WIND",
-  "zh": ""
+  "zh": "東風"
  },
  {
   "i": 45,
   "en": "SOUTH WIND",
-  "zh": ""
+  "zh": "南風"
  },
  {
   "i": 46,
   "en": "WEST  WIND",
-  "zh": ""
+  "zh": "西風"
  },
  {
   "i": 47,
   "en": "Lvl:0",
-  "zh": ""
+  "zh": "等級:0"
  },
  {
   "i": 48,
   "en": "HEAD-",
-  "zh": ""
+  "zh": "朝向-"
  },
  {
   "i": 49,
   "en": "North",
-  "zh": ""
+  "zh": "北"
  },
  {
   "i": 50,
   "en": "-East",
-  "zh": ""
+  "zh": "-東"
  },
  {
   "i": 51,
   "en": "South",
-  "zh": ""
+  "zh": "南"
  },
  {
   "i": 52,
   "en": "-West",
-  "zh": ""
+  "zh": "-西"
  },
  {
   "i": 53,
   "en": "PRESS  <SPACE>",
-  "zh": ""
+  "zh": "請按 <空白鍵>"
  },
  {
   "i": 54,
   "en": "ULTIMA III",
-  "zh": ""
+  "zh": "創世紀 III"
  },
  {
   "i": 55,
   "en": "entered this place",
-  "zh": ""
+  "zh": "進入了此地"
  },
  {
   "i": 56,
   "en": "entered this dungeon",
-  "zh": ""
+  "zh": "進入了這座地牢"
  },
  {
   "i": 57,
   "en": "entered this town",
-  "zh": ""
+  "zh": "進入了這座城鎮"
  },
  {
   "i": 58,
   "en": "entered this castle",
-  "zh": ""
+  "zh": "進入了這座城堡"
  },
  {
   "i": 59,
   "en": "entered the whirlpool",
-  "zh": ""
+  "zh": "進入了漩渦"
  },
  {
   "i": 60,
   "en": "exited a location or saved the game",
-  "zh": ""
+  "zh": "離開了某處或存了檔"
  },
  {
   "i": 61,
   "en": "Level ",
-  "zh": ""
+  "zh": "等級 "
  },
  {
   "i": 62,
   "en": "Good Health",
-  "zh": ""
+  "zh": "健康良好"
  },
  {
   "i": 63,
   "en": "Poisoned",
-  "zh": ""
+  "zh": "中毒"
  },
  {
   "i": 64,
   "en": "Dead",
-  "zh": ""
+  "zh": "死亡"
  },
  {
   "i": 65,
   "en": "Ashes",
-  "zh": ""
+  "zh": "化為灰燼"
  },
  {
   "i": 66,
   "en": "Female",
-  "zh": ""
+  "zh": "女性"
  },
  {
   "i": 67,
   "en": "Male",
-  "zh": ""
+  "zh": "男性"
  },
  {
   "i": 68,
   "en": "Other",
-  "zh": ""
+  "zh": "其他"
  },
  {
   "i": 69,
   "en": "Magic Points",
-  "zh": ""
+  "zh": "魔力值"
  },
  {
   "i": 70,
   "en": "Hit Points",
-  "zh": ""
+  "zh": "生命值"
  },
  {
   "i": 71,
   "en": "Experience",
-  "zh": ""
+  "zh": "經驗值"
  },
  {
   "i": 72,
   "en": "Food",
-  "zh": ""
+  "zh": "食物"
  },
  {
   "i": 73,
   "en": "Gold",
-  "zh": ""
+  "zh": "金幣"
  },
  {
   "i": 74,
   "en": "non-mage",
-  "zh": ""
+  "zh": "非法師"
  },
  {
   "i": 75,
   "en": "Card of Death",
-  "zh": ""
+  "zh": "死亡之牌"
  },
  {
   "i": 76,
   "en": "Card of Sol",
-  "zh": ""
+  "zh": "太陽之牌"
  },
  {
   "i": 77,
   "en": "Card of Love",
-  "zh": ""
+  "zh": "愛之牌"
  },
  {
   "i": 78,
   "en": "Card of Moons",
-  "zh": ""
+  "zh": "月之牌"
  },
  {
   "i": 79,
   "en": "Mark of Force",
-  "zh": ""
+  "zh": "力之印記"
  },
  {
   "i": 80,
   "en": "Mark of Fire",
-  "zh": ""
+  "zh": "火之印記"
  },
  {
   "i": 81,
   "en": "Mark of the Snake",
-  "zh": ""
+  "zh": "蛇之印記"
  },
  {
   "i": 82,
   "en": "Mark of Kings",
-  "zh": ""
+  "zh": "王之印記"
  },
  {
   "i": 83,
   "en": " Torches",
-  "zh": ""
+  "zh": " 火把"
  },
  {
   "i": 84,
   "en": " Gems",
-  "zh": ""
+  "zh": " 寶石"
  },
  {
   "i": 85,
   "en": " Keys",
-  "zh": ""
+  "zh": " 鑰匙"
  },
  {
   "i": 86,
   "en": " Powders",
-  "zh": ""
+  "zh": " 粉末"
  },
  {
   "i": 87,
   "en": "Ratings",
-  "zh": ""
+  "zh": "評等"
  },
  {
   "i": 88,
   "en": "Values",
-  "zh": ""
+  "zh": "數值"
  },
  {
   "i": 89,
   "en": "Weapons",
-  "zh": ""
+  "zh": "武器"
  },
  {
   "i": 90,
   "en": "Armour",
-  "zh": ""
+  "zh": "防具"
  },
  {
   "i": 91,
   "en": "Stuff",
-  "zh": ""
+  "zh": "雜物"
  },
  {
   "i": 92,
   "en": "Game Paused",
-  "zh": ""
+  "zh": "遊戲暫停"
  },
  {
   "i": 93,
   "en": "- empty -",
-  "zh": ""
+  "zh": "- 空 -"
  },
  {
   "i": 94,
   "en": "Click mouse or press a key to continue",
-  "zh": ""
+  "zh": "點擊滑鼠或按任意鍵繼續"
  },
  {
   "i": 95,
   "en": "last saved the game outdoors",
-  "zh": ""
+  "zh": "上次在野外存檔"
  },
  {
   "i": 96,
@@ -492,6 +492,6 @@
  {
   "i": 98,
   "en": "This game is $5 to fully unlock.  See “Register…” under the Ultima III menu for information.",
-  "zh": ""
+  "zh": "本遊戲需 $5 解鎖完整版。詳情請見創世紀 III 選單下的「Register…」。"
  }
 ]

@@ -2,401 +2,401 @@
  {
   "i": 0,
   "en": "Water",
-  "zh": ""
+  "zh": "水"
  },
  {
   "i": 1,
   "en": "Grass",
-  "zh": ""
+  "zh": "草地"
  },
  {
   "i": 2,
   "en": "Brush",
-  "zh": ""
+  "zh": "灌木"
  },
  {
   "i": 3,
   "en": "Forest",
-  "zh": ""
+  "zh": "森林"
  },
  {
   "i": 4,
   "en": "Mountains",
-  "zh": ""
+  "zh": "山脈"
  },
  {
   "i": 5,
   "en": "Dungeons",
-  "zh": ""
+  "zh": "地牢"
  },
  {
   "i": 6,
   "en": "Townes",
-  "zh": ""
+  "zh": "城鎮"
  },
  {
   "i": 7,
   "en": "Castles",
-  "zh": ""
+  "zh": "城堡"
  },
  {
   "i": 8,
   "en": "Floors",
-  "zh": ""
+  "zh": "地板"
  },
  {
   "i": 9,
   "en": "Chests",
-  "zh": ""
+  "zh": "寶箱"
  },
  {
   "i": 10,
   "en": "Horses",
-  "zh": ""
+  "zh": "馬"
  },
  {
   "i": 11,
   "en": "Frigates",
-  "zh": ""
+  "zh": "戰艦"
  },
  {
   "i": 12,
   "en": "Whirlpools",
-  "zh": ""
+  "zh": "漩渦"
  },
  {
   "i": 13,
   "en": "Serpents",
-  "zh": ""
+  "zh": "海蛇"
  },
  {
   "i": 14,
   "en": "Man-O-Wars",
-  "zh": ""
+  "zh": "戰船"
  },
  {
   "i": 15,
   "en": "Pirates",
-  "zh": ""
+  "zh": "海盜"
  },
  {
   "i": 16,
   "en": "Merchants",
-  "zh": ""
+  "zh": "商人"
  },
  {
   "i": 17,
   "en": "Jesters",
-  "zh": ""
+  "zh": "弄臣"
  },
  {
   "i": 18,
   "en": "Guards",
-  "zh": ""
+  "zh": "守衛"
  },
  {
   "i": 19,
   "en": "Lord British",
-  "zh": ""
+  "zh": "不列顛王"
  },
  {
   "i": 20,
   "en": "Fighters",
-  "zh": ""
+  "zh": "鬥士"
  },
  {
   "i": 21,
   "en": "Clerics",
-  "zh": ""
+  "zh": "牧師"
  },
  {
   "i": 22,
   "en": "Wizards",
-  "zh": ""
+  "zh": "巫師"
  },
  {
   "i": 23,
   "en": "Thieves",
-  "zh": ""
+  "zh": "竊賊"
  },
  {
   "i": 24,
   "en": "Orcs",
-  "zh": ""
+  "zh": "獸人"
  },
  {
   "i": 25,
   "en": "Skeletons",
-  "zh": ""
+  "zh": "骷髏"
  },
  {
   "i": 26,
   "en": "Giants",
-  "zh": ""
+  "zh": "巨人"
  },
  {
   "i": 27,
   "en": "Daemons",
-  "zh": ""
+  "zh": "惡魔"
  },
  {
   "i": 28,
   "en": "Pinchers",
-  "zh": ""
+  "zh": "鉗蟹"
  },
  {
   "i": 29,
   "en": "Dragons",
-  "zh": ""
+  "zh": "巨龍"
  },
  {
   "i": 30,
   "en": "Balrons",
-  "zh": ""
+  "zh": "巴爾隆"
  },
  {
   "i": 31,
   "en": "Exodus",
-  "zh": ""
+  "zh": "末日"
  },
  {
   "i": 32,
   "en": "Force Fields",
-  "zh": ""
+  "zh": "力場"
  },
  {
   "i": 33,
   "en": "Lava",
-  "zh": ""
+  "zh": "熔岩"
  },
  {
   "i": 34,
   "en": "Moon Gates",
-  "zh": ""
+  "zh": "月門"
  },
  {
   "i": 35,
   "en": "Walls",
-  "zh": ""
+  "zh": "牆"
  },
  {
   "i": 36,
   "en": "Void",
-  "zh": ""
+  "zh": "虛空"
  },
  {
   "i": 37,
   "en": "Walls",
-  "zh": ""
+  "zh": "牆"
  },
  {
   "i": 38,
   "en": "A",
-  "zh": ""
+  "zh": "A"
  },
  {
   "i": 39,
   "en": "B",
-  "zh": ""
+  "zh": "B"
  },
  {
   "i": 40,
   "en": "C",
-  "zh": ""
+  "zh": "C"
  },
  {
   "i": 41,
   "en": "D",
-  "zh": ""
+  "zh": "D"
  },
  {
   "i": 42,
   "en": "E",
-  "zh": ""
+  "zh": "E"
  },
  {
   "i": 43,
   "en": "F",
-  "zh": ""
+  "zh": "F"
  },
  {
   "i": 44,
   "en": "G",
-  "zh": ""
+  "zh": "G"
  },
  {
   "i": 45,
   "en": "H",
-  "zh": ""
+  "zh": "H"
  },
  {
   "i": 46,
   "en": "I",
-  "zh": ""
+  "zh": "I"
  },
  {
   "i": 47,
   "en": "U",
-  "zh": ""
+  "zh": "U"
  },
  {
   "i": 48,
   "en": "Y",
-  "zh": ""
+  "zh": "Y"
  },
  {
   "i": 49,
   "en": "L",
-  "zh": ""
+  "zh": "L"
  },
  {
   "i": 50,
   "en": "M",
-  "zh": ""
+  "zh": "M"
  },
  {
   "i": 51,
   "en": "N",
-  "zh": ""
+  "zh": "N"
  },
  {
   "i": 52,
   "en": "O",
-  "zh": ""
+  "zh": "O"
  },
  {
   "i": 53,
   "en": "P",
-  "zh": ""
+  "zh": "P"
  },
  {
   "i": 54,
   "en": "W",
-  "zh": ""
+  "zh": "W"
  },
  {
   "i": 55,
   "en": "R",
-  "zh": ""
+  "zh": "R"
  },
  {
   "i": 56,
   "en": "S",
-  "zh": ""
+  "zh": "S"
  },
  {
   "i": 57,
   "en": "T",
-  "zh": ""
+  "zh": "T"
  },
  {
   "i": 58,
   "en": "Snake",
-  "zh": ""
+  "zh": "蛇"
  },
  {
   "i": 59,
   "en": "Snake",
-  "zh": ""
+  "zh": "蛇"
  },
  {
   "i": 60,
   "en": "Magic",
-  "zh": ""
+  "zh": "魔法"
  },
  {
   "i": 61,
   "en": "Fire",
-  "zh": ""
+  "zh": "火"
  },
  {
   "i": 62,
   "en": "Shrine",
-  "zh": ""
+  "zh": "神殿"
  },
  {
   "i": 63,
   "en": "Rangers",
-  "zh": ""
+  "zh": "遊俠"
  },
  {
   "i": 64,
   "en": "Brigands",
-  "zh": ""
+  "zh": "強盜"
  },
  {
   "i": 65,
   "en": "Cutpurses",
-  "zh": ""
+  "zh": "扒手"
  },
  {
   "i": 66,
   "en": "Goblins",
-  "zh": ""
+  "zh": "哥布林"
  },
  {
   "i": 67,
   "en": "Trolls",
-  "zh": ""
+  "zh": "巨魔"
  },
  {
   "i": 68,
   "en": "Ghouls",
-  "zh": ""
+  "zh": "食屍鬼"
  },
  {
   "i": 69,
   "en": "Zombies",
-  "zh": ""
+  "zh": "殭屍"
  },
  {
   "i": 70,
   "en": "Golems",
-  "zh": ""
+  "zh": "魔像"
  },
  {
   "i": 71,
   "en": "Titans",
-  "zh": ""
+  "zh": "泰坦"
  },
  {
   "i": 72,
   "en": "Gargoyles",
-  "zh": ""
+  "zh": "石像鬼"
  },
  {
   "i": 73,
   "en": "Manes",
-  "zh": ""
+  "zh": "魔靈"
  },
  {
   "i": 74,
   "en": "Snatches",
-  "zh": ""
+  "zh": "奪魂者"
  },
  {
   "i": 75,
   "en": "Bradles",
-  "zh": ""
+  "zh": "Bradles"
  },
  {
   "i": 76,
   "en": "Griffons",
-  "zh": ""
+  "zh": "獅鷲"
  },
  {
   "i": 77,
   "en": "Wyverns",
-  "zh": ""
+  "zh": "雙足飛龍"
  },
  {
   "i": 78,
   "en": "Orcuses",
-  "zh": ""
+  "zh": "歐庫斯"
  },
  {
   "i": 79,
   "en": "Devils",
-  "zh": ""
+  "zh": "魔鬼"
  }
 ]

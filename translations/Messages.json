@@ -2,1321 +2,1321 @@
  {
   "i": 0,
   "en": "Steph Chakerian",
-  "zh": ""
+  "zh": "Steph Chakerian"
  },
  {
   "i": 1,
   "en": "Dann Cutter",
-  "zh": ""
+  "zh": "Dann Cutter"
  },
  {
   "i": 2,
   "en": "Weldon Dodd",
-  "zh": ""
+  "zh": "Weldon Dodd"
  },
  {
   "i": 3,
   "en": "Seth Grenald",
-  "zh": ""
+  "zh": "Seth Grenald"
  },
  {
   "i": 4,
   "en": "Ken Hill",
-  "zh": ""
+  "zh": "Ken Hill"
  },
  {
   "i": 5,
   "en": "Bryan Horling",
-  "zh": ""
+  "zh": "Bryan Horling"
  },
  {
   "i": 6,
   "en": "TIME IS BENEATH YOU",
-  "zh": ""
+  "zh": "時間在你之下"
  },
  {
   "i": 7,
   "en": "Chris Hwang",
-  "zh": ""
+  "zh": "Chris Hwang"
  },
  {
   "i": 8,
   "en": "Michael Jen",
-  "zh": ""
+  "zh": "Michael Jen"
  },
  {
   "i": 9,
   "en": "Eric King",
-  "zh": ""
+  "zh": "Eric King"
  },
  {
   "i": 10,
   "en": "Dan Lorca-Martinez",
-  "zh": ""
+  "zh": "Dan Lorca-Martinez"
  },
  {
   "i": 11,
   "en": "Ouch, that hurt.",
-  "zh": ""
+  "zh": "哎喲,好痛。"
  },
  {
   "i": 12,
   "en": "Brian David Olson",
-  "zh": ""
+  "zh": "Brian David Olson"
  },
  {
   "i": 13,
   "en": "Doug Miles",
-  "zh": ""
+  "zh": "Doug Miles"
  },
  {
   "i": 14,
   "en": "Shawn Scanlon",
-  "zh": ""
+  "zh": "Shawn Scanlon"
  },
  {
   "i": 15,
   "en": "Chris Soeffing",
-  "zh": ""
+  "zh": "Chris Soeffing"
  },
  {
   "i": 16,
   "en": "Dismount\n",
-  "zh": ""
+  "zh": "下馬\n"
  },
  {
   "i": 17,
   "en": "David Huberman",
-  "zh": ""
+  "zh": "David Huberman"
  },
  {
   "i": 18,
   "en": "Victor E. Aldridge III",
-  "zh": ""
+  "zh": "Victor E. Aldridge III"
  },
  {
   "i": 19,
   "en": "Read John Varley",
-  "zh": ""
+  "zh": "讀讀 John Varley"
  },
  {
   "i": 20,
   "en": "Scirocco Six",
-  "zh": ""
+  "zh": "Scirocco Six"
  },
  {
   "i": 21,
   "en": "Refer to the \"Ultima III Manual\" for help choosing a race, type, etc.",
-  "zh": ""
+  "zh": "選擇種族、職業等請參閱《創世紀III 手冊》。"
  },
  {
   "i": 22,
   "en": "Pass\n",
-  "zh": ""
+  "zh": "通過\n"
  },
  {
   "i": 23,
   "en": "North\n",
-  "zh": ""
+  "zh": "北\n"
  },
  {
   "i": 24,
   "en": "South\n",
-  "zh": ""
+  "zh": "南\n"
  },
  {
   "i": 25,
   "en": "East\n",
-  "zh": ""
+  "zh": "東\n"
  },
  {
   "i": 26,
   "en": "West\n",
-  "zh": ""
+  "zh": "西\n"
  },
  {
   "i": 27,
   "en": "Attack-",
-  "zh": ""
+  "zh": "攻擊-"
  },
  {
   "i": 28,
   "en": "Board",
-  "zh": ""
+  "zh": "登乘"
  },
  {
   "i": 29,
   "en": "Mount horse!\n",
-  "zh": ""
+  "zh": "騎上馬!\n"
  },
  {
   "i": 30,
   "en": "Board frigate!\n",
-  "zh": ""
+  "zh": "登上巡防艦!\n"
  },
  {
   "i": 31,
   "en": "Descend",
-  "zh": ""
+  "zh": "下降"
  },
  {
   "i": 32,
   "en": "Enter ",
-  "zh": ""
+  "zh": "進入 "
  },
  {
   "i": 33,
   "en": "dungeon!\n",
-  "zh": ""
+  "zh": "地牢!\n"
  },
  {
   "i": 34,
   "en": "town!\n",
-  "zh": ""
+  "zh": "城鎮!\n"
  },
  {
   "i": 35,
   "en": "castle!\n",
-  "zh": ""
+  "zh": "城堡!\n"
  },
  {
   "i": 36,
   "en": "shrine!\nWho enters?-",
-  "zh": ""
+  "zh": "聖壇!\n誰要進入?-"
  },
  {
   "i": 37,
   "en": "Fire",
-  "zh": ""
+  "zh": "射擊"
  },
  {
   "i": 38,
   "en": "\nDirect-",
-  "zh": ""
+  "zh": "\n方向-"
  },
  {
   "i": 39,
   "en": "Get chest!\nPlr to search-",
-  "zh": ""
+  "zh": "取寶箱!\n何人搜尋-"
  },
  {
   "i": 40,
   "en": "No such player!\n",
-  "zh": ""
+  "zh": "查無此人!\n"
  },
  {
   "i": 41,
   "en": "ACID TRAP!\n",
-  "zh": ""
+  "zh": "強酸陷阱!\n"
  },
  {
   "i": 42,
   "en": "POISON TRAP!\n",
-  "zh": ""
+  "zh": "毒藥陷阱!\n"
  },
  {
   "i": 43,
   "en": "BOMB TRAP!\n",
-  "zh": ""
+  "zh": "炸彈陷阱!\n"
  },
  {
   "i": 44,
   "en": "GAS TRAP!\n",
-  "zh": ""
+  "zh": "毒氣陷阱!\n"
  },
  {
   "i": 45,
   "en": "Trap evaded!\n",
-  "zh": ""
+  "zh": "閃過陷阱!\n"
  },
  {
   "i": 46,
   "en": "GOLD+",
-  "zh": ""
+  "zh": "金幣+"
  },
  {
   "i": 47,
   "en": "(overflowing!)\n",
-  "zh": ""
+  "zh": "(滿溢!)\n"
  },
  {
   "i": 48,
   "en": "and a ",
-  "zh": ""
+  "zh": "與一件 "
  },
  {
   "i": 49,
   "en": "and ",
-  "zh": ""
+  "zh": "以及 "
  },
  {
   "i": 50,
   "en": "Hand Equipment!\nFrom plr-",
-  "zh": ""
+  "zh": "傳遞裝備!\n由誰-"
  },
  {
   "i": 51,
   "en": " to plr-",
-  "zh": ""
+  "zh": " 給誰-"
  },
  {
   "i": 52,
   "en": "F,G,E,W,A:",
-  "zh": ""
+  "zh": "F,G,E,W,A:"
  },
  {
   "i": 53,
   "en": "Amount-",
-  "zh": ""
+  "zh": "數量-"
  },
  {
   "i": 54,
   "en": "Not enough!\n",
-  "zh": ""
+  "zh": "不夠!\n"
  },
  {
   "i": 55,
   "en": "Too much!\n",
-  "zh": ""
+  "zh": "太多了!\n"
  },
  {
   "i": 56,
   "en": "Done!\n",
-  "zh": ""
+  "zh": "完成!\n"
  },
  {
   "i": 57,
   "en": "G,K,P,T:",
-  "zh": ""
+  "zh": "G,K,P,T:"
  },
  {
   "i": 58,
   "en": "None!\n",
-  "zh": ""
+  "zh": "沒有!\n"
  },
  {
   "i": 59,
   "en": "How many-",
-  "zh": ""
+  "zh": "多少-"
  },
  {
   "i": 60,
   "en": "Which weapon:",
-  "zh": ""
+  "zh": "哪件武器:"
  },
  {
   "i": 61,
   "en": "Which armour:",
-  "zh": ""
+  "zh": "哪件護甲:"
  },
  {
   "i": 62,
   "en": "In use!\n",
-  "zh": ""
+  "zh": "使用中!\n"
  },
  {
   "i": 63,
   "en": "Ignite a torch\n",
-  "zh": ""
+  "zh": "點燃火炬\n"
  },
  {
   "i": 64,
   "en": "Whose torch-",
-  "zh": ""
+  "zh": "誰的火炬-"
  },
  {
   "i": 65,
   "en": "Join gold to-",
-  "zh": ""
+  "zh": "金幣交給-"
  },
  {
   "i": 66,
   "en": "None left!\n",
-  "zh": ""
+  "zh": "沒剩了!\n"
  },
  {
   "i": 67,
   "en": "Klimb ",
-  "zh": ""
+  "zh": "攀爬 "
  },
  {
   "i": 68,
   "en": "Look-",
-  "zh": ""
+  "zh": "查看-"
  },
  {
   "i": 69,
   "en": "Modify order!\nPlr:-",
-  "zh": ""
+  "zh": "調整順序!\n何人:-"
  },
  {
   "i": 70,
   "en": "\nAborted!\n",
-  "zh": ""
+  "zh": "\n已中止!\n"
  },
  {
   "i": 71,
   "en": "\nPlr:-",
-  "zh": ""
+  "zh": "\n何人:-"
  },
  {
   "i": 72,
   "en": "\nExchanged!\n",
-  "zh": ""
+  "zh": "\n已交換!\n"
  },
  {
   "i": 73,
   "en": "Negate time!\nWhose powd?-",
-  "zh": ""
+  "zh": "逆轉時間!\n誰的粉末?-"
  },
  {
   "i": 74,
   "en": "Peer at gem!\nWhose gem-",
-  "zh": ""
+  "zh": "凝視寶石!\n誰的寶石-"
  },
  {
   "i": 75,
   "en": "Quit & save...\n",
-  "zh": ""
+  "zh": "離開並存檔...\n"
  },
  {
   "i": 76,
   "en": "Only on surface!\n",
-  "zh": ""
+  "zh": "僅限地面!\n"
  },
  {
   "i": 77,
   "en": " Moves\n",
-  "zh": ""
+  "zh": " 步\n"
  },
  {
   "i": 78,
   "en": "Ready for # - ",
-  "zh": ""
+  "zh": "為 # 裝備 - "
  },
  {
   "i": 79,
   "en": "Weapon-",
-  "zh": ""
+  "zh": "武器-"
  },
  {
   "i": 80,
   "en": "\nNot owned!\n",
-  "zh": ""
+  "zh": "\n未持有!\n"
  },
  {
   "i": 81,
   "en": "\nNot allowed!\n",
-  "zh": ""
+  "zh": "\n不允許!\n"
  },
  {
   "i": 82,
   "en": " Ready\n",
-  "zh": ""
+  "zh": " 已備妥\n"
  },
  {
   "i": 83,
   "en": "Plr to steal-",
-  "zh": ""
+  "zh": "誰來偷竊-"
  },
  {
   "i": 84,
   "en": "Direct-",
-  "zh": ""
+  "zh": "方向-"
  },
  {
   "i": 85,
   "en": "Failed!\n",
-  "zh": ""
+  "zh": "失敗!\n"
  },
  {
   "i": 86,
   "en": "Watch out!\n",
-  "zh": ""
+  "zh": "當心!\n"
  },
  {
   "i": 87,
   "en": "Who will\nTransact-",
-  "zh": ""
+  "zh": "誰要\n交易-"
  },
  {
   "i": 88,
   "en": "\nGOOD DAY!\n\n",
-  "zh": ""
+  "zh": "\n日安!\n\n"
  },
  {
   "i": 89,
   "en": "WELCOME MY CHILD\n",
-  "zh": ""
+  "zh": "歡迎你,吾兒\n"
  },
  {
   "i": 90,
   "en": "EXPERIENCE MORE!!\n\n",
-  "zh": ""
+  "zh": "經驗增長!!\n\n"
  },
  {
   "i": 91,
   "en": "NO MORE!\n",
-  "zh": ""
+  "zh": "到此為止!\n"
  },
  {
   "i": 92,
   "en": "SEEK YE, THE\nMARK OF KINGS!\n",
-  "zh": ""
+  "zh": "尋覓吧,那\n王者之印!\n"
  },
  {
   "i": 93,
   "en": "THOU ART GREATER\n\n",
-  "zh": ""
+  "zh": "你更勝一籌\n\n"
  },
  {
   "i": 94,
   "en": "Unlock-",
-  "zh": ""
+  "zh": "開鎖-"
  },
  {
   "i": 95,
   "en": "Whose key-",
-  "zh": ""
+  "zh": "誰的鑰匙-"
  },
  {
   "i": 96,
   "en": "Volume ",
-  "zh": ""
+  "zh": "音量 "
  },
  {
   "i": 97,
   "en": "ON!\n",
-  "zh": ""
+  "zh": "開!\n"
  },
  {
   "i": 98,
   "en": "OFF!\n",
-  "zh": ""
+  "zh": "關!\n"
  },
  {
   "i": 99,
   "en": "Wear for # - ",
-  "zh": ""
+  "zh": "為 # 穿戴 - "
  },
  {
   "i": 100,
   "en": "Armour-",
-  "zh": ""
+  "zh": "護甲-"
  },
  {
   "i": 101,
   "en": "X-it ",
-  "zh": ""
+  "zh": "離開 "
  },
  {
   "i": 102,
   "en": "X-it craft\n",
-  "zh": ""
+  "zh": "離開載具\n"
  },
  {
   "i": 103,
   "en": "Yell, whom?-",
-  "zh": ""
+  "zh": "向誰呼喊?-"
  },
  {
   "i": 104,
   "en": "Ztats for #-",
-  "zh": ""
+  "zh": "查看 # 的屬性-"
  },
  {
   "i": 105,
   "en": "WHAT?\n",
-  "zh": ""
+  "zh": "什麼?\n"
  },
  {
   "i": 106,
   "en": "<-WHAT?\n",
-  "zh": ""
+  "zh": "<-什麼?\n"
  },
  {
   "i": 107,
   "en": "Not here!\n",
-  "zh": ""
+  "zh": "此處沒有!\n"
  },
  {
   "i": 108,
   "en": "\n\nALL PLAYERS OUT!\n",
-  "zh": ""
+  "zh": "\n\n全員出局!\n"
  },
  {
   "i": 109,
   "en": "\nA ship was\ndestroyed!\n ",
-  "zh": ""
+  "zh": "\n一艘船\n被摧毀了!\n "
  },
  {
   "i": 110,
   "en": "\nA HUGE SWIRLING\n --WHIRLPOOL--\n  ENGULFS YOU\n AND YOUR SHIP\n DRAGGING BOTH\n     TO A\n WATERY GRAVE!",
-  "zh": ""
+  "zh": "\n一個巨大旋轉的\n --漩渦--\n  將你吞沒\n 連同你的船\n 一同拖入\n     那\n 水底之墓!"
  },
  {
   "i": 111,
   "en": "\n\n AS THE WATER\n ENTERS  YOUR\nLUNGS YOU PASS\nINTO DARKNESS!\n\n",
-  "zh": ""
+  "zh": "\n\n 當海水\n 灌入你的\n肺中,你便\n墜入黑暗!\n\n"
  },
  {
   "i": 112,
   "en": "\n You awaken on\n the shores of\n  a forgotten\nland. Your ship\n and crew lost\n  to the sea!\n ",
-  "zh": ""
+  "zh": "\n 你在一片被\n 遺忘之地的\n  岸邊醒來。\n你的船與船員\n 都已葬身\n  大海!\n "
  },
  {
   "i": 113,
   "en": "\n\n\n\n\n All is dark!\n\n",
-  "zh": ""
+  "zh": "\n\n\n\n\n 一切皆黑暗!\n\n"
  },
  {
   "i": 114,
   "en": " You made it!\n",
-  "zh": ""
+  "zh": " 你成功了!\n"
  },
  {
   "i": 115,
   "en": "INVALID MOVE!\n",
-  "zh": ""
+  "zh": "無效的移動!\n"
  },
  {
   "i": 116,
   "en": "\ndestroyed!\n",
-  "zh": ""
+  "zh": "\n被摧毀了!\n"
  },
  {
   "i": 117,
   "en": "OFF only!\n",
-  "zh": ""
+  "zh": "只能關!\n"
  },
  {
   "i": 118,
   "en": "Cast by whom?-",
-  "zh": ""
+  "zh": "由誰施法?-"
  },
  {
   "i": 119,
   "en": "Cancelled.\n",
-  "zh": ""
+  "zh": "已取消。\n"
  },
  {
   "i": 120,
   "en": "Not a mage!\n",
-  "zh": ""
+  "zh": "不是法師!\n"
  },
  {
   "i": 121,
   "en": "M.P. too low!\n",
-  "zh": ""
+  "zh": "法力不足!\n"
  },
  {
   "i": 122,
   "en": "Spell type W/C-",
-  "zh": ""
+  "zh": "法術類別 W/C-"
  },
  {
   "i": 123,
   "en": "Cleric Spell-",
-  "zh": ""
+  "zh": "牧師法術-"
  },
  {
   "i": 124,
   "en": "Wizard Spell-",
-  "zh": ""
+  "zh": "巫師法術-"
  },
  {
   "i": 125,
   "en": "Incapacitated!\n",
-  "zh": ""
+  "zh": "無法行動!\n"
  },
  {
   "i": 126,
   "en": "Cure whom?-",
-  "zh": ""
+  "zh": "治療誰?-"
  },
  {
   "i": 127,
   "en": "Resurect whom?-",
-  "zh": ""
+  "zh": "復活誰?-"
  },
  {
   "i": 128,
   "en": "Recall whom?-",
-  "zh": ""
+  "zh": "召回誰?-"
  },
  {
   "i": 129,
   "en": "Heal whom?-",
-  "zh": ""
+  "zh": "醫治誰?-"
  },
  {
   "i": 130,
   "en": "KILLED! Exp.+",
-  "zh": ""
+  "zh": "擊殺!經驗+"
  },
  {
   "i": 131,
   "en": "\n****VICTORY!****\n\n",
-  "zh": ""
+  "zh": "\n****勝利!****\n\n"
  },
  {
   "i": 132,
   "en": "\n---CONFLICT!!---\n->",
-  "zh": ""
+  "zh": "\n---衝突!!---\n->"
  },
  {
   "i": 133,
   "en": "----PLAYER-",
-  "zh": ""
+  "zh": "----玩家-"
  },
  {
   "i": 134,
   "en": "----\n ",
-  "zh": ""
+  "zh": "----\n "
  },
  {
   "i": 135,
   "en": "Cast Spell!\n",
-  "zh": ""
+  "zh": "施放法術!\n"
  },
  {
   "i": 136,
   "en": "Negate Time!\n",
-  "zh": ""
+  "zh": "逆轉時間!\n"
  },
  {
   "i": 137,
   "en": "Ready a Weapon!\n",
-  "zh": ""
+  "zh": "備妥武器!\n"
  },
  {
   "i": 138,
   "en": "Ztats\n",
-  "zh": ""
+  "zh": "屬性\n"
  },
  {
   "i": 139,
   "en": "NOT USABLE CMD!\n ",
-  "zh": ""
+  "zh": "無法使用的指令!\n "
  },
  {
   "i": 140,
   "en": "Plr-",
-  "zh": ""
+  "zh": "玩家-"
  },
  {
   "i": 141,
   "en": "-Missed!\n",
-  "zh": ""
+  "zh": "-未命中!\n"
  },
  {
   "i": 142,
   "en": "-HIT!\n",
-  "zh": ""
+  "zh": "-命中!\n"
  },
  {
   "i": 143,
   "en": "KILLED!!!\n",
-  "zh": ""
+  "zh": "擊殺!!!\n"
  },
  {
   "i": 144,
   "en": " attack\nDir-",
-  "zh": ""
+  "zh": " 攻擊\n方向-"
  },
  {
   "i": 145,
   "en": "\nHIT!\n",
-  "zh": ""
+  "zh": "\n命中!\n"
  },
  {
   "i": 146,
   "en": "Missed!\n",
-  "zh": ""
+  "zh": "未命中!\n"
  },
  {
   "i": 147,
   "en": "-PILFERED!\n",
-  "zh": ""
+  "zh": "-遭竊!\n"
  },
  {
   "i": 148,
   "en": "-POISONED!\n",
-  "zh": ""
+  "zh": "-中毒!\n"
  },
  {
   "i": 149,
   "en": "It's dark!\n",
-  "zh": ""
+  "zh": "一片漆黑!\n"
  },
  {
   "i": 150,
   "en": "You see a vision\nof the Time Lord\n  He tells you\n the one way is\n   Love, Sol,\n Moons & Death,\n all else fails.",
-  "zh": ""
+  "zh": "你看見時光之主\n的幻象\n  他告訴你\n 唯一之道是\n   愛、太陽、\n 諸月與死亡,\n 餘者皆徒勞。"
  },
  {
   "i": 151,
   "en": "\nA fountain, who\nwill drink?-",
-  "zh": ""
+  "zh": "\n一座噴泉,何人\n要飲用?-"
  },
  {
   "i": 152,
   "en": "Can't\n",
-  "zh": ""
+  "zh": "不能\n"
  },
  {
   "i": 153,
   "en": "YUCK! HORRIBLE!\n",
-  "zh": ""
+  "zh": "噁!好可怕!\n"
  },
  {
   "i": 154,
   "en": "How wonderful!\n",
-  "zh": ""
+  "zh": "真美妙!\n"
  },
  {
   "i": 155,
   "en": "ARGH! BLAH! YUK!\n",
-  "zh": ""
+  "zh": "啊!呸!噁!\n"
  },
  {
   "i": 156,
   "en": "Ah! That's nice!\n",
-  "zh": ""
+  "zh": "啊!真不錯!\n"
  },
  {
   "i": 157,
   "en": "Strange wind!\n",
-  "zh": ""
+  "zh": "怪風!\n"
  },
  {
   "i": 158,
   "en": "ARGH!! A TRAP!!\n",
-  "zh": ""
+  "zh": "啊!!陷阱!!\n"
  },
  {
   "i": 159,
   "en": "Evaded!!\n",
-  "zh": ""
+  "zh": "閃過了!!\n"
  },
  {
   "i": 160,
   "en": "A red hot rod\nin the wall, who\nwill touch?-",
-  "zh": ""
+  "zh": "牆上有根燒得\n通紅的鐵棒,誰\n要去碰?-"
  },
  {
   "i": 161,
   "en": "It left a mark!\n",
-  "zh": ""
+  "zh": "它留下了印記!\n"
  },
  {
   "i": 162,
   "en": "Gremlins!\n",
-  "zh": ""
+  "zh": "小妖精!\n"
  },
  {
   "i": 163,
   "en": "Misty Writing:\n",
-  "zh": ""
+  "zh": "迷霧書寫:\n"
  },
  {
   "i": 164,
   "en": "Advance\n",
-  "zh": ""
+  "zh": "前進\n"
  },
  {
   "i": 165,
   "en": "Retreat\n",
-  "zh": ""
+  "zh": "後退\n"
  },
  {
   "i": 166,
   "en": "Turn right\n",
-  "zh": ""
+  "zh": "右轉\n"
  },
  {
   "i": 167,
   "en": "Turn left\n",
-  "zh": ""
+  "zh": "左轉\n"
  },
  {
   "i": 168,
   "en": "Descend\n",
-  "zh": ""
+  "zh": "下降\n"
  },
  {
   "i": 169,
   "en": "Klimb\n",
-  "zh": ""
+  "zh": "攀爬\n"
  },
  {
   "i": 170,
   "en": "INVALID CMD!\n",
-  "zh": ""
+  "zh": "無效指令!\n"
  },
  {
   "i": 171,
   "en": "NOT A DNG CMD!\n",
-  "zh": ""
+  "zh": "非地牢指令!\n"
  },
  {
   "i": 172,
   "en": "None\n",
-  "zh": ""
+  "zh": "無\n"
  },
  {
   "i": 173,
   "en": "Strength",
-  "zh": ""
+  "zh": "力量"
  },
  {
   "i": 174,
   "en": "Dexterity",
-  "zh": ""
+  "zh": "敏捷"
  },
  {
   "i": 175,
   "en": "Intelligence",
-  "zh": ""
+  "zh": "智力"
  },
  {
   "i": 176,
   "en": "Wisdom",
-  "zh": ""
+  "zh": "智慧"
  },
  {
   "i": 177,
   "en": "Offering*100-",
-  "zh": ""
+  "zh": "獻金*100-"
  },
  {
   "i": 178,
   "en": "\nThen be off!\n",
-  "zh": ""
+  "zh": "\n那就走吧!\n"
  },
  {
   "i": 179,
   "en": "\nYOU CAN'T CHEAT\nTHE GODS!\n",
-  "zh": ""
+  "zh": "\n你騙不了\n諸神!\n"
  },
  {
   "i": 180,
   "en": "\nSHAZAM!\n",
-  "zh": ""
+  "zh": "\n顯靈!\n"
  },
  {
   "i": 181,
   "en": "Exit to Sosaria!\n",
-  "zh": ""
+  "zh": "離開回索薩利亞!\n"
  },
  {
   "i": 182,
   "en": "POISON!\n",
-  "zh": ""
+  "zh": "中毒!\n"
  },
  {
   "i": 183,
   "en": "\nSTARVING!\n",
-  "zh": ""
+  "zh": "\n飢餓!\n"
  },
  {
   "i": 184,
   "en": "\nWELCOME TO\nTHE PUB!\n",
-  "zh": ""
+  "zh": "\n歡迎來到\n酒館!\n"
  },
  {
   "i": 185,
   "en": "\nHere friend,\nhave a drink!\nIt cost 7 g.p.\nYOU PAY?-",
-  "zh": ""
+  "zh": "\n朋友,來\n喝一杯吧!\n要價 7 金幣\n你付嗎?-"
  },
  {
   "i": 186,
   "en": "LEAVE MY SHOP!\nYOU SCUM!!\n",
-  "zh": ""
+  "zh": "滾出我的店!\n你這人渣!!\n"
  },
  {
   "i": 187,
   "en": "WHAT? CAN'T PAY!\nOUT YOU SCUM!\n",
-  "zh": ""
+  "zh": "什麼?付不起!\n滾吧,人渣!\n"
  },
  {
   "i": 188,
   "en": "\nanother drink?",
-  "zh": ""
+  "zh": "\n再來一杯?"
  },
  {
   "i": 189,
   "en": "\n\nIts been a\npleasure!!\n",
-  "zh": ""
+  "zh": "\n\n很高興\n為你服務!!\n"
  },
  {
   "i": 190,
   "en": "    YE LOCAL\n     GROCER\n\n",
-  "zh": ""
+  "zh": "    本地\n     雜貨鋪\n\n"
  },
  {
   "i": 191,
   "en": "RATIONS:\n1 g.p. EACH,\nHow many would\nyou like?-",
-  "zh": ""
+  "zh": "口糧:\n每份 1 金幣,\n你想要\n幾份?-"
  },
  {
   "i": 192,
   "en": "\n\nWHAT? CAN'T PAY!\nOUT! YOU SCUM!!!\n",
-  "zh": ""
+  "zh": "\n\n什麼?付不起!\n滾!你這人渣!!!\n"
  },
  {
   "i": 193,
   "en": "\n\nThank you,\nanything else?",
-  "zh": ""
+  "zh": "\n\n謝謝,\n還要別的嗎?"
  },
  {
   "i": 194,
   "en": "very well,\ncome again!\n",
-  "zh": ""
+  "zh": "好的,\n歡迎再來!\n"
  },
  {
   "i": 195,
   "en": "\nCLERICAL HEALING\nSACRAMENTS:\n",
-  "zh": ""
+  "zh": "\n牧師的療癒\n聖禮:\n"
  },
  {
   "i": 196,
   "en": " 1-Curing,\n 2-Healing,\n 3-Resurrection,\n 4-Recallings.\nYour needs:",
-  "zh": ""
+  "zh": " 1-治療,\n 2-醫治,\n 3-復活,\n 4-召回。\n你的需求:"
  },
  {
   "i": 197,
   "en": "1\n\nA curing will\ncost 100 g.p.\nWilt thou pay? ",
-  "zh": ""
+  "zh": "1\n\n治療要價\n100 金幣。\n你願付嗎? "
  },
  {
   "i": 198,
   "en": "Cure whom?-",
-  "zh": ""
+  "zh": "治療誰?-"
  },
  {
   "i": 199,
   "en": "2\n\nHealings cost\n200 g.p. Wilt\nthou pay? ",
-  "zh": ""
+  "zh": "2\n\n醫治要價\n200 金幣。你\n願付嗎? "
  },
  {
   "i": 200,
   "en": "Heal whom?-",
-  "zh": ""
+  "zh": "醫治誰?-"
  },
  {
   "i": 201,
   "en": "3\n\nResurrection\ncost 500 g.p.\nWilt thou pay? ",
-  "zh": ""
+  "zh": "3\n\n復活要價\n500 金幣。\n你願付嗎? "
  },
  {
   "i": 202,
   "en": "Resurrect whom?-",
-  "zh": ""
+  "zh": "復活誰?-"
  },
  {
   "i": 203,
   "en": "4\n\nRecallings\ncost 900 g.p.\nWilt thou pay? ",
-  "zh": ""
+  "zh": "4\n\n召回要價\n900 金幣。\n你願付嗎? "
  },
  {
   "i": 204,
   "en": "Recall whom?-",
-  "zh": ""
+  "zh": "召回誰?-"
  },
  {
   "i": 205,
   "en": "\nWelcome to the\nWEAPONS SHOP!\n\nlist (Y/N)?-",
-  "zh": ""
+  "zh": "\n歡迎來到\n武器店!\n\n列出清單 (Y/N)?-"
  },
  {
   "i": 206,
   "en": "\nBuy or Sell?-",
-  "zh": ""
+  "zh": "\n買還是賣?-"
  },
  {
   "i": 207,
   "en": "\n\nYour interest?-",
-  "zh": ""
+  "zh": "\n\n你想要什麼?-"
  },
  {
   "i": 208,
   "en": "\n\nI'm very sorry\nbut you haven't\nthe gold!\n",
-  "zh": ""
+  "zh": "\n\n很抱歉,\n但你的金幣\n不夠!\n"
  },
  {
   "i": 209,
   "en": "\n\nHere you are\nmay it serve\nyou well!\n",
-  "zh": ""
+  "zh": "\n\n拿去吧\n願它好好\n為你效力!\n"
  },
  {
   "i": 210,
   "en": "\n\nfor sale?-",
-  "zh": ""
+  "zh": "\n\n要賣?-"
  },
  {
   "i": 211,
   "en": "\n\nYou don't own\none of those!\n",
-  "zh": ""
+  "zh": "\n\n你並未持有\n那樣東西!\n"
  },
  {
   "i": 212,
   "en": "\n\nThank you!\n",
-  "zh": ""
+  "zh": "\n\n謝謝!\n"
  },
  {
   "i": 213,
   "en": "\nMore gold than\nthou can carry!\nSale cancelled.\n",
-  "zh": ""
+  "zh": "\n金幣超過你\n所能負荷!\n交易取消。\n"
  },
  {
   "i": 214,
   "en": "\noh well, maybe\nnext time.\n",
-  "zh": ""
+  "zh": "\n罷了,也許\n下次吧。\n"
  },
  {
   "i": 215,
   "en": "\nWelcome to the\nARMOUR SHOP!\n\nlist (Y/N)?-",
-  "zh": ""
+  "zh": "\n歡迎來到\n護甲店!\n\n列出清單 (Y/N)?-"
  },
  {
   "i": 216,
   "en": "\nTHE GUILD SHOP\nWE HAVE:",
-  "zh": ""
+  "zh": "\n公會商店\n我們有:"
  },
  {
   "i": 217,
   "en": "Your need: ",
-  "zh": ""
+  "zh": "你的需求: "
  },
  {
   "i": 218,
   "en": "Thank you,\ncome again!\n",
-  "zh": ""
+  "zh": "謝謝,\n歡迎再來!\n"
  },
  {
   "i": 219,
   "en": "\nAnything else? ",
-  "zh": ""
+  "zh": "\n還要別的嗎? "
  },
  {
   "i": 220,
   "en": "\n    RADRION:\nPROPHET OF LIFE!\n",
-  "zh": ""
+  "zh": "\n    拉德里恩:\n生命的先知!\n"
  },
  {
   "i": 221,
   "en": "\nHow many 100gp\nis your\noffering?",
-  "zh": ""
+  "zh": "\n你的獻金是\n幾個 100 金幣?"
  },
  {
   "i": 222,
   "en": "\nMore offering?",
-  "zh": ""
+  "zh": "\n再獻金?"
  },
  {
   "i": 223,
   "en": "\nFare thee well\nand good luck!\n",
-  "zh": ""
+  "zh": "\n祝你一路\n順風好運!\n"
  },
  {
   "i": 224,
   "en": "EQUINE EMPORIUM:\n",
-  "zh": ""
+  "zh": "馬匹商行:\n"
  },
  {
   "i": 225,
   "en": "-Horses cost,\n",
-  "zh": ""
+  "zh": "-馬匹要價,\n"
  },
  {
   "i": 226,
   "en": "gp. will you\nbuy? ",
-  "zh": ""
+  "zh": "金幣。你要\n買嗎? "
  },
  {
   "i": 227,
   "en": "Ah, too bad.\nThese are the\nbest in town!\n",
-  "zh": ""
+  "zh": "啊,真可惜。\n這些是鎮上\n最好的了!\n"
  },
  {
   "i": 228,
   "en": "I'm sorry but\nyou haven't\nthe gold!\n",
-  "zh": ""
+  "zh": "很抱歉但\n你的金幣\n不夠!\n"
  },
  {
   "i": 229,
   "en": "May you ride\nfast and true\nfriend!\n",
-  "zh": ""
+  "zh": "願你騎得\n飛快又穩當,\n朋友!\n"
  },
  {
   "i": 230,
   "en": "\nI'm sorry,\nbut you have\nnot the funds!\n",
-  "zh": ""
+  "zh": "\n很抱歉,\n但你的盤纏\n不足!\n"
  },
  {
   "i": 231,
   "en": "Without proper\nofferings I\ncan not help!\n",
-  "zh": ""
+  "zh": "若無適當的\n獻金,我\n無法相助!\n"
  },
  {
   "i": 232,
   "en": "I'm sorry but\nthou hast not\ngold enough.\n",
-  "zh": ""
+  "zh": "很抱歉但\n你的金幣\n不夠。\n"
  },
  {
   "i": 233,
   "en": "\nFare thee well,\nmy children.\n",
-  "zh": ""
+  "zh": "\n祝你一路順風,\n吾兒。\n"
  },
  {
   "i": 234,
   "en": "\n Welcome to the\n   Shrine  of\n",
-  "zh": ""
+  "zh": "\n 歡迎來到\n   聖壇\n"
  },
  {
   "i": 235,
   "en": "Other command!\nWhose action-",
-  "zh": ""
+  "zh": "其他指令!\n誰來行動-"
  },
  {
   "i": 236,
   "en": "\n\nAVAILABLE:\n",
-  "zh": ""
+  "zh": "\n\n可用:\n"
  },
  {
   "i": 237,
   "en": "Cmd:-",
-  "zh": ""
+  "zh": "指令:-"
  },
  {
   "i": 238,
   "en": "Dir-",
-  "zh": ""
+  "zh": "方向-"
  },
  {
   "i": 239,
   "en": "D, S, L, M-",
-  "zh": ""
+  "zh": "D, S, L, M-"
  },
  {
   "i": 240,
   "en": "CONGRATULATIONS!\n   THOU  HAST\n   COMPLEATED\nEXODUS: ULTIMA 3\n       IN\n ",
-  "zh": ""
+  "zh": "恭喜!\n   你已經\n   通關了\n末日:創世紀3\n       共\n "
  },
  {
   "i": 241,
   "en": " MOVES\nREPORT THY FEAT!",
-  "zh": ""
+  "zh": " 步\n回報你的壯舉!"
  },
  {
   "i": 242,
   "en": "Exotics!\n",
-  "zh": ""
+  "zh": "珍奇異品!\n"
  },
  {
   "i": 243,
   "en": "A card, with\nstrange marks!\n",
-  "zh": ""
+  "zh": "一張卡片,上面\n有奇怪的記號!\n"
  },
  {
   "i": 244,
   "en": "Not enough gold!\n",
-  "zh": ""
+  "zh": "金幣不足!\n"
  },
  {
   "i": 245,
   "en": "\nYell 'EVOCARE'\n\n",
-  "zh": ""
+  "zh": "\n呼喊 'EVOCARE'\n\n"
  },
  {
   "i": 246,
   "en": "Everyone\nhates you.\n",
-  "zh": ""
+  "zh": "人人\n都恨你。\n"
  },
  {
   "i": 247,
   "en": "No effect!\n",
-  "zh": ""
+  "zh": "沒有效果!\n"
  },
  {
   "i": 248,
   "en": "\n\n\n\n\n\n  Resurrecting!\n\n\n",
-  "zh": ""
+  "zh": "\n\n\n\n\n\n  復活中!\n\n\n"
  },
  {
   "i": 249,
   "en": "Southwest\n",
-  "zh": ""
+  "zh": "西南\n"
  },
  {
   "i": 250,
   "en": "Southeast\n",
-  "zh": ""
+  "zh": "東南\n"
  },
  {
   "i": 251,
   "en": "Northwest\n",
-  "zh": ""
+  "zh": "西北\n"
  },
  {
   "i": 252,
   "en": "Northeast\n",
-  "zh": ""
+  "zh": "東北\n"
  },
  {
   "i": 253,
   "en": "All is calm.\n",
-  "zh": ""
+  "zh": "一切平靜。\n"
  },
  {
   "i": 254,
   "en": "CONGRATULATIONS! Thou hast compleated EXODUS: ULTIMA III in\n ",
-  "zh": ""
+  "zh": "恭喜!你已通關 末日:創世紀 III,共\n "
  },
  {
   "i": 255,
   "en": "\n\n\n\nA huge swirling whirlpool engulfs you and your ship, dragging both to a watery grave!\n",
-  "zh": ""
+  "zh": "\n\n\n\n一個巨大旋轉的漩渦將你和你的船吞沒,把兩者一同拖入水底之墓!\n"
  },
  {
   "i": 256,
   "en": "\n\n\n\nAs the water enters your lungs, you pass into darkness!\n",
-  "zh": ""
+  "zh": "\n\n\n\n當海水灌入你的肺中,你便墜入黑暗!\n"
  },
  {
   "i": 257,
   "en": "\n\n\nYou awaken on the shores of a forgotten land, your ship and crew lost to the sea!\n",
-  "zh": ""
+  "zh": "\n\n\n你在一片被遺忘之地的岸邊醒來,你的船與船員都已葬身大海!\n"
  },
  {
   "i": 258,
   "en": "\nWelcome to the Shrine of ",
-  "zh": ""
+  "zh": "\n歡迎來到聖壇 "
  },
  {
   "i": 259,
   "en": "\nNot enough room!",
-  "zh": ""
+  "zh": "\n空間不足!"
  },
  {
   "i": 260,
   "en": "\n Keys-50gp\n Torches-5/30gp\n Powders-90gp\n Gems-75gp\n",
-  "zh": ""
+  "zh": "\n 鑰匙-50金幣\n 火炬-5/30金幣\n 粉末-90金幣\n 寶石-75金幣\n"
  },
  {
   "i": 261,
   "en": "\nExodus is\nno more!\n\n",
-  "zh": ""
+  "zh": "\n末日已\n不復存在!\n\n"
  },
  {
   "i": 262,
   "en": "SOSARIA THANKS\nYOU!\n\n",
-  "zh": ""
+  "zh": "索薩利亞\n感謝你!\n\n"
  },
  {
   "i": 263,
   "en": "While in Full Screen mode, you can access the menu bar or the Dock by moving the mouse to an edge of the screen.\n\nYou can press Apple-F to leave Full Screen mode at any time.",
-  "zh": ""
+  "zh": "在全螢幕模式下,將滑鼠移到螢幕邊緣即可使用選單列或 Dock。\n\n你可隨時按 Apple-F 離開全螢幕模式。"
  }
 ]
