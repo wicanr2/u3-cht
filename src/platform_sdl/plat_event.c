@@ -13,24 +13,51 @@
 extern int gU3Done;
 void U3_PlatPresent(void);
 
-/* --- 腳本輸入 --- */
+/* --- 腳本輸入 (game tester) ---
+ * 行導向迷你語言 (每行一指令,每次 WaitNextEvent 處理一步):
+ *   K<text>   逐字元送鍵盤 (該行讀完再進下一行)
+ *   C x y     送滑鼠點擊於 (x,y)
+ *   R         送 Return
+ *   W <n>     等待 n 次 (不送事件)
+ *   #...      註解 / 空行 略過
+ */
 static FILE *gScript = NULL;
 static int   gScriptDone = 0;
 static int   gScriptInit = 0;
+static char  gLine[256];
+static int   gLinePos = -1;     /* >=0 表示正在送 K 行的字元 */
+static int   gWait = 0;
+static int   gPendClickX = -1, gPendClickY = -1;
 
 static void script_init(void) {
     gScriptInit = 1;
     const char *p = getenv("U3_SCRIPT");
     if (p && *p) gScript = fopen(p, "rb");
 }
-/* 回傳下一個腳本字元 (Mac char code),無則 -1 */
+/* 取下一步:回傳 Mac key code,或 -1 (無鍵;可能設了 pending click 或 wait) */
 static int script_next_key(void) {
     if (!gScriptInit) script_init();
     if (!gScript || gScriptDone) return -1;
-    int c = fgetc(gScript);
-    if (c == EOF) { gScriptDone = 1; fclose(gScript); gScript = NULL; return -1; }
-    if (c == '\n') return 0x0D;   /* 換行 → Return */
-    return c;
+    if (gWait > 0) { gWait--; return -1; }
+    /* 正在送 K 行 */
+    if (gLinePos >= 0) {
+        char c = gLine[gLinePos];
+        if (c == '\0' || c == '\n') { gLinePos = -1; }
+        else { gLinePos++; return (unsigned char)c; }
+    }
+    /* 讀新行 */
+    while (fgets(gLine, sizeof(gLine), gScript)) {
+        char *s = gLine;
+        if (*s=='#' || *s=='\n' || *s=='\0') continue;
+        char cmd = *s++;
+        while (*s==' ') s++;
+        if (cmd=='K') { gLinePos = (int)(s - gLine); return script_next_key(); }
+        if (cmd=='R') return 0x0D;
+        if (cmd=='W') { gWait = atoi(s); return -1; }
+        if (cmd=='C') { int x=0,y=0; if(sscanf(s,"%d %d",&x,&y)==2){gPendClickX=x;gPendClickY=y;} return -1; }
+    }
+    gScriptDone = 1; fclose(gScript); gScript = NULL;
+    return -1;
 }
 
 /* SDL keycode → Mac char code */
@@ -59,14 +86,26 @@ static int sdl_to_mac_key(SDL_Keycode k, Uint16 mod, int *ok) {
     return 0;
 }
 
+/* 合成滑鼠 (腳本點擊用):點擊後數幀內 GetMouse 回該點、StillDown 回 true */
+static int gSynthX = -1, gSynthY = -1, gSynthDown = 0;
+
 Boolean WaitNextEvent(short mask, EventRecord *evt, unsigned long sleep, RgnHandle rgn) {
     (void)mask; (void)sleep; (void)rgn;
     U3_PlatPresent();   /* frame 邊界:先把上一幀畫上螢幕 */
 
+    if (gSynthDown > 0) gSynthDown--;
     if (evt) { evt->what = nullEvent; evt->message = 0; evt->modifiers = 0; }
 
     /* 腳本輸入優先 */
     int sk = script_next_key();
+    if (gPendClickX >= 0 && evt) {   /* 腳本點擊 → 合成 mouseDown */
+        evt->what = mouseDown;
+        evt->where.h = (SInt16)gPendClickX;
+        evt->where.v = (SInt16)gPendClickY;
+        gSynthX = gPendClickX; gSynthY = gPendClickY; gSynthDown = 4;
+        gPendClickX = gPendClickY = -1;
+        return true;
+    }
     if (sk >= 0 && evt) {
         evt->what = keyDown;
         evt->message = (UInt32)(sk & charCodeMask);
@@ -106,16 +145,22 @@ void FlushEvents(short eventMask, short stopMask) {
 }
 
 void GetMouse(Point *pt) {
+    if (gSynthDown > 0 && gSynthX >= 0) {   /* 合成點擊位置 */
+        if (pt) { pt->h = (SInt16)gSynthX; pt->v = (SInt16)gSynthY; }
+        return;
+    }
     int x = 0, y = 0;
     SDL_GetMouseState(&x, &y);
     if (pt) { pt->h = (SInt16)x; pt->v = (SInt16)y; }
 }
 
 Boolean Button(void) {
+    if (gSynthDown > 0) return true;
     return (SDL_GetMouseState(NULL, NULL) & SDL_BUTTON(SDL_BUTTON_LEFT)) ? true : false;
 }
 
 Boolean StillDown(void) {
+    if (gSynthDown > 0) { gSynthDown--; return true; }
     SDL_PumpEvents();
     return Button();
 }

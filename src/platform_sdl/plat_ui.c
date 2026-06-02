@@ -156,16 +156,34 @@ void LWSetArrowCursor(void)            {}
 void DrawText(const void *textBuf, SInt16 firstByte, SInt16 byteCount) {
     (void)textBuf; (void)firstByte; (void)byteCount;
 }
+/* Theme 文字:UltimaText.c 自帶的 UDrawThemePascalString 透過這兩個函式繪字
+ * (intra-TU 呼叫無法被 objcopy weaken 重導向,故須在此用 SDL_ttf 真實作)。 */
+extern void U3_DrawUTF8(const char *utf8, SInt16 h, SInt16 v, SInt16 ptSize);
+extern SInt16 U3_UTF8Width(const char *utf8, SInt16 ptSize);
+extern int U3_ThemeFontSize(ThemeFontID id);
+extern int U3_FontAscent(int ptSize);
+extern int U3_FontHeight(int ptSize);
+
 OSStatus DrawThemeTextBox(CFStringRef str, ThemeFontID font, UInt32 state,
                           Boolean wrap, const Rect *bounds, SInt16 just, void *ctx) {
-    (void)str; (void)font; (void)state; (void)wrap; (void)bounds; (void)just; (void)ctx;
+    (void)state; (void)wrap; (void)just; (void)ctx;
+    if (!str || !bounds) return paramErr;
+    int size = U3_ThemeFontSize(font);
+    int asc = U3_FontAscent(size);
+    /* bounds 由 UDrawThemePascalString 算出:top = baseline - ascent。
+     * U3_DrawUTF8 以 v 為 baseline,故 baseline = bounds->top + ascent。 */
+    U3_DrawUTF8((const char *)str, bounds->left, (SInt16)(bounds->top + asc), (SInt16)size);
     return noErr;
 }
 OSStatus GetThemeTextDimensions(CFStringRef str, ThemeFontID font, UInt32 state,
                                 Boolean wrap, Point *ioBounds, SInt16 *baseline) {
-    (void)str; (void)font; (void)state; (void)wrap;
-    if (ioBounds) { ioBounds->h = 0; ioBounds->v = 0; }
-    if (baseline) *baseline = 0;
+    (void)state; (void)wrap;
+    int size = U3_ThemeFontSize(font);
+    int w = str ? U3_UTF8Width((const char *)str, size) : 0;
+    int h = U3_FontHeight(size);
+    int asc = U3_FontAscent(size);
+    if (ioBounds) { ioBounds->h = (SInt16)w; ioBounds->v = (SInt16)h; }
+    if (baseline) *baseline = (SInt16)(-(h - asc));   /* 負值 (descent) */
     return noErr;
 }
 OSStatus SetAntiAliasedTextEnabled(Boolean enable, SInt16 minSize) { (void)enable; (void)minSize; return noErr; }

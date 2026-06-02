@@ -3,6 +3,7 @@
 #include "quickdraw.h"
 #include <SDL.h>
 #include <SDL_ttf.h>
+#include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
 
@@ -147,3 +148,8 @@ void U3_DrawUTF8(const char *utf8, SInt16 h, SInt16 v, SInt16 ptSize) {
 SInt16 U3_UTF8Width(const char *utf8, SInt16 ptSize) {
     return (SInt16)utf8_width(utf8, ptSize);
 }
+
+/* ===== 字型度量輔助 (供 DrawThemeTextBox/GetThemeTextDimensions) ===== */
+int U3_ThemeFontSize(ThemeFontID id) { return size_for_theme(id); }
+int U3_FontAscent(int ptSize) { TTF_Font *f = font_for_size(ptSize); return f ? TTF_FontAscent(f) : ptSize; }
+int U3_FontHeight(int ptSize) { TTF_Font *f = font_for_size(ptSize); return f ? TTF_FontHeight(f) : ptSize; }
