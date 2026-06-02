@@ -86,7 +86,7 @@ int Strings_Count(const char *table) {
     return t ? t->count : 0;
 }
 
-void GetPascalStringFromArrayByIndex(StringPtr pstringPtr, const char *table, int index) {
+void Strings_GetPascal(StringPtr pstringPtr, const char *table, int index) {
     const char *s = Strings_GetUTF8(table, index);
     size_t n = strlen(s);
     if (n > 255) n = 255;   /* Str255 上限;長中文走 UTF-8 路徑 */

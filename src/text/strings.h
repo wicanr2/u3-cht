@@ -20,7 +20,8 @@ const char *Strings_GetUTF8(const char *table, int index);
 int Strings_Count(const char *table);
 
 /* 相容原碼:填入 Pascal Str255 (UTF-8 bytes,截斷 255)。
- * 新繪字路徑請直接用 Strings_GetUTF8 + U3_DrawUTF8 以支援長中文。 */
-void GetPascalStringFromArrayByIndex(StringPtr pstringPtr, const char *table, int index);
+ * 新繪字路徑請直接用 Strings_GetUTF8 + U3_DrawUTF8 以支援長中文。
+ * (CFStringRef 版 GetPascalStringFromArrayByIndex 由 cf_bridge.c 橋接到此) */
+void Strings_GetPascal(StringPtr pstringPtr, const char *table, int index);
 
 #endif /* U3_TEXT_STRINGS_H */

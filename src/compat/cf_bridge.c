@@ -1,0 +1,35 @@
+/* cf_bridge.c — CoreFoundation / Carbon 殘留 API 的最小 shim
+ *
+ * - GetPascalStringFromArrayByIndex(CFStringRef):橋接到字串表讀取器。
+ * - Absolute:Carbon 整數絕對值。
+ * - CFPreferences*:保守預設 (回 false / 0),待 prefs 系統移植 (P 後續)。 */
+#include "mac_shim.h"
+#include "../text/strings.h"
+
+/* 上游呼叫 GetPascalStringFromArrayByIndex(str, CFSTR("Messages"), N);
+ * CFSTR 在 shim 下 = (CFStringRef)(const char*),故可還原成 C 字串表名。 */
+void GetPascalStringFromArrayByIndex(StringPtr pstringPtr, CFStringRef identifier, int index) {
+    const char *table = (const char *)identifier;
+    Strings_GetPascal(pstringPtr, table ? table : "", index);
+}
+
+short Absolute(short x) { return x < 0 ? (short)-x : x; }  /* 對齊 UltimaMisc.h */
+
+/* --- CFPreferences:暫以預設值回應,不持久化 --- */
+CFStringRef kCFPreferencesCurrentApplication = (CFStringRef)"U3CHT";
+
+Boolean CFPreferencesGetAppBooleanValue(CFStringRef key, CFStringRef appID,
+                                        Boolean *exists) {
+    (void)key; (void)appID;
+    if (exists) *exists = false;
+    return false;
+}
+void CFPreferencesSetAppValue(CFStringRef key, CFTypeRef value, CFStringRef appID) {
+    (void)key; (void)value; (void)appID;
+}
+CFIndex CFPreferencesGetAppIntegerValue(CFStringRef key, CFStringRef appID,
+                                        Boolean *exists) {
+    (void)key; (void)appID;
+    if (exists) *exists = false;
+    return 0;
+}

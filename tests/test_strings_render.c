@@ -49,7 +49,7 @@ int main(void) {
 
     /* 也示範相容 API 取 Pascal 字串 */
     unsigned char ps[256];
-    GetPascalStringFromArrayByIndex(ps, "Classes", 4);
+    Strings_GetPascal(ps, "Classes", 4);
     printf("Classes[4] (Pascal len=%d) = %.*s\n", ps[0], ps[0], ps + 1);
 
     if (IMG_SavePNG(screen->surface, OUT_PNG) != 0) { fprintf(stderr, "存 PNG 失敗\n"); return 1; }
