@@ -62,8 +62,17 @@ typedef GrafPort *WindowPtr;
 typedef GrafPort *WindowRef;
 
 typedef void *RgnHandle;  /* U3 多以 nil 傳入;shim 忽略剪裁區 */
-typedef void *GDHandle;
 typedef void *CTabHandle;
+
+/* GDevice:直繪螢幕路徑用 ((**mainDevice).gdPMap)。SDL 移植下此路徑停用,
+ * 僅供型別解析 + 必要時指向視窗 framebuffer 的 PixMap。 */
+typedef struct GDevice {
+    PixMapHandle gdPMap;
+    Rect         gdRect;
+    SInt16       gdFlags;
+} GDevice;
+typedef GDevice  *GDPtr;
+typedef GDPtr    *GDHandle;
 
 /* ===== 埠 / GWorld 生命週期 ===== */
 OSErr NewGWorld(GWorldPtr *out, SInt16 depth, const Rect *bounds,

@@ -28,9 +28,15 @@ PoC 會輸出 `poc_out.png`:左側 tile 拼圖 + 右側中文文字,一次驗證
 
 | Phase | 內容 | 狀態 |
 |---|---|---|
-| P0 | repo 骨架 + Docker + smoke build | 進行中 |
-| P1 | 垂直切片 PoC | 進行中 |
-| P2+ | 平台層移植 / 繪圖 / 文字 / 遊玩迴圈 | 待開始 |
+| P0 | repo 骨架 + Docker + smoke build | ✅ |
+| P1 | 垂直切片 PoC (繪圖/字型/中文三假設) | ✅ |
+| P2 | UltimaMacIF.c 移植稅盤點 | ✅ |
+| P3a–d | compat 層 (型別/幾何/GWorld/CopyBits/CJK 文字/Carbon umbrella) | ✅ |
+| P3e | 上游編譯狀態:6/11 檔對 compat 乾淨編譯 (含繪圖引擎) | ✅ |
+| P4a | 字串管線 (.u3s) + 讀取器 + 端到端中文渲染 | ✅ |
+| 後續 | 核心邏輯三檔補齊 / SDL 主迴圈 / 資源載入 / 全量翻譯 / 遊玩驗證 | 進行中 |
+
+詳見 `docs/P3-compat-compile-status.md`。
 
 ## 授權
 
