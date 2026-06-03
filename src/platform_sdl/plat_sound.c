@@ -12,6 +12,12 @@
 #include <stdlib.h>
 #include <string.h>
 
+/* 偏好:SoundInactive/MusicInactive=true 時靜音 (由選項對話切換) */
+extern Boolean CFPreferencesGetAppBooleanValue(CFStringRef, CFStringRef, Boolean *);
+extern CFStringRef U3PrefSoundInactive, U3PrefMusicInactive, kCFPreferencesCurrentApplication;
+#define SOUND_OFF() CFPreferencesGetAppBooleanValue(U3PrefSoundInactive, kCFPreferencesCurrentApplication, NULL)
+#define MUSIC_OFF() CFPreferencesGetAppBooleanValue(U3PrefMusicInactive, kCFPreferencesCurrentApplication, NULL)
+
 static int gAudioReady = 0;
 static int gAudioTried = 0;
 
@@ -64,7 +70,7 @@ OSErr SndDoImmediate(SndChannelPtr chan, const SndCommand *cmd) {
 void PlaySoundFile(CFStringRef name, Boolean async) {
     (void)async;
     if (!gAudioTried) audio_init();
-    if (!gAudioReady || !name) return;
+    if (!gAudioReady || !name || SOUND_OFF()) return;
     Mix_Chunk *c = load_sound((const char *)name);
     if (getenv("U3_DBG_SOUND")) fprintf(stderr, "[SND] %s -> %s\n", (const char *)name, c ? "play" : "MISS");
     if (c) Mix_PlayChannel(-1, c, 0);
@@ -91,6 +97,11 @@ void SetUpMusic(void) { if (!gAudioTried) audio_init(); }
 void MusicUpdate(void) {
     if (!gAudioTried) audio_init();
     if (!gAudioReady) return;
+    if (MUSIC_OFF()) {                /* 音樂關閉 → 停止並重置 */
+        if (gMusic) { Mix_HaltMusic(); Mix_FreeMusic(gMusic); gMusic = NULL; }
+        gPlaying = -1;
+        return;
+    }
     int want = gSongNext;
     if (want == gPlaying) return;     /* 只在要求曲目變動時切換 */
     gPlaying = want;

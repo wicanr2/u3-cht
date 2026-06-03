@@ -159,9 +159,12 @@ docker run --rm --user "$(id -u):$(id -g)" \
   鼓組 (gm≥0x4000) 配 MIDI ch9。無 tune header 名稱者 (Song_3/5/B) 用預設音色。
 - **翻譯風格**:統一全形中文標點 (，。！？:→：),Messages/MoreMessages/Pub/Radrion 共
   193 條由半形轉全形 (對齊 Talk);shrine 統一「神殿」(原 Messages 用「聖壇」)。
-- **選項對話 (Adjust Options)**:按鈕「調整選項」已中文化;但其開啟的 GameOptionsDialog
-  (BASERES+40) 在移植層 GetNewDialog 回 NULL → 對話不顯示 (ModalDialog 回 cancel,不崩潰)。
-  無顯示文字可中文化;要中文化需先把設定對話 (音效/音樂/classic 開關) 重建為 SDL UI (另一功能)。
+- **選項對話 (Adjust Options,P13 已重建為 SDL UI)**:原 GameOptionsDialog 在
+  PrefsDialog.m (未編譯) → 移植層為 stub。已重建 `plat_ui.c:GameOptionsDialog`:
+  鍵盤操作的中文設定畫面 (1 音效 / 2 音樂 / 3 自動戰鬥 / 4 快速移動,顯示 [開]/[關],
+  0 返回),重用 `HandleSpecialChoice` 切換偏好。CFPreferences 改為可存取 (cf_bridge,
+  鍵→值持久化於 u3prefs.txt,白名單只存選項鍵,避免 Mac 顯示偏好污染);plat_sound
+  尊重 SoundInactive/MusicInactive (可靜音)。經主選單按 A 進入。
 
 ## 仍待後續完善
 

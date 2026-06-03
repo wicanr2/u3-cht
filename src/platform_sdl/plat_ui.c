@@ -455,7 +455,45 @@ void DefineDefaultItem(DialogPtr theDialog, short item)    { (void)theDialog; (v
 void LWOpenURL(CFStringRef urlString)      { (void)urlString; }
 void SetRefMenuIcons(MenuRef theMenu)      { (void)theMenu; }
 int  EducateAboutFullScreen(void)          { return 0; }
-void GameOptionsDialog(void)               {}
+/* 遊戲設定畫面 (取代 PrefsDialog.m 的 Cocoa 對話):列出可切換選項,鍵盤操作。
+ * 重用 HandleSpecialChoice (切換偏好 + 副作用);偏好持久化於 cf_bridge。
+ * 偏好為反向旗標 (Inactive/Manual/Unconstrain),顯示時轉成「開/關」。 */
+void GameOptionsDialog(void) {
+    extern char CursorKey(Boolean usePenLoc);
+    extern void HandleSpecialChoice(int theItem);
+    extern void ClearBottom(void);
+    extern void ForceUpdateMain(void);
+    extern Boolean gDone;
+    extern Boolean CFPreferencesGetAppBooleanValue(CFStringRef, CFStringRef, Boolean *);
+    extern CFStringRef U3PrefSoundInactive, U3PrefMusicInactive, U3PrefManualCombat,
+                       U3PrefSpeedUnconstrain, kCFPreferencesCurrentApplication;
+    #define PREF_OFF(k) CFPreferencesGetAppBooleanValue(k, kCFPreferencesCurrentApplication, NULL)
+    unsigned char buf[256];
+    int done = 0;
+    while (!done && !gDone) {
+        Boolean snd  = !PREF_OFF(U3PrefSoundInactive);
+        Boolean mus  = !PREF_OFF(U3PrefMusicInactive);
+        Boolean autc = !PREF_OFF(U3PrefManualCombat);
+        Boolean fast =  PREF_OFF(U3PrefSpeedUnconstrain);
+        char t[256];
+        snprintf(t, sizeof(t), "\n遊戲設定 (數字切換,0 返回):\n 1 音效 [%s]\n 2 音樂 [%s]\n"
+                 " 3 自動戰鬥 [%s]\n 4 快速移動 [%s]",
+                 snd ? "開" : "關", mus ? "開" : "關", autc ? "開" : "關", fast ? "開" : "關");
+        ClearBottom();
+        wx = 24; wy = 14; pstr(buf, t); UPrintWin(buf);
+        ForceUpdateMain();
+        char k = CursorKey(false);
+        if (k > 95) k -= 32;
+        switch (k) {
+            case '1': HandleSpecialChoice(1); break;   /* SOUNDID */
+            case '2': HandleSpecialChoice(2); break;   /* MUSICID */
+            case '3': HandleSpecialChoice(5); break;   /* AUTOCOMBATID */
+            case '4': HandleSpecialChoice(4); break;   /* CONSTRAINID */
+            case '0': case 13: case 27: case 'Q': done = 1; break;
+        }
+    }
+    #undef PREF_OFF
+}
 
 /* ===== 系統事件雜項 (非 main.c 範圍的) ===== */
 void SystemClick(const EventRecord *event, WindowPtr window) { (void)event; (void)window; }
