@@ -17,18 +17,21 @@ rm -f /work/u3-cht/u3save.dat /work/u3-cht/u3prefs.txt
 export U3_SHOT_DIR=/work/u3-cht/tests/shots U3_SHOT_EVERY="$EVERY"
 export U3_SCRIPT="/work/u3-cht/$SCRIPT"
 cd /work/u3-cht
+# 截圖目錄必須先存在,否則遊戲 IMG_SavePNG 寫不進去 → 0 張截圖誤判失敗。
+mkdir -p tests/shots
 rm -f tests/shots/frame_*.png
 log=/tmp/u3-run.log
 echo "[bv] 跑 $SCRIPT (timeout ${SECS}s)"
+# 此段刻意不開 set -e:截圖統計用 find (無檔不報錯),避免 pipefail 在無截圖時中止腳本。
 set +e
 timeout "$SECS" xvfb-run -a ./build/u3 >"$log" 2>&1
 rc=$?
-set -e
 grep -ivE "^$|XIO|xvfb-run|after [0-9]+ requests" "$log" | tail -10 || true
 echo "[bv] rc=$rc"
-shots=$(ls tests/shots/frame_*.png 2>/dev/null | wc -l)
+shots=$(find tests/shots -name 'frame_*.png' 2>/dev/null | wc -l | tr -d ' ')
+shots=${shots:-0}
 echo "[bv] 截圖數: $shots"
-ls tests/shots/frame_*.png 2>/dev/null | tail -3
+find tests/shots -name 'frame_*.png' 2>/dev/null | sort | tail -3
 # rc=124:timeout 殺掉(正常:遊戲持續運行)。rc=0:遊戲主動正常退出(少見,視為通過)。
 # rc=1..123:崩潰或錯誤退出,回傳失敗。
 if [ "$rc" -ne 0 ] && [ "$rc" -ne 124 ]; then

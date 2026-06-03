@@ -61,37 +61,46 @@ chmod +x Ultima3-CHT-x86_64.AppImage
 
 一律於容器內 build/test,不污染宿主環境。
 
+> **目錄佈局(重要)**:建置腳本內部使用 `/work/u3-cht`(本 repo)與 `/work/ultima3`(上游 C 源碼)
+> 兩個絕對路徑,因此 **掛載的是 repo 的「上一層」目錄**(其中需同時有 `u3-cht` 與 `ultima3` 兩個資料夾):
+> ```bash
+> 父目錄/
+> ├── u3-cht/    # 本 repo(git clone 本專案)
+> └── ultima3/   # 上游 LairWare 源碼(git clone https://github.com/beastie/ultima3)
+> ```
+> 以下指令請在 **repo 根目錄(`.../父目錄/u3-cht`)** 執行;`"$(dirname "$PWD")"` 即父目錄。
+
 ```bash
 # 1) 建映像
 docker build -t u3cht docker/
 
-# 2) 編譯遊戲 → build/u3 (HOSTUID/HOSTGID 讓產物 chown 回宿主)
-docker run --rm -e HOSTUID=$(id -u) -e HOSTGID=$(id -g) -v "$PWD":/work \
-  u3cht bash /work/u3-cht/tools/build_game.sh
+# 2) 編譯遊戲 → build/u3 (掛載父目錄;HOSTUID/HOSTGID 讓產物 chown 回宿主)
+docker run --rm -e HOSTUID=$(id -u) -e HOSTGID=$(id -g) \
+  -v "$(dirname "$PWD")":/work u3cht bash /work/u3-cht/tools/build_game.sh
 
 # 3) 打包 AppImage (Ubuntu 22.04 容器,自動重生繁中 RaceClassInfo.gif)
-docker run --rm -e HOSTUID=$(id -u) -e HOSTGID=$(id -g) -v "$(dirname $PWD)":/work \
-  ubuntu:22.04 bash /work/u3-cht/tools/package_appimage.sh
+docker run --rm -e HOSTUID=$(id -u) -e HOSTGID=$(id -g) \
+  -v "$(dirname "$PWD")":/work ubuntu:22.04 bash /work/u3-cht/tools/package_appimage.sh
 ```
-
-> 路徑說明:本 repo 位於 `.../u3-cht/u3-cht`;打包腳本預期掛載其上一層為 `/work`。
-> 依你的目錄結構調整 `-v` 來源即可。
 
 ---
 
 ## ✅ 測試 / 驗證
 
+> 同樣掛載父目錄(`-v "$(dirname "$PWD")":/work`),在 repo 根目錄執行。
+
 ```bash
 # 單元測試 (cmake + ctest)。host 缺 sdl2 pkg-config 時請於容器內跑:
-docker run --rm -v "$PWD":/work u3cht bash /work/u3-cht/tools/run_tests.sh
+docker run --rm -v "$(dirname "$PWD")":/work u3cht bash /work/u3-cht/tools/run_tests.sh
 
 # 整合 smoke (容器內 build + 腳本驅動截圖,斷言不崩潰且持續渲染)
-docker run --rm -e HOSTUID=$(id -u) -e HOSTGID=$(id -g) -v "$PWD":/work -w /work/u3-cht \
+docker run --rm -e HOSTUID=$(id -u) -e HOSTGID=$(id -g) \
+  -v "$(dirname "$PWD")":/work -w /work/u3-cht \
   u3cht bash tools/build_and_verify.sh tests/scripts/smoke.txt 45 15
 
 # AppImage release smoke (可從 repo 外任意 cwd 跑,需 host 有 xvfb-run)。
 # 以 [SCENE] 標記斷言:主選單 / 選項 / 編組 / 世界 / 城堡 五場景皆抵達。
-cd /tmp && /path/to/u3-cht/tools/smoke_appimage.sh
+bash /絕對路徑/u3-cht/tools/smoke_appimage.sh
 ```
 
 > `run_tests.sh` 需 SDL2 開發環境;**宿主缺 `sdl2` pkg-config 時請改用上面的 `u3cht` 容器**,
