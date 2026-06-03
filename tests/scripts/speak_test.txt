@@ -1,0 +1,36 @@
+# Speak 測試:搭配 U3_TELEPORT=45,18 + U3_DBG_SPEAK=<perNum>
+# 進城堡後 debug 鉤子自動呼叫 Speak(perNum,23) 渲染該 NPC 對話。
+W 120
+R
+W 120
+R
+W 120
+R
+W 120
+R
+W 120
+R
+W 120
+R
+U 5
+W 40
+KO
+U 6
+W 40
+KF
+W 120
+R
+W 40
+U 6
+W 40
+KB
+U 5
+W 40
+KJ
+U 3
+W 120
+# 進入城堡
+KE
+W 80
+R
+W 300

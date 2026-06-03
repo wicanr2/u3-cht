@@ -1,4 +1,5 @@
 diff --git a/Sources/UltimaText.c b/Sources/UltimaText.c
+index 0bc6f51..e01c231 100755
 --- a/Sources/UltimaText.c
 +++ b/Sources/UltimaText.c
 @@ -363,7 +363,10 @@ void UPrint(Str255 gString, char x, char y) {
@@ -13,3 +14,26 @@ diff --git a/Sources/UltimaText.c b/Sources/UltimaText.c
              }
              pos++;
          }
+@@ -692,6 +695,22 @@ void Speak(short perNum, short shnum) { /* $8924 */
+     speechStr[0] = 0;
+     tlkptr = 0;
+     outStr[0] = 0;
++    /* 中文化:NPC 對話 (TLKS) 翻譯鉤子 — 以 (gCurMapID, perNum) 查外部 Talk 表,
++     * 命中即直接渲染中文並返回 (走 UPrint 的 UTF-8 路徑);未譯則回退原始 Talk[] 英文。 */
++    {
++        extern short gCurMapID;
++        extern const char *Strings_GetUTF8(const char *table, int index);
++        const char *zh = Strings_GetUTF8("Talk", (gCurMapID - 400) * 64 + perNum);
++        if (zh && zh[0]) {
++            Str255 t; int n = 0;
++            while (zh[n] && n < 255) { t[n + 1] = (unsigned char)zh[n]; n++; }
++            t[0] = (unsigned char)n;
++            if (!CFPreferencesGetAppBooleanValue(U3PrefClassicAppearance, kCFPreferencesCurrentApplication, NULL))
++                RewrapString(t, false);
++            UPrint(t, tx, ty);
++            return;
++        }
++    }
+     while (perNum > 0 && tlkptr < 256) {
+         while (Talk[tlkptr] != 0 && tlkptr < 256)
+             tlkptr++;

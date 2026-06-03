@@ -1,6 +1,6 @@
 # 可玩性狀態與驗證紀錄
 
-> 更新:2026-06-03（第五輪:`\p` Pascal 字串字面值修正 + NPC 對話研析）
+> 更新:2026-06-03（第六輪:城鎮/城堡進入驗證 + NPC 對話中文化管線）
 
 ## 目前已驗證
 
@@ -108,17 +108,26 @@ docker run --rm --user "$(id -u):$(id -g)" \
 - **修正**：`docker/Dockerfile` 加 `clang`，`tools/build_game.sh` 改用 `clang -fpascal-strings` 編譯上游 10 檔（compat/plat 仍 gcc，混合連結）。clang 較嚴格，補 `-Wno-implicit-function-declaration -Wno-int-conversion -Wno-incompatible-pointer-types*`（gcc `-w` 本就忽略）。`-fpascal-strings` 只影響 `\p` 字面值，CFSTR 音效/圖名與一般字串不變。
 - **驗證**（U3_DBG_TEXT）：含 `.jpg/.png` 資源 blob 繪字 `20+ → 0`、無 `p` 前綴殘留；底部正確顯示「玩家/北/方向/通過/強盜/匕首 攻擊/命中!/未命中!/西」。
 
-## NPC 對話中文化（#2，研析完成，待城鎮進入才能驗證）
+## 城鎮/城堡進入（#1，已驗證）
 
-- NPC 對話**不在 `.u3s` 字串表**，而在各地圖的 `'TLKS'` 資源（原始英文 ASCII，NUL 分隔），於 `UltimaMisc.c:909` 載入 `Talk[256]`；`Speak(perNum, shnum)`（`UltimaText.c:691`）走到第 `perNum` 段渲染。
-- 渲染 hook：`UltimaText.c:711` 同樣有 `talk = talk & 0x7F`（與已修的 line 366 同類，會砍 UTF-8 中文）。
-- **未動手原因（依「先驗證再下結論」）**：(a) `Speak` 僅在城鎮/城堡對 NPC 時觸發 → 需先解「進入城鎮」才能 build+verify；(b) 尚未確認原始 talk 資料是否含 0x80–0xFE 高位元組（若有，貿然移除 mask 會改變英文顯示）；(c) `Talk[256]`/`Str255` 對 3-byte/字的中文空間不足，長對話需擴充緩衝。
-- **設計（待實作）**：外部 UTF-8 talk 表 keyed by `(map resid, perNum)`，`Speak` 優先查表、缺則回退原始 `Talk[]`；同時移除 line 711 `& 0x7F` 並把 `outStr` 緩衝放寬。原始 `.ULT/TLKS` 保持不動（避免破壞 offset）。
+- 機制：在世界地圖站到已註冊地點（`LocationX/Y`）的 town/castle/dungeon tile 上，按 **`E`（Enter）** 進入子地圖（`UltimaMain.c:Enter()`）。tile：raw 0x14=地城、0x18=城鎮、0x1c=城堡（先前文件城鎮/地城標反，以程式為準）。
+- 地點清單（runtime dump，起點 xpos=42/ypos=20）：城堡 (45,18)(10,53)；城鎮 (46,19)(34,16)(6,13)… 起點旁即有城堡 (45,18) 與城鎮 (46,19)。
+- **驗證**：teleport 到城堡 (45,18) 按 E → 載入城堡子地圖、有 NPC、底部「城堡!」訊息。
+- 測試工具（env-gated，patches/0002）：`U3_TELEPORT=x,y` 放置隊伍、`U3_DBG_LOC` dump 地點、`U3_DBG_SPEAK=N` 一次性呼叫 `Speak(N,23)`（NPC 會走動，腳本對位不可靠，故用此確定性鉤子驗證對話）。一般遊玩不受影響。
+- 正常導航進城仍受地形限制（山脈/水域需船隻），屬內容/航行議題，非程式 bug。
+
+## NPC 對話中文化（#2，管線打通 + 樣本已驗證）
+
+- NPC 對話**不在 `.u3s`**，在各地圖 `'TLKS'` 資源（原始英文 ASCII，NUL 分隔），`UltimaMisc.c:909` 載入 `Talk[256]`；`Speak(perNum, shnum)`（`UltimaText.c`）渲染第 `perNum` 段。`LoadUltimaMap` 設 `gCurMapID = resid`（城堡 #0 = 400）。
+- **實作（patches/0001 的 Speak 鉤子）**：`Speak` 開頭以 `(gCurMapID, perNum)` 算複合索引 `(resid-400)*64+perNum` 查外部 `Talk` 表（`Strings_GetUTF8`）；命中即把中文 UTF-8 塞入 `Str255` → `RewrapString` → `UPrint`（走已修好的 line 366 路徑）並返回；未譯則回退原始 `Talk[]` 英文。**故不需動 line 711**（僅影響英文 fallback，`& 0x7F` 對 ASCII 無害），避免未驗證風險。
+- **資料管線**：`translations/Talk.json`（`{map, npc, en, zh}` 記錄）→ `tools/build_talk.py` → `assets/strings/<lang>/Talk.u3s`（複合索引，未譯槽空字串→回退）。
+- **驗證（pristine 上游 → 自動套 2 patch → 實機）**：城堡 #0 NPC#1 原文 `"WEST-8, SOUTH-35, AND AWAIT DAWN!"` → 譯「向西8，向南35，等待黎明！」，截圖底部正確顯示中文。
+- **待辦（純內容）**：抽取各地圖 TLKS 原文 + 翻譯填入 `Talk.json`（目前 1 句樣本）。長對話若超出 `Str255` 需分段，屆時再處理。原始 `.ULT/TLKS` 不動（避免破壞 offset）。
 
 ## 仍待後續完善
 
-- **進入城鎮/地城**：路徑已規劃（地城 (19,31)），需在怪物包圍下維持移動；城鎮被山脈/水域包圍需船隻。**亦為 NPC 對話中文化 (#2) 的前置 blocker**。
-- **NPC 對話中文化 (#2)**：見上節，渲染 hook (line 711) + 外部 talk 表 + 緩衝擴充，待城鎮進入後實作驗證。
+- **NPC 對話全量翻譯**：管線已通（見上節），剩抽取各地圖 TLKS 原文 + 翻譯填 `Talk.json`（目前僅 1 句樣本）。
+- **正常導航進城**：受地形限制（山脈/水域需船隻），屬航行系統，非中文化範圍。
 - FormPartyDialog 是移植期自動組隊，非正式 SDL 對話框 UI。
 - `WriteResource` 仍是 no-op：角色/隊伍/地圖的持久化未完整。
 - 角色建立、正式存檔/讀檔、更多遊戲命令仍需逐項補齊。
