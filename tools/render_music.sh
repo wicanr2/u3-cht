@@ -7,10 +7,15 @@
 #   2) fluidsynth + GM soundfont : MIDI → wav
 #   3) ffmpeg              : wav → ogg (assets/Music/Song_*.ogg)
 #
-# 需要:fluidsynth、ffmpeg、一個 GM soundfont (.sf2,如 Roland SC-55;
-#       參考 https://github.com/bradhowes/SoundFonts)。本機渲染用的 sf2 不入庫,
-#       只提交產出的 ogg (引擎與資料分離)。u3cht 容器無 fluidsynth,故離線執行;
-#       可用 throwaway 容器:docker run --rm -v ...:/w ubuntu bash -c 'apt install -y fluidsynth && ...'。
+# 需要:fluidsynth、ffmpeg、一個 GM soundfont (.sf2)。本機渲染用的 sf2 不入庫,
+# 只提交產出的 ogg (引擎與資料分離)。已提交的 ogg 用 Roland SC-55 渲染。
+#
+# 可重現作法 (不依賴本機特定 sf2):用 throwaway 容器 + apt 取自由授權 GM soundfont:
+#   docker run --rm -v "$PWD/..":/work ubuntu:24.04 bash -c '
+#     apt-get update && apt-get install -y fluidsynth timgm6mb-soundfont ffmpeg python3
+#     cd /work/u3-cht && bash tools/render_music.sh /usr/share/sounds/sf2/TimGM6mb.sf2'
+# (timgm6mb-soundfont 為 Ubuntu/Debian 內建自由授權 GM 音色;或用 SC-55 等其他 GM sf2,
+#  參考 https://github.com/bradhowes/SoundFonts)
 #
 # 用法:bash tools/render_music.sh <soundfont.sf2>
 set -eu

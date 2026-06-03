@@ -27,9 +27,11 @@ def find_mdat(d):
     return b""
 
 def parse_events(mdat):
-    """回傳 (note_events, total_time)。note_events: (start, dur, chan, pitch, vel)。"""
+    """回傳 (note_events, ctrl_events, total_time)。
+    note: (start, dur, chan, pitch, vel);ctrl: (start, chan, cc, val)。
+    QTMA 控制器號與 MIDI CC 相同 (7=音量, 10=聲相, 91=殘響, 93=合唱)。"""
     t = 0
-    notes = []
+    notes, ctrls = [], []
     for i in range(0, len(mdat) - 3, 4):
         w = struct.unpack(">I", mdat[i:i+4])[0]
         et = (w >> 29) & 7
@@ -42,12 +44,20 @@ def parse_events(mdat):
             dur   = w & 0x7FF
             if 0 < pitch < 128 and dur > 0:
                 notes.append((t, dur, part & 0x0F, pitch, vel or 64))
-        # Control(2)/Marker(3)/其他:略過 (單字)
-    return notes, t
+        elif et == 2:                    # Control change
+            part = (w >> 24) & 0x1F
+            cc   = (w >> 16) & 0xFF
+            val  = (w >> 8) & 0xFF
+            if cc < 120:
+                ctrls.append((t, part & 0x0F, cc, min(val, 127)))
+        # Marker(3)/General(4-7):略過 (其內容控制事件會以 top3=2 各自解析)
+    return notes, ctrls, t
 
-def write_midi(notes, path, division=600):
-    # 組 note-on/off 事件 (絕對時間),排序後寫成 delta-time
+def write_midi(notes, ctrls, path, division=600):
+    # 組 note-on/off + control-change 事件 (絕對時間),排序後寫成 delta-time
     ev = []
+    for start, chan, cc, val in ctrls:
+        ev.append((start, 0xB0 | chan, cc, val))         # control change
     for start, dur, chan, pitch, vel in notes:
         ev.append((start, 0x90 | chan, pitch, vel))      # note on
         ev.append((start + dur, 0x80 | chan, pitch, 0))  # note off
@@ -71,6 +81,6 @@ def write_midi(notes, path, division=600):
 if __name__ == "__main__":
     src, dst = sys.argv[1], sys.argv[2]
     mdat = find_mdat(open(src, "rb").read())
-    notes, total = parse_events(mdat)
-    write_midi(notes, dst)
-    print(f"{src}: {len(notes)} 音符, 總長 {total/600:.1f}s → {dst}")
+    notes, ctrls, total = parse_events(mdat)
+    write_midi(notes, ctrls, dst)
+    print(f"{src}: {len(notes)} 音符, {len(ctrls)} 控制, 總長 {total/600:.1f}s → {dst}")
