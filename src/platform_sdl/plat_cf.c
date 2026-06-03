@@ -245,7 +245,15 @@ CFStringRef CopyCatStrings(CFStringRef a, CFStringRef b) {
 /* ===== CopyAppVersionString ===== */
 CFStringRef CopyAppVersionString(void) { return (CFStringRef)"U3-CHT 1.0"; }
 
-/* ===== StringsArray:回傳具名字串表整個陣列 (用於計數);移植期回 NULL。
- * game 以 CFArrayGetCount((CFArrayRef)StringsArray(id)) 取數量 → 回 NULL → count 0。
- * 真正取字走 GetPascalStringFromArrayByIndex (已在 cf_bridge.c 接字串表)。 */
-CFArrayRef StringsArray(CFStringRef identifier) { (void)identifier; return NULL; }
+/* ===== StringsArray:回傳具名字串表 (用於計數)。game 以
+ * CFArrayGetCount((CFArrayRef)StringsArray(id)) 取數量 (如隨機名字從 Female/Male/
+ * Intersex 表挑選)。回一個 count=Strings_Count(表名) 的 CFArrayObj (items 不需,
+ * 取字走 GetPascalStringFromArrayByIndex)。 */
+extern int Strings_Count(const char *table);
+CFArrayRef StringsArray(CFStringRef identifier) {
+    static CFArrayObj a;
+    const char *name = (const char *)identifier;
+    a.items = NULL;
+    a.count = name ? (CFIndex)Strings_Count(name) : 0;
+    return (CFArrayRef)&a;
+}

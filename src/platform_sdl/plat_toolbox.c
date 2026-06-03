@@ -101,11 +101,27 @@ Boolean GetSystemVersion(unsigned *major, unsigned *minor, unsigned *bugfix) {
 void ExitToShell(void) { exit(0); }
 void SysBeep(SInt16 duration) { (void)duration; }
 
-/* ===== GetIndString:取索引字串資源。原碼多已改走字串表,殘留呼叫回空 Pascal 字串。
- *        (中文化主要文字走 GetPascalStringFromArrayByIndex,見 cf_bridge.c) ===== */
+/* ===== GetIndString:取 STR# 索引字串資源 (Mac 格式:big-endian uint16 count +
+ *        count 個 Pascal 字串)。index 為 1-based。中文化主要文字走 .u3s 字串表,
+ *        但角色建立的職業預設 (STR# 415:race/STR/DEX/INT/WIS 數字) 仍需此資源。 ===== */
+extern Handle GetResource(ResType type, SInt16 id);
+extern void   ReleaseResource(Handle h);
 void GetIndString(StringPtr theString, SInt16 strListID, SInt16 index) {
-    (void)strListID; (void)index;
     if (theString) theString[0] = 0;
+    if (!theString) return;
+    if (index < 1) index = 1;   /* 安全:空槽 preset=0 時退回第 1 項 (class 1) */
+    Handle h = GetResource('STR#', strListID);
+    if (!h || !*h) return;
+    const unsigned char *p = (const unsigned char *)*h;
+    int count = (p[0] << 8) | p[1];           /* big-endian count */
+    if (index <= count) {
+        const unsigned char *s = p + 2;
+        for (int i = 1; i < index; i++) s += 1 + s[0];   /* 跳過前 index-1 個 */
+        int len = s[0];
+        theString[0] = (unsigned char)len;
+        for (int i = 0; i < len; i++) theString[1 + i] = s[1 + i];
+    }
+    ReleaseResource(h);
 }
 
 /* ===== NewModalFilterUPP:對話框過濾器 UPP,直接回傳 proc 指標 ===== */

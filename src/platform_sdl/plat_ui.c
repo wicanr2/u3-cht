@@ -11,6 +11,8 @@
  */
 #include "mac_shim.h"
 #include <SDL.h>
+#include <stdio.h>
+#include <stdlib.h>
 
 /* ===== 視窗 ===== */
 /* 用 compat NewGWorld 建一塊與 bounds 同尺寸的 GrafPort 當視窗緩衝。 */
@@ -86,10 +88,26 @@ static int  gFormSeq = 0;        /* ModalDialog 步驟 */
 static SInt16 gLastItem = 0;     /* 上次 ModalDialog 回的 item (供 GetControlValue) */
 static char gDlgDummy;           /* 非 NULL dialog 佔位 */
 
+/* 角色建立對話框 (BASERES+8=408):移植期協同自動建立。
+ * 對話框 init 已用 SetControlValue/SetDialogItemText 預設性別/隨機名/種族/屬性,
+ * 我們提供 per-item 值/文字 roundtrip 儲存,並讓 ModalDialog 直接回 IDCCD_CREATE,
+ * OK 讀回即取得有效角色。IDCCD_CREATE=1, IDCCD_TYPE=21 (職業 popup)。 */
+#define IDCCD_CREATE 1
+#define IDCCD_TYPE   21
+static int gAutoChar = 0;
+static int gAutoRoster = 0;      /* RosterSelect (BASERES+10=410) 自動選空槽 */
+static int gRosterSeq = 0;
+static int gEmptySlot = 0;
+static struct DlgItem { SInt16 value; unsigned char text[256]; } gItem[64];
+
 static int roster_valid_count(void) {
     int n = 0;
     for (int i = 1; i < 21; i++) if (Player[i][0] > 22) n++;
     return n;
+}
+static int first_empty_slot(void) {       /* 第一個空名冊槽 (1-20),無則 0 */
+    for (int i = 1; i < 21; i++) if (Player[i][0] <= 22) return i;
+    return 0;
 }
 
 DialogPtr GetNewDialog(SInt16 dialogID, void *storage, WindowPtr behind) {
@@ -98,10 +116,34 @@ DialogPtr GetNewDialog(SInt16 dialogID, void *storage, WindowPtr behind) {
         gAutoForm = 1; gFormSeq = 0; gLastItem = 0;
         return (DialogPtr)&gDlgDummy;
     }
+    if (dialogID == 408) {       /* CharacterCreateDialog (BASERES+8) */
+        extern void U3_ProtectRange(void *lo, void *hi);
+        gAutoChar = 1;
+        for (int i = 0; i < 64; i++) { gItem[i].value = 0; gItem[i].text[0] = 0; }
+        U3_ProtectRange(&gItem[0], &gItem[64]);   /* 防 ReleaseResource→DisposeHandle 誤 free 靜態 */
+        return (DialogPtr)&gDlgDummy;
+    }
+    if (dialogID == 410) {       /* RosterSelect (BASERES+10) */
+        extern void U3_ProtectRange(void *lo, void *hi);
+        gAutoRoster = 1; gRosterSeq = 0; gEmptySlot = first_empty_slot();
+        U3_ProtectRange(&gItem[0], &gItem[64]);
+        return (DialogPtr)&gDlgDummy;
+    }
     return NULL;
 }
 WindowPtr GetDialogWindow(DialogPtr dlg) { return (WindowPtr)dlg; }
-void DisposeDialog(DialogPtr dlg) { (void)dlg; gAutoForm = 0; }
+void DisposeDialog(DialogPtr dlg) {
+    (void)dlg;
+    if (gAutoChar && getenv("U3_DBG_CHAR") && gEmptySlot > 0) {
+        unsigned char *P = Player[gEmptySlot];
+        char nm[16]; int j = 0;
+        for (; j < 12 && P[j]; j++) nm[j] = (char)P[j];
+        nm[j] = 0;
+        fprintf(stderr, "[CHAR] slot=%d name=\"%s\" race=0x%02x class=0x%02x sex=%c STR=%d DEX=%d INT=%d WIS=%d\n",
+                gEmptySlot, nm, P[22], P[23], P[24] ? P[24] : '?', P[18], P[19], P[20], P[21]);
+    }
+    gAutoForm = 0; gAutoChar = 0; gAutoRoster = 0;
+}
 void ModalDialog(ModalFilterUPP filter, SInt16 *itemHit) {
     (void)filter;
     if (gAutoForm) {
@@ -111,6 +153,21 @@ void ModalDialog(ModalFilterUPP filter, SInt16 *itemHit) {
         gFormSeq++;
         gLastItem = it;
         if (itemHit) *itemHit = it;
+        return;
+    }
+    if (gAutoRoster) {
+        /* 序列:先選第一個空槽 (item=slot+3),再按 OK(1)。OK 時上游設
+         * Player[slot][0]=clss(預設 Fighter=1) → CharacterCreateDialog preset 有效。 */
+        SInt16 it = (gRosterSeq == 0 && gEmptySlot > 0) ? (SInt16)(gEmptySlot + 3) : (SInt16)1;
+        gRosterSeq++;
+        if (itemHit) *itemHit = it;
+        return;
+    }
+    if (gAutoChar) {
+        /* 空槽職業預設可能為 0;強制 TYPE=1 (與 GetIndString clamp 的 class 1
+         * 屬性一致),並直接送 OK。名字/性別/種族/屬性已由 init 預設妥當。 */
+        gItem[IDCCD_TYPE].value = 1;
+        if (itemHit) *itemHit = IDCCD_CREATE;
         return;
     }
     if (itemHit) *itemHit = kAlertStdAlertCancelButton;
@@ -123,17 +180,32 @@ OSErr StandardAlert(AlertType type, ConstStringPtr error, ConstStringPtr explana
     if (itemHit) *itemHit = kAlertStdAlertOKButton;
     return noErr;
 }
+/* 對話項以 gItem[item] 為穩定身分:供 Set/GetControlValue 與
+ * Set/GetDialogItemText roundtrip (角色建立等對話框)。 */
+static struct DlgItem *item_slot(SInt16 item) {
+    return (item > 0 && item < 64) ? &gItem[item] : NULL;
+}
 void GetDialogItem(DialogPtr dlg, SInt16 item, SInt16 *kind, Handle *h, Rect *r) {
-    (void)dlg; (void)item;
+    (void)dlg;
     if (kind) *kind = 0;
-    if (h) *h = NULL;
+    if (h) *h = (Handle)item_slot(item);
     if (r) { r->left = r->top = r->right = r->bottom = 0; }
 }
 OSErr GetDialogItemAsControl(DialogPtr dlg, SInt16 item, ControlRef *outControl) {
-    (void)dlg; (void)item; if (outControl) *outControl = NULL; return noErr;
+    (void)dlg; if (outControl) *outControl = (ControlRef)item_slot(item); return noErr;
 }
-void GetDialogItemText(Handle item, StringPtr text) { (void)item; if (text) text[0] = 0; }
-void SetDialogItemText(Handle item, ConstStr255Param text) { (void)item; (void)text; }
+void GetDialogItemText(Handle item, StringPtr text) {
+    struct DlgItem *it = (struct DlgItem *)item;
+    if (!text) return;
+    if (it) { int n = it->text[0]; for (int i = 0; i <= n; i++) text[i] = it->text[i]; }
+    else text[0] = 0;
+}
+void SetDialogItemText(Handle item, ConstStr255Param text) {
+    struct DlgItem *it = (struct DlgItem *)item;
+    if (!it || !text) return;
+    int n = text[0]; if (n > 255) n = 255;
+    for (int i = 0; i <= n; i++) it->text[i] = text[i];
+}
 void SelectDialogItemText(DialogPtr dlg, SInt16 item, SInt16 strtSel, SInt16 endSel) {
     (void)dlg; (void)item; (void)strtSel; (void)endSel;
 }
@@ -143,7 +215,6 @@ void ParamText(ConstStr255Param a, ConstStr255Param b, ConstStr255Param c, Const
 
 /* ===== 控制項 ===== */
 SInt16 GetControlValue(ControlRef c) {
-    (void)c;
     /* 自動組隊:第 k 個名冊 popup (gLastItem=MEM1..4=3..6 → k=0..3)。
      * popup value v: 1=不選;v>=2 → FormPartyDialog 取 menuEntry[v-2] (第 v-1 個有效角色)。
      * 名冊有第 (k+1) 個有效角色時回 k+2,否則回 1 (該槽空)。 */
@@ -151,9 +222,10 @@ SInt16 GetControlValue(ControlRef c) {
         int k = gLastItem - 3;
         return (roster_valid_count() > k) ? (SInt16)(k + 2) : (SInt16)1;
     }
-    return 0;
+    struct DlgItem *it = (struct DlgItem *)c;   /* 其他對話框:roundtrip 值 */
+    return it ? it->value : 0;
 }
-void   SetControlValue(ControlRef c, SInt16 v)        { (void)c; (void)v; }
+void   SetControlValue(ControlRef c, SInt16 v)        { struct DlgItem *it = (struct DlgItem *)c; if (it) it->value = v; }
 void   SetControlMaximum(ControlRef c, SInt16 m)      { (void)c; (void)m; }
 void   GetControlTitle(ControlRef c, StringPtr title) { (void)c; if (title) title[0] = 0; }
 void   SetControlTitle(ControlRef c, ConstStr255Param title) { (void)c; (void)title; }

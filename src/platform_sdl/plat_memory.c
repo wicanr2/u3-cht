@@ -31,15 +31,22 @@ static Handle handle_make(Size byteCount, int zero) {
 Handle NewHandle(Size byteCount)      { return handle_make(byteCount, 0); }
 Handle NewHandleClear(Size byteCount) { return handle_make(byteCount, 1); }
 
+/* 受保護指標範圍:plat_ui 的對話項靜態儲存 (gItem[]) 會被當 Handle 傳給
+ * Set/GetControlValue,且上游 ReleaseResource(myHandle) 會走到 DisposeHandle。
+ * 這些非 heap handle,不可 free;在此略過避免崩潰。 */
+static char *gProtLo = 0, *gProtHi = 0;
+void U3_ProtectRange(void *lo, void *hi) { gProtLo = (char *)lo; gProtHi = (char *)hi; }
+static int is_protected(Handle h) { return gProtLo && (char *)h >= gProtLo && (char *)h < gProtHi; }
+
 void DisposeHandle(Handle h) {
-    if (!h) return;
+    if (!h || is_protected(h)) return;
     char *data = (char *)(*h);
     if (data) free(data - 8);
     free(h);
 }
 
 Size GetHandleSize(Handle h) {
-    if (!h || !*h) return 0;
+    if (!h || is_protected(h) || !*h) return 0;
     return *(Size *)((char *)(*h) - 8);
 }
 void SetHandleSize(Handle h, Size newSize) {

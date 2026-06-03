@@ -1,0 +1,26 @@
+# 角色建立測試:主選單 → Organize(O) → Create(C) → 自動組角色 → 觀察名冊
+W 120
+R
+W 120
+R
+W 120
+R
+W 120
+R
+W 120
+R
+W 120
+R
+U 5
+W 40
+# Organize a Party
+KO
+U 6
+W 40
+# Create (C) → RosterSelect 自動選空槽 + CharacterCreateDialog 自動建立
+KC
+W 100
+R
+W 60
+R
+W 80
