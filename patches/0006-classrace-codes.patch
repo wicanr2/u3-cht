@@ -1,0 +1,19 @@
+diff --git a/Sources/UltimaMacIF.c b/Sources/UltimaMacIF.c
+index 4df4b5a..cba0152 100755
+--- a/Sources/UltimaMacIF.c
++++ b/Sources/UltimaMacIF.c
+@@ -2505,11 +2505,12 @@ Boolean CharacterCreateDialog(short rosNum) {
+         GetDialogItem(charDlog, IDCCD_RACE, &temp, &myHandle, &myRect);
+         temp = GetControlValue((ControlHandle)myHandle);
+         GetPascalStringFromArrayByIndex(tempStr, CFSTR("Races"), temp - 1);
+-        Player[rosNum][22] = tempStr[1];
++        { char _rc[5] = {'H','E','D','B','F'};   /* 種族代碼用標準字母 (名稱已中文化,首字不再是代碼) */
++          Player[rosNum][22] = (temp >= 1 && temp <= 5) ? _rc[temp - 1] : tempStr[1]; }
+         GetDialogItem(charDlog, IDCCD_TYPE, &temp, &myHandle, &myRect);
+         temp = GetControlValue((ControlHandle)myHandle);
+         GetPascalStringFromArrayByIndex(tempStr, CFSTR("Classes"), temp - 1);
+-        Player[rosNum][23] = tempStr[1];
++        Player[rosNum][23] = (temp >= 1 && temp <= 11) ? careerTable[temp - 1] : tempStr[1];   /* 職業代碼用 careerTable */
+     }
+     DisposeDialog(charDlog);
+     SetPort(curPort);

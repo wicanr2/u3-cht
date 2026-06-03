@@ -2,56 +2,56 @@
  {
   "i": 0,
   "en": "Fighter",
-  "zh": ""
+  "zh": "鬥士"
  },
  {
   "i": 1,
   "en": "Cleric",
-  "zh": ""
+  "zh": "牧師"
  },
  {
   "i": 2,
   "en": "Wizard",
-  "zh": ""
+  "zh": "巫師"
  },
  {
   "i": 3,
   "en": "Thief",
-  "zh": ""
+  "zh": "竊賊"
  },
  {
   "i": 4,
   "en": "Paladin",
-  "zh": ""
+  "zh": "聖騎士"
  },
  {
   "i": 5,
   "en": "Barbarian",
-  "zh": ""
+  "zh": "野蠻人"
  },
  {
   "i": 6,
   "en": "Lark",
-  "zh": ""
+  "zh": "雲雀"
  },
  {
   "i": 7,
   "en": "Illusionist",
-  "zh": ""
+  "zh": "幻術師"
  },
  {
   "i": 8,
   "en": "Druid",
-  "zh": ""
+  "zh": "德魯伊"
  },
  {
   "i": 9,
   "en": "Alchemist",
-  "zh": ""
+  "zh": "鍊金術士"
  },
  {
   "i": 10,
   "en": "Ranger",
-  "zh": ""
+  "zh": "遊俠"
  }
 ]

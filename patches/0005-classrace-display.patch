@@ -1,0 +1,30 @@
+diff --git a/Sources/UltimaMain.c b/Sources/UltimaMain.c
+index 78fe6eb..392849d 100755
+--- a/Sources/UltimaMain.c
++++ b/Sources/UltimaMain.c
+@@ -538,20 +538,13 @@ void DrawOrganizeMenu(void) {
+             }
+             if (desc[0])
+                 desc[++desc[0]] = ' ';
+-            c = 0;
+-            got = FALSE;
+-            while (c < 5 && !got) {
+-                GetPascalStringFromArrayByIndex(str, CFSTR("Races"), c++);
+-                got = (Player[i][22] == str[1]);
+-            }
++            { char _rc[5] = {'H','E','D','B','F'};   /* 以代碼比對找索引,再顯示中文名 */
++              for (c = 0; c < 5 && Player[i][22] != _rc[c]; c++) ; if (c >= 5) c = 0; }
++            GetPascalStringFromArrayByIndex(str, CFSTR("Races"), c);
+             AddString(desc, str);
+             desc[++desc[0]] = ' ';
+-            c = 0;
+-            got = FALSE;
+-            while (c < 11 && !got) {
+-                GetPascalStringFromArrayByIndex(str, CFSTR("Classes"), c++);
+-                got = (Player[i][23] == str[1]);
+-            }
++            for (c = 0; c < 11 && Player[i][23] != careerTable[c]; c++) ; if (c >= 11) c = 0;
++            GetPascalStringFromArrayByIndex(str, CFSTR("Classes"), c);
+             AddString(desc, str);
+             desc[++desc[0]] = ' ';
+             switch (Player[i][24]) {
