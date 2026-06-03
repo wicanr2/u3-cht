@@ -27,6 +27,20 @@ W 30
 # 選職業 3 (巫師) + Enter
 K3
 R
+W 20
+# 性別 2=男 + Enter
+K2
+R
+W 20
+# 屬性 STR20 DEX15 INT8 (WIS 自動=7) 各 + Enter
+K20
+R
+W 20
+K15
+R
+W 20
+K8
+R
 W 60
 R
 W 60

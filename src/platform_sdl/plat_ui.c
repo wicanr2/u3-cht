@@ -94,6 +94,7 @@ static char gDlgDummy;           /* 非 NULL dialog 佔位 */
  * OK 讀回即取得有效角色。IDCCD_CREATE=1, IDCCD_TYPE=21 (職業 popup)。 */
 #define IDCCD_CREATE 1
 #define IDCCD_NAME   3
+#define IDCCD_SEX    19
 #define IDCCD_RACE   20
 #define IDCCD_TYPE   21
 static int gAutoChar = 0;
@@ -146,6 +147,27 @@ static void char_create_interactive(void) {
         Player[gEmptySlot][21] = (ts[13] - '0') * 10 + (ts[14] - '0');  /* WIS */
     }
     gItem[IDCCD_TYPE].value = c;
+    /* 性別 (gItem[SEX]: 1=女 2=男;init 已隨機,玩家可改) */
+    wx = 24; wy = 17;
+    pstr(buf, "\n性別 1=女 2=男 (Enter 隨機):"); UPrintWin(buf);
+    int sx = UInputNum(24, 18);
+    if (sx == 1 || sx == 2) gItem[IDCCD_SEX].value = sx;
+    /* 屬性分配:STR/DEX/INT 玩家輸入 (5-25,Enter 保留職業預設),WIS 自動補足 50 */
+    if (gEmptySlot > 0) {
+        int st[4]; for (int k = 0; k < 4; k++) st[k] = Player[gEmptySlot][18 + k];
+        const char *an[3] = { "力量", "敏捷", "智力" };
+        for (int k = 0; k < 3; k++) {
+            char tmp[64]; snprintf(tmp, sizeof(tmp), "\n%s (5-25,Enter保留%d):", an[k], st[k]);
+            wx = 24; wy = 19 + k; pstr(buf, tmp); UPrintWin(buf);
+            int v = UInputNum(24, 20 + k);
+            if (v >= 5 && v <= 25) st[k] = v;
+        }
+        int wis = 50 - (st[0] + st[1] + st[2]);   /* 智慧自動補足,使總和 50 */
+        if (wis < 5) wis = 5;
+        if (wis > 25) wis = 25;
+        st[3] = wis;
+        for (int k = 0; k < 4; k++) Player[gEmptySlot][18 + k] = st[k];
+    }
 }
 
 DialogPtr GetNewDialog(SInt16 dialogID, void *storage, WindowPtr behind) {
