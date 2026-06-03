@@ -169,8 +169,9 @@ void U3_DrawButtonLabel(int butNum, int left, int top, int right, int bottom) {
     U3_DrawTextLabel(kLabel[butNum], left, top, right, bottom);
 }
 
-/* 在 mainPort 的矩形內取樣底色蓋掉烘焙英文,再置中畫中文。供按鈕/圖示標籤共用。 */
-void U3_DrawTextLabel(const char *zh, int left, int top, int right, int bottom) {
+/* 在 mainPort 的矩形內取樣底色蓋掉烘焙英文,再以指定顏色置中畫中文。 */
+void U3_DrawTextLabelC(const char *zh, int left, int top, int right, int bottom,
+                       int cr, int cg, int cb) {
     if (!zh || !*zh) return;
     CGrafPtr p = mainPort;
     if (!p || !p->surface) return;
@@ -180,14 +181,12 @@ void U3_DrawTextLabel(const char *zh, int left, int top, int right, int bottom) 
     if (left < 0 || top < 0 || right > s->w || bottom > s->h) return;
     int stride = s->pitch / 4;
     Uint32 *px = (Uint32 *)s->pixels;
-    /* 取樣按鈕底色 (左上內側,避開中央文字) 蓋掉英文 */
-    Uint32 bg = px[(top + 4) * stride + (left + 4)];
+    Uint32 bg = px[(top + 4) * stride + (left + 4)];   /* 取樣底色蓋掉英文 */
     SDL_Rect fr = { left + 3, top + 3, w - 6, h - 6 };
     SDL_FillRect(s, &fr, bg);
-    /* 黑色中文置中 (draw_utf8_at 以 v 為 baseline) */
     int size = (int)(h * 0.5);
     if (size < 12) size = 12;
-    if (size > 20) size = 20;
+    if (size > 22) size = 22;
     int tw = utf8_width(zh, size);
     TTF_Font *f = font_for_size(size);
     int asc = f ? TTF_FontAscent(f) : size;
@@ -196,9 +195,14 @@ void U3_DrawTextLabel(const char *zh, int left, int top, int right, int bottom) 
     int y = top + (h - fh) / 2 + asc;
     CGrafPtr save = CurrentPort();
     SetGWorld(mainPort, NULL);
-    mainPort->fgColor.red = mainPort->fgColor.green = mainPort->fgColor.blue = 0;
+    mainPort->fgColor.red = (unsigned short)(cr << 8);
+    mainPort->fgColor.green = (unsigned short)(cg << 8);
+    mainPort->fgColor.blue = (unsigned short)(cb << 8);
     draw_utf8_at(zh, x, y, size);
     SetGWorld(save, NULL);
+}
+void U3_DrawTextLabel(const char *zh, int left, int top, int right, int bottom) {
+    U3_DrawTextLabelC(zh, left, top, right, bottom, 0, 0, 0);   /* 黑字 (按鈕) */
 }
 SInt16 U3_UTF8Width(const char *utf8, SInt16 ptSize) {
     return (SInt16)utf8_width(utf8, ptSize);

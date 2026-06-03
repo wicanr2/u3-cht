@@ -1,0 +1,35 @@
+diff --git a/Sources/UltimaMacIF.c b/Sources/UltimaMacIF.c
+index 4df4b5a..f80f693 100755
+--- a/Sources/UltimaMacIF.c
++++ b/Sources/UltimaMacIF.c
+@@ -1445,6 +1445,8 @@ void DrawFancyRecord(Boolean centered) {
+         myRect.bottom *= scaler;
+         OffsetRect(&myRect, blkSiz, blkSiz);
+         DrawNamedImage(CFSTR("CharacterRecord.jpg"), mainPort, &myRect);
++        { extern void U3_DrawTextLabelC(const char *zh, int l, int t, int r, int b, int cr, int cg, int cb);
++          U3_DrawTextLabelC("角色記錄", myRect.left, myRect.top, myRect.right, myRect.bottom, 255, 255, 255); }
+         //DrawPicture(gStatsHeader, &myRect);
+     }
+     if (scaler > 1.0)
+@@ -1636,8 +1638,8 @@ void DrawFancyRecord(Boolean centered) {
+             UDrawThemePascalString(outStr, kThemeCurrentPortFont);
+             MoveTo((cx + 34) * scaler + hOff, (cy * scaler) + vOff);
+             GetPascalStringFromArrayByIndex(tempStr, CFSTR("WeaponsArmour"), value);
+-            if (tempStr[tempStr[0]] != 's' && tempNum > 1)
+-                tempStr[++tempStr[0]] = 's';
++            if (tempStr[tempStr[0]] != 's' && tempNum > 1 && (unsigned char)tempStr[tempStr[0]] < 0x80)
++                tempStr[++tempStr[0]] = 's';   /* 中文名 (高位元組結尾) 不加英文複數 s */
+             UDrawThemePascalString(tempStr, kThemeCurrentPortFont);
+             ForeColor(blackColor);
+             cy += 11;
+@@ -1671,8 +1673,8 @@ void DrawFancyRecord(Boolean centered) {
+             UDrawThemePascalString(outStr, kThemeCurrentPortFont);
+             MoveTo((cx + 34) * scaler + hOff, (cy * scaler) + vOff);
+             GetPascalStringFromArrayByIndex(tempStr, CFSTR("WeaponsArmour"), value + 16);
+-            if (tempStr[tempStr[0]] != 's' && tempNum > 1)
+-                tempStr[++tempStr[0]] = 's';
++            if (tempStr[tempStr[0]] != 's' && tempNum > 1 && (unsigned char)tempStr[tempStr[0]] < 0x80)
++                tempStr[++tempStr[0]] = 's';   /* 中文名 (高位元組結尾) 不加英文複數 s */
+             UDrawThemePascalString(tempStr, kThemeCurrentPortFont);
+             ForeColor(blackColor);
+             cy += 11;
