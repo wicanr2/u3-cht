@@ -151,9 +151,20 @@ docker run --rm --user "$(id -u):$(id -g)" \
   ffmpeg 無法解碼 'musi',SDL_mixer 亦不支援。需 QTMA→MIDI 解析 + soundfont 渲染
   (專門工程,超出中文化範圍)。`MusicUpdate` 等保持安全 stub。
 
+## 音樂樂器 / 翻譯風格 / 選項對話（P11/P12）
+
+- **音樂樂器**:從 stsd 'musi' 的 tune header 解析 ToneDescription → 各 part 的 GM
+  樂器號 (`tools/qtma2midi.py:parse_tune_header`),輸出 MIDI program-change。例:
+  Song_8 = 長號/長號/低音號/小號/鼓 (銅管編制)、Song_6 = 大鍵琴、Song_1 = 合成弦樂。
+  鼓組 (gm≥0x4000) 配 MIDI ch9。無 tune header 名稱者 (Song_3/5/B) 用預設音色。
+- **翻譯風格**:統一全形中文標點 (，。！？:→：),Messages/MoreMessages/Pub/Radrion 共
+  193 條由半形轉全形 (對齊 Talk);shrine 統一「神殿」(原 Messages 用「聖壇」)。
+- **選項對話 (Adjust Options)**:按鈕「調整選項」已中文化;但其開啟的 GameOptionsDialog
+  (BASERES+40) 在移植層 GetNewDialog 回 NULL → 對話不顯示 (ModalDialog 回 cancel,不崩潰)。
+  無顯示文字可中文化;要中文化需先把設定對話 (音效/音樂/classic 開關) 重建為 SDL UI (另一功能)。
+
 ## 仍待後續完善
 
-- **NPC 對話全量翻譯**:151 句已全譯（見「NPC 對話中文化」節更新)。
 - **正常導航進城**:受地形限制（山脈/水域需船隻),屬航行系統,非中文化範圍（#3 已驗證船隻可用）。
-- FormPartyDialog 是移植期自動組隊,非正式 SDL 對話框 UI。
-- 角色建立 UI、更多遊戲命令、選單按鈕圖片中文化仍可逐項補齊。
+- **GameOptions / 設定對話**:stub 未顯示,需重建 SDL 設定 UI 才能中文化+功能化。
+- 部分裝飾 logo 圖 (EXODUS 等) 維持原樣;翻譯「聖壇 vs 神殿」已統一,半形/全形已統一。
