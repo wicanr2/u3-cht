@@ -17,8 +17,9 @@ TRIPLE=x86_64-w64-mingw32
 
 echo "[win] apt:clang lld mingw CRT ..."
 apt-get update -qq >/dev/null
+# gcc-mingw-w64-x86-64 提供 mingw 版 libgcc.a/libgcc_eh.a (clang mingw 連結需要)
 apt-get install -y -qq clang lld binutils-mingw-w64-x86-64 mingw-w64-x86-64-dev \
-    git wget tar xz-utils zip ca-certificates >/dev/null
+    gcc-mingw-w64-x86-64 git wget tar xz-utils zip ca-certificates >/dev/null
 
 echo "[win] 下載 SDL2 mingw 開發庫 ..."
 mkdir -p "$SDL"; cd "$SDL"
@@ -57,7 +58,7 @@ for p in "$PLAT"/*.c; do $CC $CF -c "$p" -o "$OBJ/$(basename "${p%.c}").o" || { 
 echo "[win] 連結 u3.exe ..."
 $CC $OBJ/*.o -o "$OBJ/u3.exe" $LIBS \
     -lmingw32 -lSDL2main -lSDL2 -lSDL2_image -lSDL2_ttf -lSDL2_mixer -mwindows || { echo "連結失敗"; exit 1; }
-file "$OBJ/u3.exe"
+file "$OBJ/u3.exe" 2>/dev/null || echo "  (u3.exe 已連結)"
 
 echo "[win] 組 zip (exe + DLL + 資料 + 字型 + 啟動腳本) ..."
 rm -rf "$STAGE"; mkdir -p "$STAGE"
