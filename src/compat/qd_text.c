@@ -157,13 +157,21 @@ void U3_DrawUTF8(const char *utf8, SInt16 h, SInt16 v, SInt16 ptSize) {
  * 按鈕圖 (Buttons.png) 文字烘焙為英文;DrawButton CopyBits 到 mainPort 後,
  * 此函式在按鈕矩形內取樣底色蓋掉英文,再以 SDL_ttf 置中畫中文。butNum 對應見下。 */
 extern CGrafPtr mainPort;
+void U3_DrawTextLabel(const char *zh, int left, int top, int right, int bottom);
+
+/* 9 個主選單/Organize 按鈕 (Buttons.png) 的中文標籤,butNum 對應見 DrawButton。 */
 void U3_DrawButtonLabel(int butNum, int left, int top, int right, int bottom) {
     static const char *kLabel[] = {
         "返回畫面", "編組隊伍", "啟程冒險", "建立角色", "刪除角色",
         "組成隊伍", "解散隊伍", "返回", "調整選項",
     };
     if (butNum < 0 || butNum > 8) return;
-    const char *zh = kLabel[butNum];
+    U3_DrawTextLabel(kLabel[butNum], left, top, right, bottom);
+}
+
+/* 在 mainPort 的矩形內取樣底色蓋掉烘焙英文,再置中畫中文。供按鈕/圖示標籤共用。 */
+void U3_DrawTextLabel(const char *zh, int left, int top, int right, int bottom) {
+    if (!zh || !*zh) return;
     CGrafPtr p = mainPort;
     if (!p || !p->surface) return;
     SDL_Surface *s = p->surface;

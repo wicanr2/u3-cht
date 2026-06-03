@@ -1,0 +1,35 @@
+# 指令測試:進世界後試 Ztats(Z)/Pass(空白) 等,驗證中文訊息
+W 120
+R
+W 120
+R
+W 120
+R
+W 120
+R
+W 120
+R
+W 120
+R
+U 5
+W 40
+KO
+U 6
+W 40
+KF
+W 120
+R
+W 40
+U 6
+W 40
+KB
+U 5
+W 40
+KJ
+U 3
+W 80
+# Ztats 角色 1
+KZ
+W 30
+K1
+W 120

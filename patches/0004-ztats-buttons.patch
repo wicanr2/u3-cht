@@ -1,0 +1,18 @@
+diff --git a/Sources/UltimaMacIF.c b/Sources/UltimaMacIF.c
+index 4df4b5a..0768f15 100755
+--- a/Sources/UltimaMacIF.c
++++ b/Sources/UltimaMacIF.c
+@@ -1819,9 +1819,13 @@ void DrawFancyRecord(Boolean centered) {
+         SetRect(&ToRect, 0, 0, 96 * scaler, 19 * scaler);
+         OffsetRect(&ToRect, 244 * scaler + hOff, 298 * scaler + vOff);
+         DrawNamedImage(CFSTR("DistributeFood.png"), mainPort, &ToRect);
++        { extern void U3_DrawTextLabel(const char *zh, int l, int t, int r, int b);
++          U3_DrawTextLabel("分配食物", ToRect.left, ToRect.top, ToRect.right, ToRect.bottom); }
+         SetRect(&ToRect, 0, 0, 96 * scaler, 19 * scaler);
+         OffsetRect(&ToRect, 244 * scaler + hOff, 321 * scaler + vOff);
+         DrawNamedImage(CFSTR("GatherGold.png"), mainPort, &ToRect);
++        { extern void U3_DrawTextLabel(const char *zh, int l, int t, int r, int b);
++          U3_DrawTextLabel("收集金幣", ToRect.left, ToRect.top, ToRect.right, ToRect.bottom); }
+     }
+ 
+     // headers of boxed text (were kThemeSmallEmphasizedSystemFont)

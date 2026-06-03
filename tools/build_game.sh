@@ -12,14 +12,27 @@ PATCHES=/work/u3-cht/patches
 mkdir -p $OUT
 
 # 套用對上游唯讀源碼的中文化修正 (patches/*.patch)。
-# 上游 ultima3/ 預設唯讀,修正以 patch 納入 repo;idempotent 套用 (已套用則略過)。
+# 上游 ultima3/ 為 git clone;優先用 git apply (較穩健,reverse-check 做 idempotent;
+# GNU patch 對部分檔案的 hunk 比對較挑剔)。非 git 或無 git 時回退 patch。
+UPDIR="$SRC/.."
 if [ -d "$PATCHES" ]; then
   for pf in "$PATCHES"/*.patch; do
     [ -e "$pf" ] || continue
-    if patch -p1 -d "$SRC/.." -N --dry-run <"$pf" >/dev/null 2>&1; then
-      patch -p1 -d "$SRC/.." -N <"$pf" >/dev/null && echo "套用 patch: $(basename "$pf")"
+    bn=$(basename "$pf")
+    if [ -d "$UPDIR/.git" ] && command -v git >/dev/null 2>&1; then
+      if git -C "$UPDIR" apply --reverse --check "$pf" 2>/dev/null; then
+        echo "已套用,略過: $bn"
+      elif git -C "$UPDIR" apply "$pf" 2>/dev/null; then
+        echo "套用 patch: $bn"
+      else
+        echo "⚠ patch 套用失敗: $bn"; exit 1
+      fi
     else
-      echo "patch 已套用或無法套用，略過: $(basename "$pf")"
+      if patch -p1 -d "$UPDIR" -N --dry-run <"$pf" >/dev/null 2>&1; then
+        patch -p1 -d "$UPDIR" -N <"$pf" >/dev/null && echo "套用 patch: $bn"
+      else
+        echo "已套用或無法套用,略過: $bn"
+      fi
     fi
   done
 fi
