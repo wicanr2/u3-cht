@@ -89,7 +89,12 @@ int Strings_Count(const char *table) {
 void Strings_GetPascal(StringPtr pstringPtr, const char *table, int index) {
     const char *s = Strings_GetUTF8(table, index);
     size_t n = strlen(s);
-    if (n > 255) n = 255;   /* Str255 上限;長中文走 UTF-8 路徑 */
+    if (n > 255) {
+        /* Str255 上限。目前所有翻譯最長僅 131 byte,不會觸發;此處為防未來長句:
+         * 截斷時退回 UTF-8 字元邊界 (不切在 0x80-0xBF 接續位元組中間),避免壞字。 */
+        n = 255;
+        while (n > 0 && ((unsigned char)s[n] & 0xC0) == 0x80) n--;
+    }
     pstringPtr[0] = (unsigned char)n;
     memcpy(pstringPtr + 1, s, n);
 }
