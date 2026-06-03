@@ -100,6 +100,9 @@ static int sdl_to_mac_key(SDL_Keycode k, Uint16 mod, int *ok) {
 /* 合成滑鼠 (腳本點擊用):點擊後數幀內 GetMouse 回該點、StillDown 回 true */
 static int gSynthX = -1, gSynthY = -1, gSynthDown = 0;
 
+/* 視窗像素 → 邏輯畫布座標 (放大視窗時必經;實作於 main.c) */
+extern void U3_MapMouse(int *x, int *y);
+
 Boolean WaitNextEvent(short mask, EventRecord *evt, unsigned long sleep, RgnHandle rgn) {
     (void)mask; (void)sleep; (void)rgn;
     U3_PlatPresent();   /* frame 邊界:先把上一幀畫上螢幕 */
@@ -141,9 +144,11 @@ Boolean WaitNextEvent(short mask, EventRecord *evt, unsigned long sleep, RgnHand
                 return true;
             }
         } else if (ev.type == SDL_MOUSEBUTTONDOWN && evt) {
+            int mx = ev.button.x, my = ev.button.y;
+            U3_MapMouse(&mx, &my);
             evt->what = mouseDown;
-            evt->where.h = (SInt16)ev.button.x;
-            evt->where.v = (SInt16)ev.button.y;
+            evt->where.h = (SInt16)mx;
+            evt->where.v = (SInt16)my;
             return true;
         }
     }
@@ -168,6 +173,7 @@ void GetMouse(Point *pt) {
     }
     int x = 0, y = 0;
     SDL_GetMouseState(&x, &y);
+    U3_MapMouse(&x, &y);
     if (pt) { pt->h = (SInt16)x; pt->v = (SInt16)y; }
 }
 
