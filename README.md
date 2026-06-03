@@ -61,11 +61,28 @@ PoC 會輸出 `poc_out.png`:左側 tile 拼圖 + 右側中文文字,一次驗證
 
 ```bash
 docker build -t u3cht docker/
-docker run --rm --user "$(id -u):$(id -g)" -v "$PWD":/work u3cht bash /work/u3-cht/tools/build_game.sh
+docker run --rm -e HOSTUID=$(id -u) -e HOSTGID=$(id -g) -v "$PWD":/work u3cht bash /work/u3-cht/tools/build_game.sh
 # 背景測試 (game tester):截圖 + 腳本輸入
 docker run --rm --user "$(id -u):$(id -g)" -v "$PWD":/work -e XDG_RUNTIME_DIR=/tmp u3cht \
   bash tools/game_tester.sh build/u3 20 tests/scripts/tomenu.txt
 ```
+
+## 測試 / 驗證
+
+```bash
+# 單元測試 (cmake + ctest);需 SDL2 開發套件,host 缺 sdl2 pkg-config 時請在容器內跑:
+docker run --rm -v "$PWD":/work u3cht bash /work/u3-cht/tools/run_tests.sh
+
+# 整合 smoke (容器內 build + 腳本驅動截圖)
+docker run --rm -e HOSTUID=$(id -u) -e HOSTGID=$(id -g) -v "$PWD":/work -w /work/u3-cht u3cht \
+  bash tools/build_and_verify.sh tests/scripts/smoke.txt 45 15
+
+# AppImage release smoke (可從 repo 外任意 cwd 跑,需 host 有 xvfb-run)
+cd /tmp && /path/to/u3-cht/tools/smoke_appimage.sh
+```
+
+> `run_tests.sh` 需 SDL2 開發環境;**宿主缺 `sdl2` pkg-config 時請用上面的 `u3cht` 容器執行**,
+> 本機直接跑失敗屬環境缺依賴,非專案問題。
 
 ## 授權
 

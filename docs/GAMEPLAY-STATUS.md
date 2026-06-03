@@ -20,8 +20,10 @@
 - Ztats 角色記錄:評等/數值/雜物/武器/防具全中文,分配食物 / 收集金幣 按鈕渲染正常。
 - 世界移動 (方向鍵)、戰鬥、進城堡 (站上 tile 按 E)+NPC、地城導航 — 皆正常。
 
-已知在地化缺口 (非功能性 bug):
-- 角色建立時的種族屬性說明圖 `RaceClassInfo.gif` 仍為英文 (圖片資產,需重繪才能中文化)。
+在地化狀態:
+- 角色建立時的種族屬性說明圖 `RaceClassInfo.gif` **已中文化**(P15,`tools/make_raceclass_gif.py`
+  重繪繁中,`package_appimage.sh` 打包時自動重生)。AppImage 內 `data/assets/RaceClassInfo.gif`
+  經 Hermes 解包驗證為繁中、無裁切。詳見本檔末「Hermes AppImage QA 收斂」段。
 
 ## 目前已驗證
 

@@ -57,3 +57,9 @@ for p in $PLAT/*.c; do gcc $CFLAGS -c "$p" -o $OUT/$(basename ${p%.c}).o; done
 gcc -rdynamic $OUT/*.o -o $BIN $(sdl2-config --libs) -lSDL2_image -lSDL2_ttf -lSDL2_mixer -lm
 echo "建置完成: $BIN"
 ls -la $BIN
+
+# 把 build 產物 chown 回宿主使用者 (若有傳 HOSTUID/HOSTGID),避免 root-owned 物件
+# 害下次以 --user 跑 docker 時 clang 無法覆寫 (Operation not permitted)。
+if [ -n "${HOSTUID:-}" ]; then
+  chown -R "${HOSTUID}:${HOSTGID:-$HOSTUID}" "$(dirname "$BIN")" 2>/dev/null || true
+fi
