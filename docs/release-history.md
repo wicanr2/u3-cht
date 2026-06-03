@@ -5,10 +5,13 @@
 ## 開發者與發行商
 
 - **設計者**:Richard Garriott(化名 *Lord British*)。
-- **發行商**:**Origin Systems, Inc.**——依英文 Wikipedia〈Origin Systems〉條目,公司於
-  **1983 年 3 月**(內文作 3 月 3 日;資訊框作 3 月 4 日)由 **Richard Garriott、其兄
-  Robert Garriott,以及兩人的父親 Owen Garriott** 共同創立(資訊框另列程式設計師
-  Chuck Bueche 為共同創辦人),後落腳美國德州 Austin。
+- **發行商**:**Origin Systems, Inc.**——依英文 Wikipedia〈Origin Systems〉條目**內文**,
+  公司於 **1983 年 3 月 3 日**由 **Richard Garriott、其兄 Robert Garriott,以及兩人的父親
+  Owen Garriott** 共同創立,後落腳美國德州 Austin。本專案以該條目**內文的 1983-03-03**
+  作為主要敘述。[^date]
+
+[^date]: 該維基條目的**資訊框(infobox)**另記為 3 月 4 日,並把程式設計師 Chuck Bueche
+    一併列為共同創辦人;內文與資訊框存在小差異。本專案採內文日期(1983-03-03)為準,於此註明以利查證。
 - 依英文 Wikipedia〈Origin Systems〉條目,**公司的第一款遊戲即《Ultima III: Exodus》**;
   〈Ultima III: Exodus〉條目與 MobyGames 則記本作 **1983 年發行**。
 

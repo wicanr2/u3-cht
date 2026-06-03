@@ -9,6 +9,13 @@
 set -euo pipefail
 REPO="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 BUILD="$REPO/build_tests"
+# 在所有離開路徑 (含失敗) 移除暫時 build 目錄,並把它 chown 回宿主 (若以 root 容器跑且
+# 傳了 HOSTUID),避免留下宿主無法清理的 root-owned 殘檔。
+cleanup() {
+  [ -n "${HOSTUID:-}" ] && chown -R "${HOSTUID}:${HOSTGID:-$HOSTUID}" "$BUILD" 2>/dev/null || true
+  rm -rf "$BUILD" 2>/dev/null || true
+}
+trap cleanup EXIT
 rm -rf "$BUILD"
 echo "[tests] cmake configure ..."
 cmake -S "$REPO" -B "$BUILD" -DCMAKE_BUILD_TYPE=Release >/tmp/u3-cmake.log 2>&1 || { tail -20 /tmp/u3-cmake.log; exit 1; }

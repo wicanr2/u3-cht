@@ -5,6 +5,19 @@ set -uo pipefail
 SCRIPT="${1:-tests/scripts/play.txt}"
 SECS="${2:-24}"
 EVERY="${3:-20}"
+
+# 容器內以 root 跑時,所有產物 (build/、tests/shots、存檔) 預設 root-owned,宿主使用者
+# 無法清理。以 trap 在「所有離開路徑」(含中途 exit / 失敗) 把這些產物 chown 回宿主
+# (需 docker 傳入 HOSTUID/HOSTGID)。沒傳則略過 (例如真的以宿主 UID 跑容器)。
+_REPO=/work/u3-cht
+chown_back() {
+  [ -n "${HOSTUID:-}" ] || return 0
+  chown -R "${HOSTUID}:${HOSTGID:-$HOSTUID}" \
+    "$_REPO/tests/shots" "$_REPO/tests" "$_REPO/build" \
+    "$_REPO/u3save.dat" "$_REPO/u3prefs.txt" 2>/dev/null || true
+}
+trap chown_back EXIT
+
 echo "[bv] 重建 build/u3 ..."
 bash /work/u3-cht/tools/build_game.sh >/tmp/build.log 2>&1 || { echo "建置失敗:"; tail -20 /tmp/build.log; exit 1; }
 echo "[bv] 建置 OK"

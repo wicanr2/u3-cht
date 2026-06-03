@@ -1,8 +1,9 @@
 # Ultima III: Exodus 繁體中文化 (u3-cht)
 
-把官方授權的 [`beastie/ultima3`](https://github.com/beastie/ultima3)(LairWare Ultima III,
-MIT C 源碼)從 Mac(Carbon / Cocoa / QuickDraw)移植到 **SDL2**,並以 **UTF-8 + SDL_ttf
-(Noto Sans CJK)** 全面繁體中文化,可在 **Linux(AppImage)** 與 **Windows** 執行遊玩。
+把 **MIT 授權**的 [`beastie/ultima3`](https://github.com/beastie/ultima3)
+(LairWare 的 Ultima III Mac 版,Leon McNeill 以 MIT 釋出的 C 源碼)從
+Mac(Carbon / Cocoa / QuickDraw)移植到 **SDL2**,並以 **UTF-8 + SDL_ttf(Noto Sans CJK)**
+全面繁體中文化,可在 **Linux(AppImage)** 與 **Windows** 執行遊玩。
 
 本 repo 同時是一份 **Ultima III 繁體中文參考入口**:除了可玩的移植版,也整理了
 世界觀、人物、發行史、台灣流通查證、在地化筆記與入門導覽(見下方
@@ -107,6 +108,10 @@ bash /絕對路徑/u3-cht/tools/smoke_appimage.sh
 > 本機直接跑失敗屬環境缺依賴,非專案問題。
 > 測試掛勾(僅測試用,正式版不啟用):`U3_SKIPINTRO`、`U3_DBG_SCENE`、`U3_TELEPORT` 等,
 > 細節見 [在地化筆記 · 測試與截圖](docs/localization-notes.md#測試與截圖注意事項)。
+>
+> **臨時產物清理**:`build_and_verify.sh` 會把 `tests/shots/` 等截圖產物 chown 回宿主
+> (需傳 `HOSTUID`/`HOSTGID`),`build_game.sh` 亦把 `build/` chown 回宿主;`tests/shots/`、
+> `tests/_*`、`build/`、`dist/` 皆 `.gitignore`,跑完可直接 `rm -rf tests/shots tests/_*` 清理。
 
 ---
 
@@ -119,6 +124,7 @@ bash /絕對路徑/u3-cht/tools/smoke_appimage.sh
 | [世界觀與故事背景](docs/ultima-iii-overview.md) | Sosaria、黑暗時代三部曲、Exodus、火焰之島、為何重要 |
 | [人物與勢力](docs/characters-and-factions.md) | Lord British、Mondain、Minax、Exodus、自建四人隊伍、種族/職業 |
 | [發行與移植史](docs/release-history.md) | Garriott / Origin、1983 Apple II 原版、多平台移植、在地化 |
+| [版本與平台差異](docs/versions-and-platforms.md) | 各平台移植差異、**LairWare Mac 版** 與本專案的關係與改造對照 |
 | [台灣發行/流通查證](docs/taiwan-history.md) | 官方中文名;精訊/第三波 屬**收藏者紀錄(非官方代理證明)**;**未查到可靠發行年份** |
 | [在地化筆記](docs/localization-notes.md) | 翻譯原則、名詞對照、字型/SDL/AppImage、踩雷與測試掛勾 |
 | [入門玩法導覽](docs/gameplay-guide.md) | 主選單、創角、種族職業、操作、初期目標 |

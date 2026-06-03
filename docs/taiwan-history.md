@@ -52,18 +52,20 @@
 ## 參考來源
 
 - EA 官方(繁中)創世紀3:魔胎 — https://www.ea.com/zh-tw/games/ultima/ultima-3-exodus
-- 4大RPG典藏(隨意窩 Xuite 日誌),*Ultima III Exodus 創世紀3* —
+- 4大RPG典藏(隨意窩 Xuite 日誌),*Ultima III Exodus 創世紀3*(原連結目前 DNS 不可達)—
   https://blog.xuite.net/ultimavintage/ultima/50478049
-- 4大RPG典藏 收藏目錄 —
+  - **Wayback Machine 存檔(可即時存取,2023-08-28 快照,HTTP 200)**:
+    http://web.archive.org/web/20230828190933/https://blog.xuite.net/ultimavintage/ultima/50478049
+- 4大RPG典藏 收藏目錄(原連結目前 DNS 不可達)—
   https://blog.xuite.net/ultimavintage/ultima/52510915
 - 維基百科(中文),*創世紀系列* — https://zh.wikipedia.org/zh-tw/創世紀系列
 - 台灣遊戲公司回顧(背景參考):zazu 雜誌,*消逝的經典遊戲公司(六):台灣特輯* —
   https://zazu.tw/talks/15920
 
-> ⚠️ **來源可即時存取性**:上述 Xuite(隨意窩)收藏者連結可能因 **Xuite 服務狀態/DNS**
-> 而時有無法即時開啟的情形(實測曾遇 DNS 解析失敗)。在該來源穩定恢復前,建議**改以
-> Web Archive(Wayback Machine)存檔、實體包裝/手冊照片、或當年雜誌掃描**作為更穩固的佐證;
-> 此為**待補**項目。
+> ⚠️ **來源可即時存取性**:原始 Xuite(隨意窩)收藏者連結目前**無法即時開啟**
+> (實測 `Could not resolve host: blog.xuite.net`,屬 Xuite 服務/DNS 狀態)。
+> 已改提供 **Wayback Machine 存檔**(見下方參考來源)作為可即時存取的佐證快照;
+> 更穩固的第一手佐證(實體包裝/手冊照片、當年雜誌掃描)仍為**待補**項目。
 >
 > 免責:上述台灣版本資訊主要來自**收藏者/愛好者整理**,非 EA/Origin 官方發行紀錄;
 > 年份與授權狀態仍待第一手資料確認。本頁將隨佐證更新。
