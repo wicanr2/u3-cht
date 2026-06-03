@@ -2,8 +2,907 @@
  {
   "map": 400,
   "npc": 1,
-  "note": "城堡 #0 (45,18) NPC#1 — 月門線索",
   "en": "WEST-8, SOUTH-35, AND AWAIT DAWN!",
   "zh": "向西8，向南35，等待黎明！"
+ },
+ {
+  "map": 400,
+  "npc": 2,
+  "en": "COOKIE CRIES: LIKE THE FOOD?",
+  "zh": "庫奇喊道：喜歡這食物嗎？"
+ },
+ {
+  "map": 400,
+  "npc": 3,
+  "en": "IOLO SINGS: HO EYO HE HUM!",
+  "zh": "伊歐羅唱道：呵 欸喲 嘿 哼！"
+ },
+ {
+  "map": 400,
+  "npc": 4,
+  "en": "GWINO SINGS: MUH EH OYE OH!",
+  "zh": "格威諾唱道：姆 欸 喔耶 喔！"
+ },
+ {
+  "map": 400,
+  "npc": 5,
+  "en": "PHANTOM FIGHTER: THE FOOD SUCKS!!",
+  "zh": "幻影鬥士：這食物難吃透了！！"
+ },
+ {
+  "map": 400,
+  "npc": 6,
+  "en": "THE WISE CLERIC: 4 CARDS, 4 SLOTS",
+  "zh": "智者牧師：四張卡片，四個插槽"
+ },
+ {
+  "map": 400,
+  "npc": 7,
+  "en": "ENTER... IF YOU DARE!",
+  "zh": "進來吧……若你有膽！"
+ },
+ {
+  "map": 400,
+  "npc": 8,
+  "en": "CHUCKLES: WELCOME ALL!",
+  "zh": "恰克斯：歡迎光臨！"
+ },
+ {
+  "map": 401,
+  "npc": 1,
+  "en": "ALL MAY ENTER, NONE SHALL LEAVE",
+  "zh": "人人皆可進，無人能出"
+ },
+ {
+  "map": 401,
+  "npc": 2,
+  "en": "CHOOSE WELL, YOUR WAY!",
+  "zh": "慎選你的道路！"
+ },
+ {
+  "map": 401,
+  "npc": 3,
+  "en": "SAVE ME, PLEASE!!!",
+  "zh": "救救我，拜託！！！"
+ },
+ {
+  "map": 401,
+  "npc": 4,
+  "en": "DEATH IS HERE!",
+  "zh": "死亡降臨此地！"
+ },
+ {
+  "map": 401,
+  "npc": 5,
+  "en": "LEAVE, QUICKLY!",
+  "zh": "快離開！"
+ },
+ {
+  "map": 402,
+  "npc": 1,
+  "en": "IS IT NOT LOVELY",
+  "zh": "是不是很美呢"
+ },
+ {
+  "map": 402,
+  "npc": 2,
+  "en": "QUEST YE UNTO LOST AMBROSIA!",
+  "zh": "去追尋失落的安布羅西亞吧！"
+ },
+ {
+  "map": 402,
+  "npc": 3,
+  "en": "ONLY WITH EXOTIC ARMS CAN YOU WIN",
+  "zh": "唯有珍奇武器方能致勝"
+ },
+ {
+  "map": 402,
+  "npc": 4,
+  "en": "EXODUS LIES BEYOND THE SILVER SNAKE!",
+  "zh": "Exodus 就在銀蛇之後！"
+ },
+ {
+  "map": 402,
+  "npc": 5,
+  "en": "'DAWN' COMES EACH NEW PAIR!",
+  "zh": "「黎明城」於每對月相交會時現身！"
+ },
+ {
+  "map": 402,
+  "npc": 6,
+  "en": "DUPRE LAUGHS: DRINK UP!",
+  "zh": "杜普雷大笑：乾杯！"
+ },
+ {
+  "map": 402,
+  "npc": 7,
+  "en": "ROUND BACK!",
+  "zh": "繞到後面！"
+ },
+ {
+  "map": 402,
+  "npc": 8,
+  "en": "HO! HO!",
+  "zh": "呵！呵！"
+ },
+ {
+  "map": 402,
+  "npc": 9,
+  "en": "IF YOU DARE!",
+  "zh": "若你有膽！"
+ },
+ {
+  "map": 402,
+  "npc": 10,
+  "en": "CHUCKLES: WELCOME ALL!",
+  "zh": "恰克斯：歡迎光臨！"
+ },
+ {
+  "map": 403,
+  "npc": 1,
+  "en": "WE ARE HONORED!",
+  "zh": "我們深感榮幸！"
+ },
+ {
+  "map": 403,
+  "npc": 2,
+  "en": "SEEK YE, THE SHRINES OF TRUTH",
+  "zh": "去尋找真理的神殿吧"
+ },
+ {
+  "map": 403,
+  "npc": 3,
+  "en": "<BRIBE> GUARDS! THEY WILL LEAVE!",
+  "zh": "<賄賂>守衛！他們就會離開！"
+ },
+ {
+  "map": 403,
+  "npc": 4,
+  "en": "TO ARMS! AND TO BATTLE!!",
+  "zh": "拿起武器！投入戰鬥！！"
+ },
+ {
+  "map": 403,
+  "npc": 5,
+  "en": "PEACE BE WITH YOU.",
+  "zh": "願平安與你同在。"
+ },
+ {
+  "map": 403,
+  "npc": 6,
+  "en": "I'VE BEEN BEYOND THE WHIRLPOOL!",
+  "zh": "我去過大漩渦之外！"
+ },
+ {
+  "map": 403,
+  "npc": 7,
+  "en": "DAWN RISES IN THE DARK FOREST.",
+  "zh": "黎明城現身於黑暗森林中。"
+ },
+ {
+  "map": 403,
+  "npc": 8,
+  "en": "DEPART! OR DIE!!!",
+  "zh": "離開！否則受死！！！"
+ },
+ {
+  "map": 404,
+  "npc": 1,
+  "en": "SEARCH, AND YE SHALL FIND!",
+  "zh": "搜尋，你便會找到！"
+ },
+ {
+  "map": 404,
+  "npc": 2,
+  "en": "WELCOME TO THE CIRCLE OF LIGHT!",
+  "zh": "歡迎來到光之環！"
+ },
+ {
+  "map": 404,
+  "npc": 3,
+  "en": "BONIM ANIMA TEURI, AMEN!",
+  "zh": "博寧 阿尼瑪 圖里，阿們！"
+ },
+ {
+  "map": 404,
+  "npc": 4,
+  "en": "KNOW YE WELL THY FOES!!",
+  "zh": "務必摸清你的敵人！！"
+ },
+ {
+  "map": 404,
+  "npc": 5,
+  "en": "SHAWN: I GOO FOR LIV!",
+  "zh": "肖恩：我為麗芙傾心！"
+ },
+ {
+  "map": 405,
+  "npc": 1,
+  "en": "<INSERT> CARDS INTO PANELS!",
+  "zh": "把卡片<插入>插槽！"
+ },
+ {
+  "map": 405,
+  "npc": 2,
+  "en": "4 CARDS, 4 PANELS",
+  "zh": "四張卡片，四個插槽"
+ },
+ {
+  "map": 405,
+  "npc": 3,
+  "en": "JOLLY JOE: HO HO HO!",
+  "zh": "快活喬：呵呵呵！"
+ },
+ {
+  "map": 405,
+  "npc": 4,
+  "en": "BABY BOB: BRING ME BUCKS!",
+  "zh": "寶寶鮑伯：給我錢！"
+ },
+ {
+  "map": 405,
+  "npc": 5,
+  "en": "'CARDS' ARE USEFUL!",
+  "zh": "「卡片」很有用！"
+ },
+ {
+  "map": 405,
+  "npc": 6,
+  "en": "'MARKS' ARE USEFUL!",
+  "zh": "「印記」很有用！"
+ },
+ {
+  "map": 405,
+  "npc": 7,
+  "en": "'EXOTICS' ARE USEFUL!",
+  "zh": "「珍奇武器」很有用！"
+ },
+ {
+  "map": 405,
+  "npc": 9,
+  "en": "WERE A JESTER!",
+  "zh": "當個弄臣吧！"
+ },
+ {
+  "map": 406,
+  "npc": 1,
+  "en": "GOOD STUFF EH?",
+  "zh": "好東西吧？"
+ },
+ {
+  "map": 406,
+  "npc": 2,
+  "en": "SEEK THE JESTER IN CASTLE FIRE!",
+  "zh": "去烈火城堡尋找弄臣！"
+ },
+ {
+  "map": 406,
+  "npc": 3,
+  "en": "SENTRI: GOOD GROG!",
+  "zh": "森特里：好酒！"
+ },
+ {
+  "map": 406,
+  "npc": 4,
+  "en": "SHAMINO: GOOD FOOD!",
+  "zh": "夏米諾：好菜！"
+ },
+ {
+  "map": 406,
+  "npc": 5,
+  "en": "<SEARCH> THE SHRINES!",
+  "zh": "<搜尋>神殿！"
+ },
+ {
+  "map": 406,
+  "npc": 6,
+  "en": "<SEARCH> FOR CARDS!",
+  "zh": "<搜尋>卡片！"
+ },
+ {
+  "map": 406,
+  "npc": 7,
+  "en": "NONE SHALL PASS!",
+  "zh": "誰都別想過！"
+ },
+ {
+  "map": 406,
+  "npc": 8,
+  "en": "LAUGHS: DRINK UP!",
+  "zh": "大笑：乾杯！"
+ },
+ {
+  "map": 406,
+  "npc": 9,
+  "en": "ROUND BACK!",
+  "zh": "繞到後面！"
+ },
+ {
+  "map": 406,
+  "npc": 10,
+  "en": "HO! HO!",
+  "zh": "呵！呵！"
+ },
+ {
+  "map": 406,
+  "npc": 11,
+  "en": "IF YOU DARE!",
+  "zh": "若你有膽！"
+ },
+ {
+  "map": 406,
+  "npc": 12,
+  "en": "CHUCKLES: WELCOME ALL!",
+  "zh": "恰克斯：歡迎光臨！"
+ },
+ {
+  "map": 407,
+  "npc": 1,
+  "en": "YO! HO! HO! AND A BOTTLE OF RUM!!!",
+  "zh": "唷！呵！呵！還有一瓶蘭姆酒！！！"
+ },
+ {
+  "map": 407,
+  "npc": 2,
+  "en": "WATCH IT BUB!",
+  "zh": "放尊重點，老兄！"
+ },
+ {
+  "map": 407,
+  "npc": 3,
+  "en": "EVER SEEN, EXOTIC ARMS?",
+  "zh": "見過珍奇武器嗎？"
+ },
+ {
+  "map": 407,
+  "npc": 4,
+  "en": "EXOTIC CLUES FOUND AT DAWN!",
+  "zh": "珍奇武器的線索在黎明城！"
+ },
+ {
+  "map": 407,
+  "npc": 5,
+  "en": "ONLY EXOTICS WILL PROTECT FROM GREAT EVIL!",
+  "zh": "唯有珍奇武器能抵禦大邪惡！"
+ },
+ {
+  "map": 407,
+  "npc": 6,
+  "en": "DON'T YOU WISH YOU WERE A JESTER!",
+  "zh": "你不想當個弄臣嗎！"
+ },
+ {
+  "map": 408,
+  "npc": 1,
+  "en": "WELCOME, TO DAWN!",
+  "zh": "歡迎來到黎明城！"
+ },
+ {
+  "map": 408,
+  "npc": 2,
+  "en": "<DIG> ON ISLES",
+  "zh": "在島嶼上<挖掘>"
+ },
+ {
+  "map": 408,
+  "npc": 3,
+  "en": "<DIG> UP EXOTICS",
+  "zh": "<挖掘>出珍奇武器"
+ },
+ {
+  "map": 408,
+  "npc": 4,
+  "en": "<DIG> CAREFULLY!",
+  "zh": "小心<挖掘>！"
+ },
+ {
+  "map": 408,
+  "npc": 5,
+  "en": "JOLLY GOOD DAY!",
+  "zh": "美好的一天！"
+ },
+ {
+  "map": 408,
+  "npc": 6,
+  "en": "DAWN LASTS BUT A BRIEF MOMENT!",
+  "zh": "黎明城只現身片刻！"
+ },
+ {
+  "map": 408,
+  "npc": 7,
+  "en": "AMBROSIA AWAITS!",
+  "zh": "安布羅西亞在等著你！"
+ },
+ {
+  "map": 408,
+  "npc": 8,
+  "en": "SEEK YE THY FORTUNE!",
+  "zh": "去追尋你的命運吧！"
+ },
+ {
+  "map": 409,
+  "npc": 1,
+  "en": "'MARKS' GAINED IN DUNGEONS!",
+  "zh": "「印記」可在地城中取得！"
+ },
+ {
+  "map": 409,
+  "npc": 2,
+  "en": "HOT METAL LEAVES A 'MARK'!",
+  "zh": "熾熱金屬會留下「印記」！"
+ },
+ {
+  "map": 409,
+  "npc": 3,
+  "en": "THE KING FAVORS A 'MARK'!",
+  "zh": "國王青睞持有「印記」者！"
+ },
+ {
+  "map": 409,
+  "npc": 4,
+  "en": "A 'MARK' HELPS INVOKE THE SNAKE",
+  "zh": "「印記」有助於召喚銀蛇"
+ },
+ {
+  "map": 409,
+  "npc": 5,
+  "en": "4 'MARKS', 4 USES!",
+  "zh": "四枚「印記」，四種用途！"
+ },
+ {
+  "map": 409,
+  "npc": 6,
+  "en": "SEEK YE THE DUNGEON OF FIRE!",
+  "zh": "去尋找烈火地城吧！"
+ },
+ {
+  "map": 409,
+  "npc": 7,
+  "en": "MARK THEE WELL!",
+  "zh": "好好留下你的印記！"
+ },
+ {
+  "map": 410,
+  "npc": 1,
+  "en": "<PRAY> FOR THE INVOCATION!",
+  "zh": "<祈禱>以得召喚之力！"
+ },
+ {
+  "map": 410,
+  "npc": 2,
+  "en": "<PRAY> IN THE CIRCLE OF LIGHT!",
+  "zh": "在光之環中<祈禱>！"
+ },
+ {
+  "map": 410,
+  "npc": 3,
+  "en": "'INVOKE' THE SILVER SNAKE!",
+  "zh": "「召喚」銀蛇！"
+ },
+ {
+  "map": 410,
+  "npc": 4,
+  "en": "TO PASS YOU NEED A MARK!",
+  "zh": "要通過你需要一枚印記！"
+ },
+ {
+  "map": 410,
+  "npc": 5,
+  "en": "FAWN IS A NICE PLACE!",
+  "zh": "法恩是個好地方！"
+ },
+ {
+  "map": 410,
+  "npc": 6,
+  "en": "WELCOME TO FAWN, CITY OF THE SEA!",
+  "zh": "歡迎來到海之城法恩！"
+ },
+ {
+  "map": 411,
+  "npc": 1,
+  "en": "BEGONE FOOL!",
+  "zh": "滾開，蠢貨！"
+ },
+ {
+  "map": 411,
+  "npc": 2,
+  "en": "<BRIBE> ME TO ENTER!",
+  "zh": "<賄賂>我才能進入！"
+ },
+ {
+  "map": 411,
+  "npc": 3,
+  "en": "EXODUS IS FOUR AS ONE!",
+  "zh": "Exodus 乃四合為一！"
+ },
+ {
+  "map": 411,
+  "npc": 4,
+  "en": "'INVOKE' THE SILVER SNAKE!",
+  "zh": "「召喚」銀蛇！"
+ },
+ {
+  "map": 411,
+  "npc": 5,
+  "en": "TO PASS YOU NEED A MARK!",
+  "zh": "要通過你需要一枚印記！"
+ },
+ {
+  "map": 411,
+  "npc": 6,
+  "en": "FAUN IS A NICE PLACE!",
+  "zh": "法恩是個好地方！"
+ },
+ {
+  "map": 411,
+  "npc": 7,
+  "en": "WELCOME TO FAUN, CITY OF THE SEA!",
+  "zh": "歡迎來到海之城法恩！"
+ },
+ {
+  "map": 411,
+  "npc": 8,
+  "en": "THEE WELL!",
+  "zh": "祝你安好！"
+ },
+ {
+  "map": 412,
+  "npc": 1,
+  "en": "WELCOME FOOLS, TO YOUR DOOM!!",
+  "zh": "歡迎啊蠢貨，迎向你們的末日！！"
+ },
+ {
+  "map": 412,
+  "npc": 2,
+  "en": "SECRET CORNERS!",
+  "zh": "隱密的角落！"
+ },
+ {
+  "map": 412,
+  "npc": 3,
+  "en": "TRAPS & TREASURE",
+  "zh": "陷阱與寶藏"
+ },
+ {
+  "map": 412,
+  "npc": 4,
+  "en": "BEWARE THE WINDS",
+  "zh": "當心強風"
+ },
+ {
+  "map": 412,
+  "npc": 5,
+  "en": "DANGER!",
+  "zh": "危險！"
+ },
+ {
+  "map": 412,
+  "npc": 6,
+  "en": "MAP WELL!!!",
+  "zh": "好好繪製地圖！！！"
+ },
+ {
+  "map": 412,
+  "npc": 7,
+  "en": "REACH UP!",
+  "zh": "向上探尋！"
+ },
+ {
+  "map": 412,
+  "npc": 8,
+  "en": "WINDY SECRET",
+  "zh": "風中秘密"
+ },
+ {
+  "map": 413,
+  "npc": 1,
+  "en": "BEWARE, THE FIRES OF HELL!",
+  "zh": "當心，地獄之火！"
+ },
+ {
+  "map": 413,
+  "npc": 2,
+  "en": "TRAPPED DOOR!",
+  "zh": "有陷阱的門！"
+ },
+ {
+  "map": 413,
+  "npc": 3,
+  "en": "TWISTY MAZE!",
+  "zh": "曲折迷宮！"
+ },
+ {
+  "map": 413,
+  "npc": 4,
+  "en": "WINDY WALK!",
+  "zh": "風中行路！"
+ },
+ {
+  "map": 413,
+  "npc": 5,
+  "en": "GREMLIN CITY!",
+  "zh": "葛瑞林之城！"
+ },
+ {
+  "map": 413,
+  "npc": 6,
+  "en": "DEVILS DEN!",
+  "zh": "惡魔巢穴！"
+ },
+ {
+  "map": 413,
+  "npc": 7,
+  "en": "GO BACK! PITS!",
+  "zh": "回頭！有陷坑！"
+ },
+ {
+  "map": 413,
+  "npc": 8,
+  "en": "CHAMBER OF FIRE!",
+  "zh": "烈火之室！"
+ },
+ {
+  "map": 414,
+  "npc": 1,
+  "en": "TIME AWAITS!",
+  "zh": "時間在等待！"
+ },
+ {
+  "map": 414,
+  "npc": 2,
+  "en": "GREMLIN GOLD!",
+  "zh": "葛瑞林的黃金！"
+ },
+ {
+  "map": 414,
+  "npc": 3,
+  "en": "GOLDEN CENTER!",
+  "zh": "黃金中心！"
+ },
+ {
+  "map": 414,
+  "npc": 4,
+  "en": "STAIR TO HEAVEN!",
+  "zh": "通天之梯！"
+ },
+ {
+  "map": 414,
+  "npc": 5,
+  "en": "TIME RUNS SHORT!",
+  "zh": "時間不多了！"
+ },
+ {
+  "map": 414,
+  "npc": 6,
+  "en": "LONG MARCH!",
+  "zh": "漫漫長路！"
+ },
+ {
+  "map": 414,
+  "npc": 7,
+  "en": "TRAP!",
+  "zh": "陷阱！"
+ },
+ {
+  "map": 414,
+  "npc": 8,
+  "en": "VERY NEAR NOW!",
+  "zh": "已經很近了！"
+ },
+ {
+  "map": 415,
+  "npc": 1,
+  "en": "CLUES TO FOLLOW!",
+  "zh": "循線索而行！"
+ },
+ {
+  "map": 415,
+  "npc": 2,
+  "en": "<INSERT> CARDS INTO EXODUS!",
+  "zh": "把卡片<插入>Exodus！"
+ },
+ {
+  "map": 415,
+  "npc": 3,
+  "en": "<SEARCH> THE SHRINES!",
+  "zh": "<搜尋>神殿！"
+ },
+ {
+  "map": 415,
+  "npc": 4,
+  "en": "DEATH BELOW!",
+  "zh": "下方有死亡！"
+ },
+ {
+  "map": 415,
+  "npc": 5,
+  "en": "DON'T DRINK!",
+  "zh": "別喝！"
+ },
+ {
+  "map": 415,
+  "npc": 6,
+  "en": "DON'T DRINK!",
+  "zh": "別喝！"
+ },
+ {
+  "map": 415,
+  "npc": 7,
+  "en": "GREMLINS!",
+  "zh": "葛瑞林！"
+ },
+ {
+  "map": 415,
+  "npc": 8,
+  "en": "WINDY GOLD!",
+  "zh": "風中黃金！"
+ },
+ {
+  "map": 416,
+  "npc": 1,
+  "en": "PERINIAN DEPTHS",
+  "zh": "佩里尼安深淵"
+ },
+ {
+  "map": 416,
+  "npc": 2,
+  "en": "GO BACK!",
+  "zh": "回頭！"
+ },
+ {
+  "map": 416,
+  "npc": 3,
+  "en": "NOT HERE!",
+  "zh": "不在這裡！"
+ },
+ {
+  "map": 416,
+  "npc": 4,
+  "en": "QUARTER EACH!",
+  "zh": "各分四分之一！"
+ },
+ {
+  "map": 416,
+  "npc": 5,
+  "en": "DEATH AWAITS!",
+  "zh": "死亡在等著你！"
+ },
+ {
+  "map": 416,
+  "npc": 6,
+  "en": "MAP WELL!",
+  "zh": "好好繪製地圖！"
+ },
+ {
+  "map": 416,
+  "npc": 7,
+  "en": "GREMLINS!",
+  "zh": "葛瑞林！"
+ },
+ {
+  "map": 416,
+  "npc": 8,
+  "en": "GO BACK!",
+  "zh": "回頭！"
+ },
+ {
+  "map": 416,
+  "npc": 9,
+  "en": "EVAILES",
+  "zh": "邪惡盛行"
+ },
+ {
+  "map": 416,
+  "npc": 10,
+  "en": "DRY HOLE",
+  "zh": "枯井"
+ },
+ {
+  "map": 417,
+  "npc": 1,
+  "en": "MINES OF MORINIA",
+  "zh": "莫里尼亞礦坑"
+ },
+ {
+  "map": 417,
+  "npc": 2,
+  "en": "TERROR TUNNELS!",
+  "zh": "恐怖隧道！"
+ },
+ {
+  "map": 417,
+  "npc": 3,
+  "en": "LONG MARCH!",
+  "zh": "漫漫長路！"
+ },
+ {
+  "map": 417,
+  "npc": 4,
+  "en": "MISTY MINES!",
+  "zh": "迷霧礦坑！"
+ },
+ {
+  "map": 417,
+  "npc": 5,
+  "en": "MINES OF MADNESS",
+  "zh": "瘋狂礦坑"
+ },
+ {
+  "map": 417,
+  "npc": 6,
+  "en": "G, T & G!",
+  "zh": "G、T 與 G！"
+ },
+ {
+  "map": 417,
+  "npc": 7,
+  "en": "DARK PREVAILES",
+  "zh": "黑暗籠罩"
+ },
+ {
+  "map": 417,
+  "npc": 8,
+  "en": "DRY HOLE",
+  "zh": "枯井"
+ },
+ {
+  "map": 418,
+  "npc": 1,
+  "en": "DARDIN'S PIT!",
+  "zh": "達爾丁之坑！"
+ },
+ {
+  "map": 418,
+  "npc": 2,
+  "en": "SECRET SLIDES!",
+  "zh": "隱密的滑道！"
+ },
+ {
+  "map": 418,
+  "npc": 3,
+  "en": "BEWARE TRAPS!",
+  "zh": "當心陷阱！"
+ },
+ {
+  "map": 418,
+  "npc": 4,
+  "en": "EVER ADVENTURE!",
+  "zh": "永遠冒險！"
+ },
+ {
+  "map": 418,
+  "npc": 5,
+  "en": "GREMLINS!",
+  "zh": "葛瑞林！"
+ },
+ {
+  "map": 418,
+  "npc": 6,
+  "en": "CIRCLE DEATH!",
+  "zh": "環形死路！"
+ },
+ {
+  "map": 418,
+  "npc": 7,
+  "en": "COLLASAL CAVERN!",
+  "zh": "巨大的洞窟！"
+ },
+ {
+  "map": 418,
+  "npc": 8,
+  "en": "TRAPS TO GOLD!",
+  "zh": "通往黃金的陷阱！"
+ },
+ {
+  "map": 421,
+  "npc": 1,
+  "en": "BEASTIE: MACINTOSH THULE!",
+  "zh": "畢斯提：麥金塔圖勒！"
+ },
+ {
+  "map": 421,
+  "npc": 2,
+  "en": "REESIE: JASMINE JOY, LITTLE TOY!",
+  "zh": "瑞西：茉莉之樂，小小玩具！"
  }
 ]

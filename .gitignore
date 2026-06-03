@@ -16,3 +16,6 @@ assets/Rod.jpg
 assets/Shrine.jpg
 assets/SosariaMap.jpg
 assets/TimeLord.jpg
+
+# Python
+__pycache__/
