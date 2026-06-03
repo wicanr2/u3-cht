@@ -12,7 +12,8 @@
 |---|---|
 | ![世界畫面](docs/screenshots/gameplay-zh.png) | ![主選單](docs/screenshots/menu-zh-hant.png) |
 
-右側隊伍面板、底部訊息(如「通過」)、職業標籤(「非法師」)均為 SDL_ttf 中文渲染。
+右側隊伍面板(種族+職業如「精靈賊」、等級「級」、糧食「糧」、無法力者標「不可施法」)、
+底部訊息(如「等待」)均為 SDL_ttf 中文渲染。
 
 ## 建置 (Docker first)
 
