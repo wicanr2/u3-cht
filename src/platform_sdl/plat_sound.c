@@ -72,11 +72,46 @@ void PlaySoundFile(CFStringRef name, Boolean async) {
 void ErrorTone(void) { PlaySoundFile((CFStringRef)"Error1", true); }
 void ApplyVolumePreferences(void) {}
 
-/* ===== 音樂 (待 .mov → ogg 轉檔) ===== */
-void SetUpMusic(void) {}
-void MusicUpdate(void) {}
-void EndSong(void) {}
-void CloseMusic(void) {}
+/* ===== 音樂 (QTMA→MIDI→ogg,見 tools/qtma2midi.py) =====
+ * 原始 Song_*.mov 是 QuickTime Music ('musi' 音符序列),已離線轉成
+ * assets/Music/Song_<N>.ogg (1-8 / A=10 / B=11)。gSongNext 為遊戲要求的曲目,
+ * MusicUpdate 在其變動時載入對應 ogg 並迴圈播放。 */
+extern short gSongCurrent, gSongNext, gSongPlaying;
+static Mix_Music *gMusic = NULL;
+static int gPlaying = -1;
+
+static const char *song_suffix(int n) {
+    static char buf[4];
+    if (n == 10) return "A";
+    if (n == 11) return "B";
+    snprintf(buf, sizeof(buf), "%d", n);
+    return buf;
+}
+void SetUpMusic(void) { if (!gAudioTried) audio_init(); }
+void MusicUpdate(void) {
+    if (!gAudioTried) audio_init();
+    if (!gAudioReady) return;
+    int want = gSongNext;
+    if (want == gPlaying) return;     /* 只在要求曲目變動時切換 */
+    gPlaying = want;
+    if (gMusic) { Mix_HaltMusic(); Mix_FreeMusic(gMusic); gMusic = NULL; }
+    if (want <= 0) return;            /* 0 = 停止 */
+    char path[256];
+    snprintf(path, sizeof(path), "assets/Music/Song_%s.ogg", song_suffix(want));
+    gMusic = Mix_LoadMUS(path);
+    if (gMusic) {
+        Mix_VolumeMusic(MIX_MAX_VOLUME * 3 / 4);
+        Mix_PlayMusic(gMusic, -1);   /* 迴圈 */
+        if (getenv("U3_DBG_SOUND")) fprintf(stderr, "[MUS] play Song_%s.ogg\n", song_suffix(want));
+    } else if (getenv("U3_DBG_SOUND")) {
+        fprintf(stderr, "[MUS] MISS %s\n", path);
+    }
+}
+void EndSong(void) {
+    if (gMusic) { Mix_HaltMusic(); Mix_FreeMusic(gMusic); gMusic = NULL; }
+    gPlaying = -1;
+}
+void CloseMusic(void) { EndSong(); }
 void SetMusicPortAndDevice(void) {}
 
 /* ===== 語音 (Mac TTS;移植期停用) ===== */
