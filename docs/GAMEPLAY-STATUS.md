@@ -139,6 +139,18 @@ docker run --rm --user "$(id -u):$(id -g)" \
 - **驗證（兩段實機）**:RUN1 teleport (50,30) → autosave/U3_DBG_SAVE 寫 `u3save.dat`（10 筆資源）;RUN2 無 teleport → 「存檔載入:10 筆」,隊伍位置還原為 **(50,30)**（預設應為 42,20）。進城堡 autosave 亦正常觸發。
 - 重置存檔:刪除 `u3save.dat` 即回到初始 bundle 狀態。
 
+## 音效 / 音樂（#4）
+
+- **音效（已實作 + 驗證）**:`plat_sound.c` 接 SDL_mixer。`PlaySoundFile(CFSTR("Hit")…)`
+  從 `assets/Sounds/<name>.wav|.mp3` 載入 (快取) 並播放。`build_game.sh` 連結
+  `-lSDL2_mixer`;音效資產 (36 檔, 416K) 複製進 `assets/Sounds/`。
+  - headless 驗證:`SDL_AUDIODRIVER=dummy` → 「音效就緒」,移動觸發 `[SND] Step -> play`。
+  - 無音訊裝置時 `Mix_OpenAudio` 失敗 → 靜默停用、不崩潰 (回歸 PASS)。`U3_NOSOUND` 可關。
+- **音樂(受限,未實作)**:原始 `Resources/Music/Song_*.mov` 經 ffprobe 確認為
+  **QuickTime Music ('musi' codec,類 MIDI 音符序列**,非取樣音訊;檔僅 2-6KB)。
+  ffmpeg 無法解碼 'musi',SDL_mixer 亦不支援。需 QTMA→MIDI 解析 + soundfont 渲染
+  (專門工程,超出中文化範圍)。`MusicUpdate` 等保持安全 stub。
+
 ## 仍待後續完善
 
 - **NPC 對話全量翻譯**:151 句已全譯（見「NPC 對話中文化」節更新)。

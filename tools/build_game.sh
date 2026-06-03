@@ -54,6 +54,6 @@ for f in $COMPAT/qd_geometry $COMPAT/qd_port $COMPAT/qd_draw $COMPAT/qd_text $CO
 done
 for p in $PLAT/*.c; do gcc $CFLAGS -c "$p" -o $OUT/$(basename ${p%.c}).o; done
 
-gcc -rdynamic $OUT/*.o -o $BIN $(sdl2-config --libs) -lSDL2_image -lSDL2_ttf -lm
+gcc -rdynamic $OUT/*.o -o $BIN $(sdl2-config --libs) -lSDL2_image -lSDL2_ttf -lSDL2_mixer -lm
 echo "建置完成: $BIN"
 ls -la $BIN

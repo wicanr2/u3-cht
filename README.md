@@ -48,7 +48,11 @@ PoC 會輸出 `poc_out.png`:左側 tile 拼圖 + 右側中文文字,一次驗證
 | P6 | 字串表全量翻譯 (主要遊戲文字) | ✅ |
 | P7 | 組隊→啟程→世界移動→戰鬥可玩流程 | ✅ |
 | P7e | 底部文字滾動區中文亂碼根因修正 (UPrint & 0x7F 砍 UTF-8) | ✅ |
-| 後續 | 進城鎮/地城 + NPC 對話中文化 / 存檔 / 選單按鈕圖片中文化 / 翻譯潤飾 | 進行中 |
+| P7f | 243 處 \p Pascal 字串字面值修正 (clang -fpascal-strings) | ✅ |
+| P8 | 進城鎮/城堡 + NPC 對話中文化 (TLKS 151 句全譯) | ✅ |
+| P8d | 存檔/讀檔 (WriteResource + AutoSave) | ✅ |
+| P9 | 角色建立 UI / 選單按鈕中文化 / 命令+Ztats 中文 / 音效 (SDL_mixer) | ✅ |
+| 後續 | 音樂 (QuickTime Music 'musi' 格式需 QTMA→MIDI) / 翻譯潤飾 / 角色建立正式 UI | 進行中 |
 
 詳見 `docs/P3-compat-compile-status.md`、`docs/GAMEPLAY-STATUS.md`。截圖見 `docs/screenshots/`。
 
