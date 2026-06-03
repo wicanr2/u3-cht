@@ -6,6 +6,14 @@
 
 > 詳細工程計畫見 [`PLAN.md`](PLAN.md);可行性分析見工作區的 `ultima3-中文化評估.md`。
 
+## 截圖
+
+| 世界地圖 + 隊伍 + 中文訊息 | 主選單 |
+|---|---|
+| ![世界畫面](docs/screenshots/gameplay-zh.png) | ![主選單](docs/screenshots/menu-zh-hant.png) |
+
+右側隊伍面板、底部訊息(如「通過」)、職業標籤(「非法師」)均為 SDL_ttf 中文渲染。
+
 ## 建置 (Docker first)
 
 ```bash
@@ -38,9 +46,11 @@ PoC 會輸出 `poc_out.png`:左側 tile 拼圖 + 右側中文文字,一次驗證
 | P5b | 遊戲內字串表文字渲染 (DrawThemeTextBox → SDL_ttf) | ✅ |
 | P5d | 滑鼠點擊導航:可進入世界畫面 | ✅ |
 | P6 | 字串表全量翻譯 (主要遊戲文字) | ✅ |
-| 後續 | 組隊→啟程完整遊玩流程 / 選單按鈕圖片中文化 / 翻譯潤飾 | 進行中 |
+| P7 | 組隊→啟程→世界移動→戰鬥可玩流程 | ✅ |
+| P7e | 底部文字滾動區中文亂碼根因修正 (UPrint & 0x7F 砍 UTF-8) | ✅ |
+| 後續 | 進城鎮/地城 + NPC 對話中文化 / 存檔 / 選單按鈕圖片中文化 / 翻譯潤飾 | 進行中 |
 
-詳見 `docs/P3-compat-compile-status.md`。截圖見 `docs/screenshots/`。
+詳見 `docs/P3-compat-compile-status.md`、`docs/GAMEPLAY-STATUS.md`。截圖見 `docs/screenshots/`。
 
 ## 執行 (容器內)
 
