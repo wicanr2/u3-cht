@@ -1,0 +1,10 @@
+diff --git a/Sources/UltimaNew.c b/Sources/UltimaNew.c
+--- a/Sources/UltimaNew.c
++++ b/Sources/UltimaNew.c
+@@ -333,4 +333,6 @@ void DrawButton(short butNum, Boolean pushed, Boolean dim) {
+     ForeColor(blackColor);
+     BackColor(whiteColor);
+     CopyBits(LWPortCopyBits(buttonPort), LWPortCopyBits(mainPort), &fromRect, &toRect, srcCopy, nil);
++    { extern void U3_DrawButtonLabel(int butNum, int l, int t, int r, int b);
++      U3_DrawButtonLabel(butNum, toRect.left, toRect.top, toRect.right, toRect.bottom); }
+ }

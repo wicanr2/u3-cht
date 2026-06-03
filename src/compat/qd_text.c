@@ -152,6 +152,46 @@ SInt16 UThemePascalStringWidth(ConstStr255Param inPString, ThemeFontID inFontID)
 void U3_DrawUTF8(const char *utf8, SInt16 h, SInt16 v, SInt16 ptSize) {
     draw_utf8_at(utf8, h, v, ptSize);
 }
+
+/* ===== 選單按鈕中文標籤 =====
+ * 按鈕圖 (Buttons.png) 文字烘焙為英文;DrawButton CopyBits 到 mainPort 後,
+ * 此函式在按鈕矩形內取樣底色蓋掉英文,再以 SDL_ttf 置中畫中文。butNum 對應見下。 */
+extern CGrafPtr mainPort;
+void U3_DrawButtonLabel(int butNum, int left, int top, int right, int bottom) {
+    static const char *kLabel[] = {
+        "返回畫面", "編組隊伍", "啟程冒險", "建立角色", "刪除角色",
+        "組成隊伍", "解散隊伍", "返回", "調整選項",
+    };
+    if (butNum < 0 || butNum > 8) return;
+    const char *zh = kLabel[butNum];
+    CGrafPtr p = mainPort;
+    if (!p || !p->surface) return;
+    SDL_Surface *s = p->surface;
+    int w = right - left, h = bottom - top;
+    if (w < 8 || h < 8) return;
+    if (left < 0 || top < 0 || right > s->w || bottom > s->h) return;
+    int stride = s->pitch / 4;
+    Uint32 *px = (Uint32 *)s->pixels;
+    /* 取樣按鈕底色 (左上內側,避開中央文字) 蓋掉英文 */
+    Uint32 bg = px[(top + 4) * stride + (left + 4)];
+    SDL_Rect fr = { left + 3, top + 3, w - 6, h - 6 };
+    SDL_FillRect(s, &fr, bg);
+    /* 黑色中文置中 (draw_utf8_at 以 v 為 baseline) */
+    int size = (int)(h * 0.5);
+    if (size < 12) size = 12;
+    if (size > 20) size = 20;
+    int tw = utf8_width(zh, size);
+    TTF_Font *f = font_for_size(size);
+    int asc = f ? TTF_FontAscent(f) : size;
+    int fh = f ? TTF_FontHeight(f) : size;
+    int x = left + (w - tw) / 2;
+    int y = top + (h - fh) / 2 + asc;
+    CGrafPtr save = CurrentPort();
+    SetGWorld(mainPort, NULL);
+    mainPort->fgColor.red = mainPort->fgColor.green = mainPort->fgColor.blue = 0;
+    draw_utf8_at(zh, x, y, size);
+    SetGWorld(save, NULL);
+}
 SInt16 U3_UTF8Width(const char *utf8, SInt16 ptSize) {
     return (SInt16)utf8_width(utf8, ptSize);
 }
