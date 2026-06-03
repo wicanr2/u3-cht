@@ -41,6 +41,24 @@ static void crash_handler(int sig) {
 extern int Ultima3_main(void);
 extern WindowPtr gMainWindow;   /* 上游全域:主視窗 (= GrafPort*) */
 extern CGrafPtr  mainPort;      /* 上游全域:上螢幕繪圖埠 (原 ForceUpdateMain 即 flush 此埠) */
+extern short          gUpdateWhere;   /* 畫面狀態:5=主選單 6=Organize 3=世界/地圖 */
+extern unsigned char  Party[];        /* Party[3]:0=外界 1=地城 2=城鎮 3=城堡 */
+
+/* 場景追蹤:U3_DBG_SCENE 設定時,於畫面狀態變化印 grep 用標記,供 smoke 驗證
+ * 全流程 (主選單→選項→編組→世界→城堡)。party3 區分外界/城鎮/城堡。 */
+static int gSceneDbg = -1, gLastWhere = -999, gLastParty3 = -999;
+void U3_SceneTrace(void) {
+    if (gSceneDbg < 0) gSceneDbg = getenv("U3_DBG_SCENE") ? 1 : 0;
+    if (!gSceneDbg) return;
+    int w = (int)gUpdateWhere, p3 = (int)Party[3];
+    if (w != gLastWhere || p3 != gLastParty3) {
+        const char *name = (w == 5) ? "menu" : (w == 6) ? "organize" :
+            (w == 3 && p3 == 0) ? "world" : (w == 3 && p3 == 2) ? "town" :
+            (w == 3 && p3 == 3) ? "castle" : (w == 3 && p3 == 1) ? "dungeon" : "other";
+        fprintf(stderr, "[SCENE] where=%d party3=%d %s\n", w, p3, name);
+        gLastWhere = w; gLastParty3 = p3;
+    }
+}
 
 static SDL_Window   *gWin;
 static SDL_Renderer *gRen;
@@ -73,6 +91,7 @@ void U3_MapMouse(int *x, int *y) {
 
 void U3_PlatPresent(void) {
     if (!gRen) return;
+    U3_SceneTrace();   /* 場景變化標記 (U3_DBG_SCENE) */
     /* mainPort 是上螢幕埠 (ForceUpdateMain 原本 flush 它);回退 gMainWindow */
     CGrafPtr src = mainPort ? mainPort : gMainWindow;
     SDL_Surface *s = (src ? src->surface : NULL);

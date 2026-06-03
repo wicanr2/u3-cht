@@ -1,0 +1,41 @@
+# release smoke (需 U3_SKIPINTRO=1;進城堡需 U3_TELEPORT=45,18)。
+# 涵蓋場景:主選單 → 選項對話 → 編組(名冊) → 啟程世界(sidebar) → 進城堡(內部)。
+# 不含開場 R 跳頁 (skipintro 已直達主選單),時序與動畫長度無關,穩定可重現。
+# 場景標記見 stderr [SCENE] ...(需 U3_DBG_SCENE=1)。
+# U <n> 等 gUpdateWhere==n:5=主選單 6=Organize 3=世界/地圖
+U 5
+W 30
+# 選項對話 (A 開,觀察後 0/Esc 關)
+KA
+W 60
+K0
+W 30
+U 5
+W 20
+# 編組隊伍 (顯示名冊),自動成隊後返回
+KO
+U 6
+W 40
+KF
+W 80
+R
+W 30
+U 6
+W 20
+KB
+U 5
+W 30
+# 啟程冒險 → 世界 (右側 sidebar)。U3_TELEPORT 已把隊伍置於城堡 tile (45,18)。
+KJ
+U 3
+W 80
+# 進城堡:隊伍正站在城堡 tile,E=進入 (U3 城堡/城鎮以 E 進入)。
+KE
+W 60
+R
+W 30
+# 進入後往北走兩步深入中庭,確保截到城堡內部 (非門口提示)。
+M 30
+W 40
+M 30
+W 80

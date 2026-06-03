@@ -60,6 +60,7 @@ static int script_next_key(void) {
         if (*s=='#' || *s=='\n' || *s=='\0') continue;
         char cmd = *s++;
         while (*s==' ') s++;
+        if (getenv("U3_DBG_SCRIPT")) fprintf(stderr, "[SCRIPT] cmd=%c arg=%.20s gUpdateWhere=%d\n", cmd, s, gUpdateWhere);
         if (cmd=='K') { gLinePos = (int)(s - gLine); return script_next_key(); }
         if (cmd=='R') return 0x0D;
         if (cmd=='M') { int k = atoi(s); return k > 0 ? k : -1; }  /* 原始 Mac 鍵碼 (方向鍵 28-31) */

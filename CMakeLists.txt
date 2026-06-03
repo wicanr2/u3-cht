@@ -33,13 +33,17 @@ target_link_libraries(test_geometry PRIVATE u3compat)
 enable_testing()
 add_test(NAME geometry COMMAND test_geometry)
 
+# 平台層全域樁 (mainPort):qd_text.c 的按鈕標籤函式引用,正式遊戲由上游提供。
+add_library(u3compat_teststub STATIC tests/compat_test_stubs.c)
+target_include_directories(u3compat_teststub PRIVATE src/compat ${U3COMPAT_SDL_INCLUDES})
+
 add_executable(test_qd_blit tests/test_qd_blit.c)
 target_include_directories(test_qd_blit PRIVATE ${SDL2_IMAGE_INCLUDE_DIRS})
-target_link_libraries(test_qd_blit PRIVATE u3compat ${SDL2_IMAGE_LIBRARIES})
+target_link_libraries(test_qd_blit PRIVATE u3compat u3compat_teststub ${SDL2_IMAGE_LIBRARIES})
 
 add_executable(test_qd_text tests/test_qd_text.c)
 target_include_directories(test_qd_text PRIVATE ${SDL2_IMAGE_INCLUDE_DIRS})
-target_link_libraries(test_qd_text PRIVATE u3compat ${SDL2_IMAGE_LIBRARIES})
+target_link_libraries(test_qd_text PRIVATE u3compat u3compat_teststub ${SDL2_IMAGE_LIBRARIES})
 
 # --- 字串表讀取器 ---
 add_library(u3text STATIC src/text/strings.c)
@@ -47,7 +51,7 @@ target_include_directories(u3text PUBLIC src/text)
 
 add_executable(test_strings_render tests/test_strings_render.c)
 target_include_directories(test_strings_render PRIVATE ${SDL2_IMAGE_INCLUDE_DIRS})
-target_link_libraries(test_strings_render PRIVATE u3compat u3text ${SDL2_IMAGE_LIBRARIES})
+target_link_libraries(test_strings_render PRIVATE u3compat u3text u3compat_teststub ${SDL2_IMAGE_LIBRARIES})
 
 # --- P1 垂直切片 PoC ---
 add_executable(poc

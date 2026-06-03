@@ -468,6 +468,7 @@ void GameOptionsDialog(void) {
     extern CFStringRef U3PrefSoundInactive, U3PrefMusicInactive, U3PrefManualCombat,
                        U3PrefSpeedUnconstrain, kCFPreferencesCurrentApplication;
     #define PREF_OFF(k) CFPreferencesGetAppBooleanValue(k, kCFPreferencesCurrentApplication, NULL)
+    if (getenv("U3_DBG_SCENE")) fprintf(stderr, "[SCENE] options-open\n");
     unsigned char buf[256];
     int done = 0;
     while (!done && !gDone) {

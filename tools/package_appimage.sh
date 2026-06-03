@@ -13,13 +13,18 @@ APP=/tmp/AppDir
 
 echo "[ai] apt 安裝建置依賴 ..."
 apt-get update -qq >/dev/null
-apt-get install -y -qq build-essential clang git wget file \
+apt-get install -y -qq build-essential clang git wget file python3-pil \
     libsdl2-dev libsdl2-image-dev libsdl2-ttf-dev libsdl2-mixer-dev \
     fonts-noto-cjk >/dev/null
 
 echo "[ai] 建置遊戲 (Ubuntu 22.04) ..."
 bash $REPO/tools/build_game.sh >/tmp/aibuild.log 2>&1 || { echo "建置失敗:"; tail -25 /tmp/aibuild.log; exit 1; }
 echo "[ai] 建置 OK ($(file $REPO/build/u3 | grep -o 'ELF.*stripped\|ELF.*x86-64' | head -1))"
+
+# 重繪繁中 RaceClassInfo.gif (角色建立的種族/職業說明圖)。原為英文上游資產且被
+# gitignore;此處由產生器重建,確保打包進 AppImage 的是中文版。失敗不致命 (退回現有檔)。
+echo "[ai] 重繪中文 RaceClassInfo.gif ..."
+python3 $REPO/tools/make_raceclass_gif.py >/tmp/aigif.log 2>&1 && echo "[ai] GIF OK" || { echo "[ai] ⚠ GIF 產生失敗 (沿用現有檔):"; tail -5 /tmp/aigif.log; }
 
 # ---- 組 AppDir ----
 rm -rf "$APP"; mkdir -p "$APP/usr/bin" "$APP/usr/lib" "$APP/data"

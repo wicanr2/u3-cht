@@ -1,0 +1,62 @@
+--- a/Sources/UltimaNew.c
++++ b/Sources/UltimaNew.c
+@@ -1262,7 +1262,7 @@
+     OSErr err;
+     float scale;
+     Str255 str, numStr;
+-    Str255 levelStr = "\pLevel ";
++    Str255 levelStr = "\p級 ";   /* 原 "Level ";中文化:等級 */
+     RGBColor color;
+     static short fontNumber = -1;
+     int fontSize = (int)(9.0 * (blkSiz / 16.0));
+@@ -1306,12 +1306,35 @@
+             UPrint(str, 7 - (str[0] / 2) + showPortraits, 0);
+         else
+             NewPrint(str, (blkSiz * 7.5) - PixelsWideString(str) / 2, 0);
+-        // Sex/Race/Class
+-        str[0] = 3;
+-        str[1] = Player[ros][24];
+-        str[2] = Player[ros][22];
+-        str[3] = Player[ros][23];
+-        UPrint(str, 1 + showPortraits, 1);
++        // 種族/職業:原為性別/種族/職業英文字母碼 (如 FET=Female Elf Thief),
++        // 改為「種族全名(2字)+職業(1字)」(如 精靈賊)。性別由人像與名字辨識,
++        // 完整 種族/職業/性別 仍見「編組隊伍」名冊。受面板寬度限制 (約 3 個中文字)。
++        // 以 UDrawThemePascalString 直繪 (同 級/糧 標籤路徑),可正確顯示「絨」等
++        // 經 UPrint→NewPrint 暫存 GWorld 路徑會缺字 (顯示方框) 的字元。
++        {
++            static const char *raceCh[5]   = {"人類", "精靈", "矮人", "哈比", "毛絨"};
++            static const char *classCh[11] = {"鬥", "牧", "巫", "賊", "騎",
++                                              "蠻", "雀", "幻", "德", "鍊", "俠"};
++            char charRaces[5] = {'H', 'E', 'D', 'B', 'F'};
++            short ri, ci, n;
++            const char *p;
++            for (ri = 0; ri < 5 && Player[ros][22] != charRaces[ri]; ri++) ;
++            if (ri >= 5) ri = 0;
++            for (ci = 0; ci < 11 && Player[ros][23] != careerTable[ci]; ci++) ;
++            if (ci >= 11) ci = 0;
++            n = 0;
++            for (p = raceCh[ri]; *p; p++)  str[++n] = *p;
++            for (p = classCh[ci]; *p; p++) str[++n] = *p;
++            str[0] = n;
++            if (fontNumber == -1) GetFNum("\pHelvetica", &fontNumber);
++            TextSize(fontSize + 3);
++            TextFont(fontNumber);
++            TextMode(srcOr);
++            TextFace(0);
++            ForeColor(whiteColor);
++            MoveTo((1 + showPortraits) * blkSiz, blkSiz * 2 - 3);
++            UDrawThemePascalString(str, kThemeCurrentPortFont);
++        }
+         if (!classic) {   // draw bars & such
+             // Hit Points
+             num = (Player[ros][26] * 256) + (Player[ros][27]);
+@@ -1484,7 +1507,7 @@
+                 RGBForeColor(&color);
+             }
+             MoveTo(blkSiz * 10, blkSiz * 3 - (labelOffset + 3));
+-            Str255 outStr = "\pFood: ";
++            Str255 outStr = "\p糧:";   /* 原 "Food: ";中文化:糧食 */
+             Str255 numStr;
+             NumToString(num, numStr);
+             BlockMoveData(numStr + 1, outStr + outStr[0] + 1, numStr[0]);

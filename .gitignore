@@ -25,3 +25,6 @@ __pycache__/
 u3save.dat
 u3prefs.txt
 tests/sweep/
+
+# 臨時測試輸出 (截圖/腳本/裁切圖)
+tests/_*

@@ -70,6 +70,14 @@ Boolean CFPreferencesGetAppBooleanValue(CFStringRef key, CFStringRef appID, Bool
         if (exists) *exists = true;
         return getenv("U3_NOSAVE") ? false : true;
     }
+    /* OriginalSize 預設「true 且 exists」:SDL 移植固定 640×480 邏輯畫布,
+     * blkSiz 必須是 16 (40×24 tile = 640×384)。若回 exists=false,WindowInit 會走
+     * CGDisplayCurrentMode (本移植回 NULL) 推算螢幕尺寸 → 讀到未初始化值 → blkSiz
+     * 不確定地變成 32,畫面以 2 倍繪入 640×480 埠 → 裁切。固定回 true 消除此 UB。 */
+    if (k && strcmp(k, "OriginalSize") == 0) {
+        if (exists) *exists = true;
+        return true;
+    }
     if (exists) *exists = false;
     return false;
 }

@@ -192,3 +192,32 @@ docker run --rm --user "$(id -u):$(id -g)" \
 - **正常導航進城**:受地形限制（山脈/水域需船隻),屬航行系統,非中文化範圍（#3 已驗證船隻可用）。
 - **GameOptions / 設定對話**:stub 未顯示,需重建 SDL 設定 UI 才能中文化+功能化。
 - 部分裝飾 logo 圖 (EXODUS 等) 維持原樣;翻譯「聖壇 vs 神殿」已統一,半形/全形已統一。
+
+## Hermes AppImage QA 收斂（第八輪,2026-06-03）
+
+針對 Hermes 試玩 AppImage 的回饋逐項修正,目標 release QA:
+
+- **主選單/標題裁切（修正）**:`WindowInit` 透過 `CGDisplayCurrentMode`(本移植回 NULL)
+  推算螢幕尺寸,讀到未初始化值 → `blkSiz` 不確定地變成 32,畫面以 2 倍繪入 640×480 埠
+  → 裁切。`cf_bridge.c` 讓 `OriginalSize` 偏好預設 `true 且 exists`,固定 `blkSiz=16`
+  (40×24 tile = 640×384),消除 UB,主選單/編組不再裁切。
+- **右側隊伍 sidebar 中文化（修正）**:`RenderCharStats` 原以 性別/種族/職業 英文字母碼
+  (FET=Female Elf Thief…) 顯示。改為「種族全名(2字)+職業(1字)」(精靈賊/人類俠/哈比牧/
+  毛絨巫),並改用 `UDrawThemePascalString` 直繪(同 級/糧 標籤路徑),修掉 `絨` 字經
+  `UPrint→NewPrint` 暫存 GWorld 會缺字顯示方框的問題。`Level→級`、`Food→糧`、
+  Organize 名冊 `Lvl→級`;法力欄 `non-mage` 原譯「非法師」改「不可施法」。
+- **世界提示語**:`Pass→等待`(原誤譯「通過」);`<-WHAT?→←什麼?`(去除半形箭頭怪感)。
+- **RaceClassInfo.gif 中文化（新)**:原為整張英文圖資(種族屬性上限 + 職業說明)。
+  以 `tools/make_raceclass_gif.py` 重繪繁中(數值取自原圖權威值),`package_appimage.sh`
+  打包時自動重生,確保 AppImage 內為中文版。(資產 gitignore,故提交產生器而非二進位。)
+- **AppImage release smoke（新)**:`tools/smoke_appimage.sh` 可從 repo 外 cwd 跑
+  `dist/Ultima3-CHT-x86_64.AppImage`,以 `U3_SKIPINTRO` 直達主選單,腳本
+  (`tests/scripts/smoke.txt`) 驅動並用 `[SCENE]` 標記斷言 主選單/選項/編組/世界/城堡
+  五場景皆抵達;音訊無裝置只警告不致命。
+- **可重現測試**:`tools/run_tests.sh` 於容器內以獨立 build 目錄跑 cmake+ctest
+  (補 `tests/compat_test_stubs.c` 提供 `mainPort` 樁,使 PoC 測試連結通過),不污染
+  `build/`(那是 `build_game.sh` 產物)。
+- **測試掛勾**:`U3_SKIPINTRO`(略過片頭直達選單,僅測試用,正式版維持完整片頭)、
+  `U3_DBG_SCENE`(印場景轉換標記)。
+- **設計取捨**:範例隊伍角色名 (Tatiana/Roderic/Norric/Ghiselle) 保留原西式專有名詞,
+  未中文化;種族/職業/狀態/數值欄位皆已繁中。
