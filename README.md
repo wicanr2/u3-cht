@@ -52,7 +52,8 @@ PoC 會輸出 `poc_out.png`:左側 tile 拼圖 + 右側中文文字,一次驗證
 | P8 | 進城鎮/城堡 + NPC 對話中文化 (TLKS 151 句全譯) | ✅ |
 | P8d | 存檔/讀檔 (WriteResource + AutoSave) | ✅ |
 | P9 | 角色建立 UI / 選單按鈕中文化 / 命令+Ztats 中文 / 音效 (SDL_mixer) | ✅ |
-| 後續 | 音樂 (QuickTime Music 'musi' 格式需 QTMA→MIDI) / 翻譯潤飾 / 角色建立正式 UI | 進行中 |
+| P10 | 音樂 (QTMA→MIDI→ogg) / 角色建立互動 UI / race+class 中文名 / 小殘留 / 標頭中文 | ✅ |
+| 後續 | 翻譯潤飾 / 更多遊戲流程驗證 | 進行中 |
 
 詳見 `docs/P3-compat-compile-status.md`、`docs/GAMEPLAY-STATUS.md`。截圖見 `docs/screenshots/`。
 
