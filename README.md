@@ -110,7 +110,7 @@ cd /tmp && /path/to/u3-cht/tools/smoke_appimage.sh
 | [世界觀與故事背景](docs/ultima-iii-overview.md) | Sosaria、黑暗時代三部曲、Exodus、火焰之島、為何重要 |
 | [人物與勢力](docs/characters-and-factions.md) | Lord British、Mondain、Minax、Exodus、自建四人隊伍、種族/職業 |
 | [發行與移植史](docs/release-history.md) | Garriott / Origin、1983 Apple II 原版、多平台移植、在地化 |
-| [台灣發行/流通查證](docs/taiwan-history.md) | 官方中文名、精訊/第三波 收藏紀錄、**未查到可靠發行年份(保守)** |
+| [台灣發行/流通查證](docs/taiwan-history.md) | 官方中文名;精訊/第三波 屬**收藏者紀錄(非官方代理證明)**;**未查到可靠發行年份** |
 | [在地化筆記](docs/localization-notes.md) | 翻譯原則、名詞對照、字型/SDL/AppImage、踩雷與測試掛勾 |
 | [入門玩法導覽](docs/gameplay-guide.md) | 主選單、創角、種族職業、操作、初期目標 |
 

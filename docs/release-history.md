@@ -5,8 +5,12 @@
 ## 開發者與發行商
 
 - **設計者**:Richard Garriott(化名 *Lord British*)。
-- **發行商**:**Origin Systems, Inc.**——由 Richard Garriott 與其兄 Robert Garriott
-  於美國德州 Austin 創立。**《Ultima III: Exodus》是 Origin Systems 以該品牌發行的第一款遊戲。**
+- **發行商**:**Origin Systems, Inc.**——依英文 Wikipedia〈Origin Systems〉條目,公司於
+  **1983 年 3 月**(內文作 3 月 3 日;資訊框作 3 月 4 日)由 **Richard Garriott、其兄
+  Robert Garriott,以及兩人的父親 Owen Garriott** 共同創立(資訊框另列程式設計師
+  Chuck Bueche 為共同創辦人),後落腳美國德州 Austin。
+- 依英文 Wikipedia〈Origin Systems〉條目,**公司的第一款遊戲即《Ultima III: Exodus》**;
+  〈Ultima III: Exodus〉條目與 MobyGames 則記本作 **1983 年發行**。
 
 ## 原始發行(1983)
 
