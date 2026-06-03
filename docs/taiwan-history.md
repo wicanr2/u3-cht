@@ -49,13 +49,19 @@
 - 交叉 MobyGames / Ultima Codex 之 release 清單是否登錄台灣 SKU。
 - 徵集玩家手中的實體手冊/磁片/包裝照片作為第一手佐證。
 
+## 相關閱讀
+
+- 總目錄:[docs 知識庫索引](README.md)
+- 延伸:[時間線與來源層級(台灣狀態表)](timeline.md#台灣流通查證狀態再次強調不給年份) ·
+  [發行與移植史](release-history.md) · [版本與平台差異](versions-and-platforms.md)
+
 ## 參考來源
 
 - EA 官方(繁中)創世紀3:魔胎 — https://www.ea.com/zh-tw/games/ultima/ultima-3-exodus
 - 4大RPG典藏(隨意窩 Xuite 日誌),*Ultima III Exodus 創世紀3*(原連結目前 DNS 不可達)—
   https://blog.xuite.net/ultimavintage/ultima/50478049
-  - **Wayback Machine 存檔(可即時存取,2023-08-28 快照,HTTP 200)**:
-    http://web.archive.org/web/20230828190933/https://blog.xuite.net/ultimavintage/ultima/50478049
+  - **Wayback Machine 存檔(可即時存取;直接存取此存檔 URL 實測回 HTTP 200,快照日 2023-08-28)**:
+    https://web.archive.org/web/20230828190933/https://blog.xuite.net/ultimavintage/ultima/50478049
 - 4大RPG典藏 收藏目錄(原連結目前 DNS 不可達)—
   https://blog.xuite.net/ultimavintage/ultima/52510915
 - 維基百科(中文),*創世紀系列* — https://zh.wikipedia.org/zh-tw/創世紀系列

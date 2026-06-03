@@ -17,14 +17,18 @@
 
 ## 原始發行(1983)
 
-- **首發平台**:Apple II。
-- **年份**:1983 年(EA 官方繁中頁面標示日期為 1983-08-23)。
-- 同期/稍後並推出 Commodore 64、Atari 8-bit、IBM PC 等版本。
-- 商業上相當成功;1984 年獲 *Softline* 雜誌讀者票選為史上第三受歡迎的 Apple II 遊戲。
+- **首發平台**:Apple II。(來源:Wikipedia〈Ultima III: Exodus〉、MobyGames)
+- **年份**:1983 年。(Wikipedia〈Ultima III: Exodus〉、MobyGames)其中
+  **EA 官方繁中產品頁**的上市日期欄標示為 **1983-08-23**(來源:EA 官方繁中頁,屬 EA 平台標註)。
+- 同期/稍後並推出 Commodore 64、Atari 8-bit、IBM PC 等版本。(Wikipedia〈Ultima III: Exodus〉)
+- 商業表現:依 **Wikipedia〈Ultima III: Exodus〉**,本作 1983 年推出後銷售良好,
+  並於 **1984 年**獲 ***Softline* 雜誌**讀者票選為史上第三受歡迎的 Apple II 遊戲
+  (此句之事實與 *Softline* 出處均轉引自該維基條目)。
 
 ## 多平台移植
 
-原作以 Apple II 開發,之後被移植到**十多個平台**。常被列出的版本包含:
+原作以 Apple II 開發,之後被移植到多個平台——**英文 Wikipedia〈Ultima III: Exodus〉
+稱原版之後另移植到 13 個其他平台**。常被列出的版本包含(來源:Wikipedia 同條目、MobyGames):
 
 - 家用/個人電腦:Commodore 64、Atari 8-bit、IBM PC、**Macintosh**、Atari ST、Amiga
   (後數者具強化畫面)。
@@ -48,6 +52,13 @@
 - Ultima 系列 IP 現屬 **Electronic Arts(EA)**;EA 提供官方繁中產品頁(名《創世紀3:魔胎》)。
 - 本移植專案僅程式碼為 MIT(沿用上游);美術/音樂/字串等非程式資產著作權屬原權利人,
   採「引擎與資料分離」,以自用與技術研究為主。
+
+## 相關閱讀
+
+- 總目錄:[docs 知識庫索引](README.md)
+- 延伸:[版本與平台差異](versions-and-platforms.md) · [時間線與來源層級](timeline.md) ·
+  [台灣發行/流通查證](taiwan-history.md)
+- 背景:[世界觀](ultima-iii-overview.md) · [人物與勢力](characters-and-factions.md)
 
 ## 參考來源
 

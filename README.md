@@ -3,7 +3,8 @@
 把 **MIT 授權**的 [`beastie/ultima3`](https://github.com/beastie/ultima3)
 (LairWare 的 Ultima III Mac 版,Leon McNeill 以 MIT 釋出的 C 源碼)從
 Mac(Carbon / Cocoa / QuickDraw)移植到 **SDL2**,並以 **UTF-8 + SDL_ttf(Noto Sans CJK)**
-全面繁體中文化,可在 **Linux(AppImage)** 與 **Windows** 執行遊玩。
+將**主要介面、對話、狀態、種族/職業說明圖繁體中文化**(預設西式角色名與少數鍵名如
+`Enter` 保留原文),可在 **Linux(AppImage)** 與 **Windows** 執行遊玩。
 
 本 repo 同時是一份 **Ultima III 繁體中文參考入口**:除了可玩的移植版,也整理了
 世界觀、人物、發行史、台灣流通查證、在地化筆記與入門導覽(見下方
@@ -34,12 +35,15 @@ Mac(Carbon / Cocoa / QuickDraw)移植到 **SDL2**,並以 **UTF-8 + SDL_ttf(Noto 
 食物「**糧**」、無法力職業標「**不可施法**」;底部訊息(如「**等待**」)、選單、創角、
 城堡/城鎮、種族職業說明圖均為中文。
 
+> 截圖中**預設隊伍角色名**(Tatiana / Roderic / …)為原西式專有名詞、創角輸入提示中的
+> 鍵名 `Enter` 保留原文——詳見 [已知限制](#️-已知限制)。
+
 ---
 
 ## ⬇️ 下載與執行(Release)
 
-預先打包的可執行檔請至 **[Releases 頁面](../../releases/latest)** 下載
-(大型二進位不入 git,改以 GitHub Release 發布)。
+預先打包的可執行檔請至 **[Releases 頁面](https://github.com/wicanr2/u3-cht/releases/latest)**
+下載(大型二進位不入 git,改以 GitHub Release 發布)。
 
 ### Linux — AppImage
 ```bash
@@ -117,14 +121,18 @@ bash /絕對路徑/u3-cht/tools/smoke_appimage.sh
 
 ## 📚 Ultima III 中文知識庫
 
-以原創中文整理、附參考來源;不收錄受版權保護的原始手冊全文。
+完整知識庫附 **[總目錄與閱讀路線 → docs/README.md](docs/README.md)**(新玩家 / 歷史考證 /
+中文化技術 / 台灣查證 四條路線 + 來源與版權原則)。以原創中文整理、附參考來源;
+不收錄受版權保護的原始手冊全文。
 
 | 文件 | 內容 |
 |---|---|
+| 📑 **[知識庫總目錄](docs/README.md)** | **閱讀路線、全文件索引、來源層級與版權原則** |
 | [世界觀與故事背景](docs/ultima-iii-overview.md) | Sosaria、黑暗時代三部曲、Exodus、火焰之島、為何重要 |
 | [人物與勢力](docs/characters-and-factions.md) | Lord British、Mondain、Minax、Exodus、自建四人隊伍、種族/職業 |
 | [發行與移植史](docs/release-history.md) | Garriott / Origin、1983 Apple II 原版、多平台移植、在地化 |
 | [版本與平台差異](docs/versions-and-platforms.md) | 各平台移植差異、**LairWare Mac 版** 與本專案的關係與改造對照 |
+| [時間線與來源層級](docs/timeline.md) | 1981→今年代表,每條標來源層級;台灣查證狀態表 |
 | [台灣發行/流通查證](docs/taiwan-history.md) | 官方中文名;精訊/第三波 屬**收藏者紀錄(非官方代理證明)**;**未查到可靠發行年份** |
 | [在地化筆記](docs/localization-notes.md) | 翻譯原則、名詞對照、字型/SDL/AppImage、踩雷與測試掛勾 |
 | [入門玩法導覽](docs/gameplay-guide.md) | 主選單、創角、種族職業、操作、初期目標 |
@@ -152,6 +160,8 @@ bash /絕對路徑/u3-cht/tools/smoke_appimage.sh
 
 - **角色預設名**:範例隊伍角色名(Tatiana/Roderic/…)保留原西式專有名詞;種族/職業/狀態/
   數值欄位皆已繁中。
+- **少數鍵名**:創角輸入提示中的鍵名 `Enter` 保留原文(屬實體按鍵名稱);提示句其餘為中文
+  (如「請輸入名字後按 Enter:」)。
 - **隊伍面板寬度**:右側 sidebar 空間有限,種族+職業以短碼呈現(完整名見「編組隊伍」名冊)。
 - **音樂**:原始 `.mov`(QuickTime Music,類 MIDI)非取樣音訊,SDL_mixer 不直接支援,
   目前以安全 stub 處理(音效已可用)。
