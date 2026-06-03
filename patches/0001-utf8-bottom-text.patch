@@ -1,0 +1,15 @@
+diff --git a/Sources/UltimaText.c b/Sources/UltimaText.c
+--- a/Sources/UltimaText.c
++++ b/Sources/UltimaText.c
+@@ -363,7 +363,10 @@ void UPrint(Str255 gString, char x, char y) {
+                 UIncTy();
+                 tx = 24;
+             } else {
+-                str[++str[0]] = gString[pos] & 0x7F;
++                /* 中文化:原本 & 0x7F 會砍掉 UTF-8 多位元組中文字的高位元
++                 * (例: 「通」0xe9 0x80 0x9a → 0x69 0x00 0x1a 變亂碼)。
++                 * 非 classic 路徑下字串為 UTF-8,直接保留位元組;ASCII (<0x80) 不受影響。 */
++                str[++str[0]] = gString[pos];
+             }
+             pos++;
+         }

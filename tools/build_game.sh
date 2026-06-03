@@ -8,7 +8,21 @@ TEXT=/work/u3-cht/src/text
 PLAT=/work/u3-cht/src/platform_sdl
 OUT=/work/u3-cht/build/game_obj
 BIN=/work/u3-cht/build/u3
+PATCHES=/work/u3-cht/patches
 mkdir -p $OUT
+
+# 套用對上游唯讀源碼的中文化修正 (patches/*.patch)。
+# 上游 ultima3/ 預設唯讀,修正以 patch 納入 repo;idempotent 套用 (已套用則略過)。
+if [ -d "$PATCHES" ]; then
+  for pf in "$PATCHES"/*.patch; do
+    [ -e "$pf" ] || continue
+    if patch -p1 -d "$SRC/.." -N --dry-run <"$pf" >/dev/null 2>&1; then
+      patch -p1 -d "$SRC/.." -N <"$pf" >/dev/null && echo "套用 patch: $(basename "$pf")"
+    else
+      echo "patch 已套用或無法套用，略過: $(basename "$pf")"
+    fi
+  done
+fi
 
 CFLAGS="-std=gnu11 -w -O2 -g -include $COMPAT/mac_shim.h -I $COMPAT/fakeinc -I $COMPAT -I $TEXT -I $PLAT -I $SRC $(sdl2-config --cflags)"
 

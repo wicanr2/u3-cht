@@ -1,6 +1,6 @@
 # 可玩性狀態與驗證紀錄
 
-> 更新:2026-06-03（第三輪）
+> 更新:2026-06-03（第四輪:底部文字中文亂碼根因修正）
 
 ## 目前已驗證
 
@@ -11,7 +11,7 @@
 - game tester 已用 Docker / Xvfb 實機驗證:組隊後進世界,畫面右側顯示 4 名隊員。
 - 世界地圖可長時間穩定移動（70s timeout PASS，597 截圖）。
 - **戰鬥系統可用**:party 成員 HP 隨怪物攻擊下降，確認基礎戰鬥迴圈運作。
-- 世界畫面底部文字滾動區控制字元亂碼已修正（過濾 0x00–0x1F）。
+- **底部文字滾動區中文亂碼根因已修正**（見下節「底部文字協定說明」）：戰鬥/方向/狀態訊息現正確顯示中文（「玩家」「命中!」「匕首 攻擊」「未命中!」「北/方向」「通過」等）。
 - `非法師` 標籤已確認為正確翻譯（Female-Elf-Thief 不能施法，顯示 "non-mage"）。
 
 ## gUpdateWhere 狀態對照表
@@ -30,13 +30,26 @@
 
 注：Game() 主迴圈直接呼叫 DrawMap/ShowChars，不依賴 HandleUpdate 繪製地圖。
 
-## 底部文字協定說明
+## 底部文字協定說明（第四輪更正：先前的「Classic tile 索引」診斷有誤）
 
-底部文字滾動區使用 **Classic mode tile 索引**（非 ASCII）。Mac 原版以 `textPort` bitmap 渲染 tile 索引；SDL 移植改用 SDL_ttf，tile 索引被誤解為 ASCII，出現「e7+MITTAR」等含 tile code 前綴的文字。
+**真實根因（已修正）**：底部文字並非走 Classic tile bitmap 路徑。`U3PrefClassicAppearance` 偏好在移植層回傳 `false`，故 `UPrint()` 走 **非 classic 路徑**（`NewPrint` → `UDrawThemePascalString` → SDL_ttf），全程文字渲染。
 
-- 純 ASCII 文字（如怪物名稱 "MITTAR"、戰鬥音效 "AIEEEEEE!"）可正確顯示。
-- Tile code bytes（如 0x65='e', 0x37='7'）無法在 SDL_ttf 層區分，是已知限制。
-- 修正方向：需為 `textPort` 填入正確字型 bitmap，啟用 Classic mode；或解析 tile 索引協定建立映射表。
+問題出在 `UltimaText.c:366`，非 classic 路徑逐字組字串時做了 `str[++str[0]] = gString[pos] & 0x7F;`。這個 `& 0x7F` 會**砍掉 UTF-8 多位元組中文字的高位元**，把中文打成控制碼亂碼：
+
+| 原文 | UTF-8 bytes | `& 0x7F` 後 | 螢幕呈現 |
+|---|---|---|---|
+| 通 | `e9 80 9a` | `69 00 1a` | `i`+亂碼 |
+| 過 | `e9 81 8e` | `69 01 0e` | 亂碼 |
+| 玩 | `e7 8e a9` | `67 0e 29` | `g)` |
+| 家 | `e5 ae b6` | `65 2e 36` | `e.6` |
+
+⇒ 先前看到的「e7+MITTAR」「g)e.6」其實是「玩家」等中文被 `& 0x7F` 破壞。怪物名稱（MITTAR）等純 ASCII 不受影響，故能正常顯示，造成「tile code 前綴」的錯覺。
+
+**修正**：移除 `UltimaText.c:366` 的 `& 0x7F`（該段已在 `if (!classic)` 分支內，僅影響中文化路徑；ASCII < 0x80 不受影響，UTF-8 ≥ 0x80 完整保留）。診斷方法：在 `CFStringCreateWithPascalString`（真實繪字漏斗）與 `GetPascalStringFromArrayByIndex` 加 env-gated 控制碼偵測 + `backtrace`，定位到 `UPrint` 而非字串表。
+
+**驗證**：`U3_DBG_TEXT=1` 跑戰鬥，含控制碼字串數 `392 → 0`；截圖底部正確顯示「玩家」「命中!」「匕首 攻擊」「未命中!」「北/方向」「通過」。
+
+> 殘留小議題（非亂碼、不影響可讀性）：底部滾動區由多次 `NewPrint` 片段拼接，截圖偶爾捕捉到拼接中的瞬時重疊；屬版面細節，後續再調。
 
 ## 世界地圖城鎮位置（MAPS 420/PRTY 500）
 
@@ -58,6 +71,7 @@
 3. `plat_resource.c`：MAPS/MONS 419 fallback
 4. `main.c` + `build_game.sh`：crash backtrace + -rdynamic
 5. `qd_text.c`：pascal_to_c 過濾控制字元 0x00–0x1F
+5b. **`UltimaText.c:366`：移除 `& 0x7F`（第四輪）—— 底部文字中文 UTF-8 被砍高位元的根因**
 6. `build_and_verify.sh`：PASS/FAIL + 截圖數最小值
 7. `.gitignore` + `git rm --cached`：shots 清除
 8. `tests/scripts/play.txt`：擴充世界移動腳本
