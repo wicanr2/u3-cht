@@ -93,6 +93,8 @@ static char gDlgDummy;           /* 非 NULL dialog 佔位 */
  * 我們提供 per-item 值/文字 roundtrip 儲存,並讓 ModalDialog 直接回 IDCCD_CREATE,
  * OK 讀回即取得有效角色。IDCCD_CREATE=1, IDCCD_TYPE=21 (職業 popup)。 */
 #define IDCCD_CREATE 1
+#define IDCCD_NAME   3
+#define IDCCD_RACE   20
 #define IDCCD_TYPE   21
 static int gAutoChar = 0;
 static int gAutoRoster = 0;      /* RosterSelect (BASERES+10=410) 自動選空槽 */
@@ -108,6 +110,42 @@ static int roster_valid_count(void) {
 static int first_empty_slot(void) {       /* 第一個空名冊槽 (1-20),無則 0 */
     for (int i = 1; i < 21; i++) if (Player[i][0] <= 22) return i;
     return 0;
+}
+
+/* 互動式角色建立:玩家輸入名字 + 選職業 (職業決定種族/屬性預設,STR# 415)。
+ * 渲染與讀鍵用遊戲既有 UPrintWin/UInputText/UInputNum (headless 由腳本餵鍵)。 */
+extern int  wx, wy;
+extern void UInputText(short x, short y, unsigned char *dest, short maxChar, Boolean numOnly);
+extern short UInputNum(short x, short y);
+extern void UPrintWin(unsigned char *gString);
+extern void GetIndString(unsigned char *theString, SInt16 strListID, SInt16 index);
+static void pstr(unsigned char *d, const char *s) {
+    int n = 0; while (s[n] && n < 255) { d[n + 1] = (unsigned char)s[n]; n++; } d[0] = (unsigned char)n;
+}
+static void char_create_interactive(void) {
+    unsigned char buf[256], nm[256];
+    wx = 24; wy = 17;
+    pstr(buf, "\n請輸入名字後按 Enter:\n"); UPrintWin(buf);
+    UInputText(24, 19, nm, 12, false);
+    if (nm[0] > 0) {
+        int n = nm[0]; if (n > 12) n = 12;
+        gItem[IDCCD_NAME].text[0] = (unsigned char)n;
+        for (int i = 1; i <= n; i++) gItem[IDCCD_NAME].text[i] = nm[i];
+    }
+    wx = 24; wy = 20;
+    pstr(buf, "\n職業:1鬥士2牧師3巫師4竊賊\n5聖騎士6野人7雲雀8幻術\n9德魯伊10鍊金11遊俠 選1-11:"); UPrintWin(buf);
+    int c = UInputNum(24, 23);
+    if (c < 1 || c > 11) c = 1;
+    unsigned char ts[256];
+    GetIndString(ts, 400 + 15, (SInt16)c);   /* STR# 415 職業預設 */
+    if (ts[0] >= 14 && gEmptySlot > 0) {
+        gItem[IDCCD_RACE].value = ts[2] - '0' + 1;
+        Player[gEmptySlot][18] = (ts[4] - '0') * 10 + (ts[5] - '0');    /* STR */
+        Player[gEmptySlot][19] = (ts[7] - '0') * 10 + (ts[8] - '0');    /* DEX */
+        Player[gEmptySlot][20] = (ts[10] - '0') * 10 + (ts[11] - '0');  /* INT */
+        Player[gEmptySlot][21] = (ts[13] - '0') * 10 + (ts[14] - '0');  /* WIS */
+    }
+    gItem[IDCCD_TYPE].value = c;
 }
 
 DialogPtr GetNewDialog(SInt16 dialogID, void *storage, WindowPtr behind) {
@@ -164,9 +202,7 @@ void ModalDialog(ModalFilterUPP filter, SInt16 *itemHit) {
         return;
     }
     if (gAutoChar) {
-        /* 空槽職業預設可能為 0;強制 TYPE=1 (與 GetIndString clamp 的 class 1
-         * 屬性一致),並直接送 OK。名字/性別/種族/屬性已由 init 預設妥當。 */
-        gItem[IDCCD_TYPE].value = 1;
+        char_create_interactive();   /* 玩家輸入名字 + 選職業 (重套預設) */
         if (itemHit) *itemHit = IDCCD_CREATE;
         return;
     }

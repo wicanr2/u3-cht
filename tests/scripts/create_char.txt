@@ -17,10 +17,16 @@ W 40
 KO
 U 6
 W 40
-# Create (C) → RosterSelect 自動選空槽 + CharacterCreateDialog 自動建立
+# Create (C) → RosterSelect 自動選空槽 + 互動建立 (輸入名字 + 選職業)
 KC
-W 100
+W 40
+# 輸入名字 MELION + Enter
+KMELION
+R
+W 30
+# 選職業 3 (巫師) + Enter
+K3
 R
 W 60
 R
-W 80
+W 60
