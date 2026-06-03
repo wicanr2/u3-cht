@@ -24,3 +24,4 @@ __pycache__/
 # 存檔 (執行期產生)
 u3save.dat
 u3prefs.txt
+tests/sweep/
