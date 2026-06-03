@@ -1,6 +1,6 @@
 # 可玩性狀態與驗證紀錄
 
-> 更新:2026-06-03（第四輪:底部文字中文亂碼根因修正）
+> 更新:2026-06-03（第五輪:`\p` Pascal 字串字面值修正 + NPC 對話研析）
 
 ## 目前已驗證
 
@@ -100,10 +100,25 @@ docker run --rm --user "$(id -u):$(id -g)" \
 - `CheckAllDead` 函數：只要有一名成員存活（Status='G' or 'P'），不觸發全員死亡流程。
 - 到達地城 (19,31) 的路徑已確認存在（北6→東2→北5→西3），但途中怪物戰鬥使移動延遲，120s 內未完成路徑。
 
+## `\p` Pascal 字串字面值修正（第五輪，clang -fpascal-strings）
+
+上游 243 處 Classic Mac `"\p..."` Pascal 字串字面值（`\p` 應由編譯器轉成長度前綴）：
+
+- **GCC 不支援 `\p`**（也無 `-fpascal-strings`），會把 `\p` 當普通字元 `'p'` → `"\pTERRAFORM"` 變 C 字串 `"pTERRAFORM"`。傳給吃 `Str255` 的函式（`UPrint`/`UPrintWin`/`DrawString`…）時，首位元組 `'p'`(0x70=112) 被當長度 → 讀 112 byte rodata = 亂碼 blob（先前看到的 `Hit/Step/Ouch/DungeonShapes.jpg…` 即此）。
+- **修正**：`docker/Dockerfile` 加 `clang`，`tools/build_game.sh` 改用 `clang -fpascal-strings` 編譯上游 10 檔（compat/plat 仍 gcc，混合連結）。clang 較嚴格，補 `-Wno-implicit-function-declaration -Wno-int-conversion -Wno-incompatible-pointer-types*`（gcc `-w` 本就忽略）。`-fpascal-strings` 只影響 `\p` 字面值，CFSTR 音效/圖名與一般字串不變。
+- **驗證**（U3_DBG_TEXT）：含 `.jpg/.png` 資源 blob 繪字 `20+ → 0`、無 `p` 前綴殘留；底部正確顯示「玩家/北/方向/通過/強盜/匕首 攻擊/命中!/未命中!/西」。
+
+## NPC 對話中文化（#2，研析完成，待城鎮進入才能驗證）
+
+- NPC 對話**不在 `.u3s` 字串表**，而在各地圖的 `'TLKS'` 資源（原始英文 ASCII，NUL 分隔），於 `UltimaMisc.c:909` 載入 `Talk[256]`；`Speak(perNum, shnum)`（`UltimaText.c:691`）走到第 `perNum` 段渲染。
+- 渲染 hook：`UltimaText.c:711` 同樣有 `talk = talk & 0x7F`（與已修的 line 366 同類，會砍 UTF-8 中文）。
+- **未動手原因（依「先驗證再下結論」）**：(a) `Speak` 僅在城鎮/城堡對 NPC 時觸發 → 需先解「進入城鎮」才能 build+verify；(b) 尚未確認原始 talk 資料是否含 0x80–0xFE 高位元組（若有，貿然移除 mask 會改變英文顯示）；(c) `Talk[256]`/`Str255` 對 3-byte/字的中文空間不足，長對話需擴充緩衝。
+- **設計（待實作）**：外部 UTF-8 talk 表 keyed by `(map resid, perNum)`，`Speak` 優先查表、缺則回退原始 `Talk[]`；同時移除 line 711 `& 0x7F` 並把 `outStr` 緩衝放寬。原始 `.ULT/TLKS` 保持不動（避免破壞 offset）。
+
 ## 仍待後續完善
 
-- **進入城鎮/地城**：路徑已規劃（地城 (19,31)），需在怪物包圍下維持移動；城鎮被山脈/水域包圍需船隻。
-- **底部文字 tile code**：需 `textPort` bitmap 或 tile 索引映射表才能正確渲染。
+- **進入城鎮/地城**：路徑已規劃（地城 (19,31)），需在怪物包圍下維持移動；城鎮被山脈/水域包圍需船隻。**亦為 NPC 對話中文化 (#2) 的前置 blocker**。
+- **NPC 對話中文化 (#2)**：見上節，渲染 hook (line 711) + 外部 talk 表 + 緩衝擴充，待城鎮進入後實作驗證。
 - FormPartyDialog 是移植期自動組隊，非正式 SDL 對話框 UI。
 - `WriteResource` 仍是 no-op：角色/隊伍/地圖的持久化未完整。
 - 角色建立、正式存檔/讀檔、更多遊戲命令仍需逐項補齊。

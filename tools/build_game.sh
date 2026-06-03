@@ -26,8 +26,12 @@ fi
 
 CFLAGS="-std=gnu11 -w -O2 -g -include $COMPAT/mac_shim.h -I $COMPAT/fakeinc -I $COMPAT -I $TEXT -I $PLAT -I $SRC $(sdl2-config --cflags)"
 
+# 上游檔以 clang -fpascal-strings 編譯:GCC 不支援 Classic Mac 的 "\p..." Pascal 字串
+# 字面值 (243 處),否則 \p 被當普通字元 'p' → 首位元組 0x70 被當長度 → 讀 112 byte 亂碼。
+# clang 較嚴格,需抑制上游大量隱式宣告/int↔ptr 轉換 (gcc -w 本就忽略)。
+GAME_CFLAGS="$CFLAGS -fpascal-strings -Wno-implicit-function-declaration -Wno-int-conversion -Wno-incompatible-pointer-types -Wno-incompatible-pointer-types-discards-qualifiers"
 GAME="UltimaAutocombat UltimaDngn UltimaGraphics UltimaMacIF UltimaMain UltimaMisc UltimaNew UltimaNewMap UltimaSpellCombat UltimaText"
-for f in $GAME; do gcc $CFLAGS -c $SRC/$f.c -o $OUT/$f.o; done
+for f in $GAME; do clang $GAME_CFLAGS -c $SRC/$f.c -o $OUT/$f.o; done
 # 弱化 UltimaText.c 自帶 Mac 版繪字函式,改用 compat/qd_text.c 的 SDL_ttf 中文版
 objcopy --weaken-symbol=UDrawThemePascalString \
         --weaken-symbol=UThemePascalStringWidth $OUT/UltimaText.o
