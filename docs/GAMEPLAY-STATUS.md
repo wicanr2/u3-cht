@@ -116,6 +116,13 @@ docker run --rm --user "$(id -u):$(id -g)" \
 - 測試工具（env-gated，patches/0002）：`U3_TELEPORT=x,y` 放置隊伍、`U3_DBG_LOC` dump 地點、`U3_DBG_SPEAK=N` 一次性呼叫 `Speak(N,23)`（NPC 會走動，腳本對位不可靠，故用此確定性鉤子驗證對話）。一般遊玩不受影響。
 - 正常導航進城仍受地形限制（山脈/水域需船隻），屬內容/航行議題，非程式 bug。
 
+## 航行 / 船隻導航（#3，移植層已驗證可用）
+
+- 船隻系統為上游 gameplay,移植層編譯且運作:`Board`（按 `B`,`UltimaMain.c:1372`）站在 ship tile `0x2C` 上船 → `Party[1]=0x16`（frigate）→ 可於水上移動（`Party[1]==0x16` 才允許進入水/漩渦）。Board/上馬/啟航訊息（`UPrintMessage` 29-31）已在 `Messages.u3s` 翻譯。
+- 地圖掃描:overworld（MAPS 420）**無**預置船;唯一可登船 ship tile 在城堡 #0 (9,23) 內。符合 U3 設計 —— 海域環繞的城鎮（如海之城 FAWN，resid 410/411）需透過遊戲進程取得船（海戰 / 城堡船）。
+- **驗證**：`U3_TELEPORT=45,17`（水域）+ `U3_DBG_SHIP=1`（設 frigate）→ 隊伍以船型在水上自由移動（步行無法進入水域），截圖確認。
+- 結論:**抵達海域城鎮是遊戲進程（取得船），非 localization 缺陷或移植 bug**;多數城鎮為陸路可達（#1 已驗證）。測試鉤子 `U3_DBG_SHIP` 見 patches/0002。
+
 ## NPC 對話中文化（#2，管線打通 + 樣本已驗證）
 
 - NPC 對話**不在 `.u3s`**，在各地圖 `'TLKS'` 資源（原始英文 ASCII，NUL 分隔），`UltimaMisc.c:909` 載入 `Talk[256]`；`Speak(perNum, shnum)`（`UltimaText.c`）渲染第 `perNum` 段。`LoadUltimaMap` 設 `gCurMapID = resid`（城堡 #0 = 400）。

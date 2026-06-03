@@ -2,7 +2,7 @@ diff --git a/Sources/UltimaMain.c b/Sources/UltimaMain.c
 index 78fe6eb..9bd6b19 100755
 --- a/Sources/UltimaMain.c
 +++ b/Sources/UltimaMain.c
-@@ -1018,6 +1018,14 @@ void Game(void) {
+@@ -1018,6 +1018,15 @@ void Game(void) {
      GetPortraits();
      lastCard = 0x1E;
      GetSosaria();
@@ -14,6 +14,7 @@ index 78fe6eb..9bd6b19 100755
 +    }
 +    { char *_tp = getenv("U3_TELEPORT"); int _tx, _ty;
 +      if (_tp && sscanf(_tp, "%d,%d", &_tx, &_ty) == 2) { xpos = _tx; ypos = _ty; printf("[TP] -> %d,%d\n", _tx, _ty); } }
++    if (getenv("U3_DBG_SHIP")) Party[1] = 0x16; /* frigate:測試水上移動 */
      gUpdateWhere = 3;
      DrawFrame(1);
      ClearUpdatePort();
