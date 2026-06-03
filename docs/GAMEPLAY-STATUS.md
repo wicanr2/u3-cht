@@ -131,10 +131,17 @@ docker run --rm --user "$(id -u):$(id -g)" \
 - **驗證（pristine 上游 → 自動套 2 patch → 實機）**：城堡 #0 NPC#1 原文 `"WEST-8, SOUTH-35, AND AWAIT DAWN!"` → 譯「向西8，向南35，等待黎明！」，截圖底部正確顯示中文。
 - **待辦（純內容）**：抽取各地圖 TLKS 原文 + 翻譯填入 `Talk.json`（目前 1 句樣本）。長對話若超出 `Str255` 需分段，屆時再處理。原始 `.ULT/TLKS` 不動（避免破壞 offset）。
 
+## 存檔 / 讀檔（#4,已實作 + 驗證）
+
+- `WriteResource`（原 no-op）已實作於 `plat_resource.c`:`GetResource` 記錄 live handle→(type,id,len);`WriteResource` 反查身分,把資料寫入存檔 overlay 並持久化到 `u3save.dat`（格式:magic `U3SV` + count + 各筆 type/id/len/data）。
+- `GetResource` 改為 **overlay 優先**:已存檔的 `ROST`（名冊）/`PRTY`（隊伍,含位置 Party[4]/[5]）/`MAPS`+`MONS` 419（目前世界）覆蓋 bundle,跨重啟保留。原始 `MainResources.rsrc` 維持唯讀。
+- **AutoSave 預設開啟**（`cf_bridge.c`,`U3PrefAutoSave`→true）:進入地點時自動存檔（`Enter()`）。測試以 `U3_NOSAVE=1` 關閉保持確定性,`build_and_verify.sh` 已設並清 `u3save.dat`。
+- **驗證（兩段實機）**:RUN1 teleport (50,30) → autosave/U3_DBG_SAVE 寫 `u3save.dat`（10 筆資源）;RUN2 無 teleport → 「存檔載入:10 筆」,隊伍位置還原為 **(50,30)**（預設應為 42,20）。進城堡 autosave 亦正常觸發。
+- 重置存檔:刪除 `u3save.dat` 即回到初始 bundle 狀態。
+
 ## 仍待後續完善
 
-- **NPC 對話全量翻譯**：管線已通（見上節），剩抽取各地圖 TLKS 原文 + 翻譯填 `Talk.json`（目前僅 1 句樣本）。
-- **正常導航進城**：受地形限制（山脈/水域需船隻），屬航行系統，非中文化範圍。
-- FormPartyDialog 是移植期自動組隊，非正式 SDL 對話框 UI。
-- `WriteResource` 仍是 no-op：角色/隊伍/地圖的持久化未完整。
-- 角色建立、正式存檔/讀檔、更多遊戲命令仍需逐項補齊。
+- **NPC 對話全量翻譯**:151 句已全譯（見「NPC 對話中文化」節更新)。
+- **正常導航進城**:受地形限制（山脈/水域需船隻),屬航行系統,非中文化範圍（#3 已驗證船隻可用）。
+- FormPartyDialog 是移植期自動組隊,非正式 SDL 對話框 UI。
+- 角色建立 UI、更多遊戲命令、選單按鈕圖片中文化仍可逐項補齊。

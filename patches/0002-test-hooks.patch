@@ -2,7 +2,7 @@ diff --git a/Sources/UltimaMain.c b/Sources/UltimaMain.c
 index 78fe6eb..9bd6b19 100755
 --- a/Sources/UltimaMain.c
 +++ b/Sources/UltimaMain.c
-@@ -1018,6 +1018,15 @@ void Game(void) {
+@@ -1018,6 +1018,16 @@ void Game(void) {
      GetPortraits();
      lastCard = 0x1E;
      GetSosaria();
@@ -15,15 +15,18 @@ index 78fe6eb..9bd6b19 100755
 +    { char *_tp = getenv("U3_TELEPORT"); int _tx, _ty;
 +      if (_tp && sscanf(_tp, "%d,%d", &_tx, &_ty) == 2) { xpos = _tx; ypos = _ty; printf("[TP] -> %d,%d\n", _tx, _ty); } }
 +    if (getenv("U3_DBG_SHIP")) Party[1] = 0x16; /* frigate:測試水上移動 */
++    if (getenv("U3_DBG_LOC") || getenv("U3_DBG_SAVE")) printf("[POS] Game entry xpos=%d ypos=%d\n", xpos, ypos);
      gUpdateWhere = 3;
      DrawFrame(1);
      ClearUpdatePort();
-@@ -1036,6 +1044,8 @@ void Game(void) {
+@@ -1036,6 +1046,10 @@ void Game(void) {
          ShowChars(false);
          CheckAllDead();
          DrawPrompt();
 +        { static int _spoke = 0; char *_sp = getenv("U3_DBG_SPEAK");
 +          if (_sp && !_spoke && Party[3] != 0) { _spoke = 1; Speak(atoi(_sp), 23); } }
++        { static int _saved = 0; char *_sv = getenv("U3_DBG_SAVE");
++          if (_sv && !_saved && Party[3] == 0) { _saved = 1; Party[4] = xpos; Party[5] = ypos; PutParty(); PutRoster(); PutSosaria(); printf("[SAVE] @%d,%d\n", xpos, ypos); } }
          gMouseState = 1;
          count = 60; /* SUPPOSED TO BE 0x25! */
          Boolean allowDiagonal = !(CFPreferencesGetAppBooleanValue(U3PrefNoDiagonals, kCFPreferencesCurrentApplication, NULL));

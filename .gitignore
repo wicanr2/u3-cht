@@ -19,3 +19,6 @@ assets/TimeLord.jpg
 
 # Python
 __pycache__/
+
+# 存檔 (執行期產生)
+u3save.dat

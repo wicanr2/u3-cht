@@ -9,6 +9,9 @@ echo "[bv] 重建 build/u3 ..."
 bash /work/u3-cht/tools/build_game.sh >/tmp/build.log 2>&1 || { echo "建置失敗:"; tail -20 /tmp/build.log; exit 1; }
 echo "[bv] 建置 OK"
 export XDG_RUNTIME_DIR=/tmp U3_LANG=zh-Hant
+# 測試保持確定性:關閉 autosave 並清除舊存檔,避免跨 run 狀態污染。
+export U3_NOSAVE=1
+rm -f /work/u3-cht/u3save.dat
 export U3_SHOT_DIR=/work/u3-cht/tests/shots U3_SHOT_EVERY="$EVERY"
 export U3_SCRIPT="/work/u3-cht/$SCRIPT"
 cd /work/u3-cht
