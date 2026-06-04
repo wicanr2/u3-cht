@@ -159,17 +159,67 @@ void U3_DrawUTF8(const char *utf8, SInt16 h, SInt16 v, SInt16 ptSize) {
 extern CGrafPtr mainPort;
 void U3_DrawTextLabel(const char *zh, int left, int top, int right, int bottom);
 
-/* 9 個主選單/Organize 按鈕 (Buttons.png) 的中文標籤,butNum 對應見 DrawButton。 */
+/* 在 [textTop,bottom] 文字帶內「逐列重建背景」抹去烘焙英文,再置中畫中文。
+ * 逐列取左右 margin 較亮像素當該列底色 (英文為深色;取較亮者避開字身),只填該帶 →
+ * 保留上方插畫 (textTop 以上不動) 與按鈕漸層/bevel 質感 (逐列保留垂直漸層)。 */
+static void label_reconstruct(const char *zh, int left, int top, int right, int bottom,
+                              int textTop, int cr, int cg, int cb) {
+    if (!zh || !*zh) return;
+    CGrafPtr p = mainPort;
+    if (!p || !p->surface) return;
+    SDL_Surface *s = p->surface;
+    int w = right - left, h = bottom - top;
+    if (w < 8 || h < 8) return;
+    if (left < 0 || top < 0 || right > s->w || bottom > s->h) return;
+    int stride = s->pitch / 4;
+    Uint32 *px = (Uint32 *)s->pixels;
+    const int pad = 3;                       /* 內縮避開外框/圓角 bevel */
+    int sxL = left + pad, sxR = right - 1 - pad;
+    int fy0 = textTop + pad; if (fy0 < top + pad) fy0 = top + pad;
+    int fy1 = bottom - pad;
+    int fx0 = left + pad, fx1 = right - pad;
+    for (int y = fy0; y < fy1; y++) {
+        Uint32 cl = px[y * stride + sxL], crr = px[y * stride + sxR];
+        int lumL = ((cl >> 16) & 255) + ((cl >> 8) & 255) + (cl & 255);
+        int lumR = ((crr >> 16) & 255) + ((crr >> 8) & 255) + (crr & 255);
+        Uint32 bg = (lumL >= lumR) ? cl : crr;   /* 較亮者 = 底色 (避開深色英文) */
+        for (int x = fx0; x < fx1; x++) px[y * stride + x] = bg;
+    }
+    int regTop = textTop, regH = bottom - textTop;
+    int size = (int)(regH * 0.5);
+    if (size < 12) size = 12;
+    if (size > 22) size = 22;
+    int tw = utf8_width(zh, size);
+    TTF_Font *f = font_for_size(size);
+    int asc = f ? TTF_FontAscent(f) : size;
+    int fh = f ? TTF_FontHeight(f) : size;
+    int x = left + (w - tw) / 2;
+    int y = regTop + (regH - fh) / 2 + asc;
+    CGrafPtr save = CurrentPort();
+    SetGWorld(mainPort, NULL);
+    mainPort->fgColor.red = (unsigned short)(cr << 8);
+    mainPort->fgColor.green = (unsigned short)(cg << 8);
+    mainPort->fgColor.blue = (unsigned short)(cb << 8);
+    draw_utf8_at(zh, x, y, size);
+    SetGWorld(save, NULL);
+}
+
+/* 9 個主選單/Organize 按鈕 (Buttons.png) 的中文標籤,butNum 對應見 DrawButton。
+ * 大按鈕 0/1/2/8 = 上方插畫 + 下方英文 → 只重建下方 ~47% 文字帶,保留插畫;
+ * 小按鈕 3-7 = 純文字 → 逐列重建整顆 (保留漸層)。pressed/dim 由即時取樣底色自動相容。 */
 void U3_DrawButtonLabel(int butNum, int left, int top, int right, int bottom) {
     static const char *kLabel[] = {
         "返回畫面", "編組隊伍", "啟程冒險", "建立角色", "刪除角色",
         "組成隊伍", "解散隊伍", "返回", "調整選項",
     };
     if (butNum < 0 || butNum > 8) return;
-    U3_DrawTextLabel(kLabel[butNum], left, top, right, bottom);
+    int hasIcon = (butNum == 0 || butNum == 1 || butNum == 2 || butNum == 8);
+    int textTop = hasIcon ? top + (int)((bottom - top) * 0.53) : top;   /* 插畫佔上方 53% */
+    label_reconstruct(kLabel[butNum], left, top, right, bottom, textTop, 0, 0, 0);
 }
 
-/* 在 mainPort 的矩形內取樣底色蓋掉烘焙英文,再以指定顏色置中畫中文。 */
+/* 在 mainPort 的矩形內取樣底色「整塊」蓋掉烘焙英文,再以指定顏色置中畫中文。
+ * 用於實心標題列 (如 Ztats「角色記錄」藍底),無插畫/漸層需保留。 */
 void U3_DrawTextLabelC(const char *zh, int left, int top, int right, int bottom,
                        int cr, int cg, int cb) {
     if (!zh || !*zh) return;
@@ -201,8 +251,9 @@ void U3_DrawTextLabelC(const char *zh, int left, int top, int right, int bottom,
     draw_utf8_at(zh, x, y, size);
     SetGWorld(save, NULL);
 }
+/* 小按鈕中文標籤 (如 Ztats 分配食物/收集金幣):逐列重建保留按鈕漸層質感。 */
 void U3_DrawTextLabel(const char *zh, int left, int top, int right, int bottom) {
-    U3_DrawTextLabelC(zh, left, top, right, bottom, 0, 0, 0);   /* 黑字 (按鈕) */
+    label_reconstruct(zh, left, top, right, bottom, top, 0, 0, 0);   /* 黑字,純文字按鈕 */
 }
 SInt16 U3_UTF8Width(const char *utf8, SInt16 ptSize) {
     return (SInt16)utf8_width(utf8, ptSize);
