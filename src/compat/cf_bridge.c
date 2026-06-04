@@ -85,10 +85,23 @@ Boolean CFPreferencesGetAppBooleanValue(CFStringRef key, CFStringRef appID, Bool
  * (FullScreen/視窗座標/DisplayMode 等) 不適用 SDL 移植,維持 no-op 避免污染與不穩。 */
 static int pref_persist(const char *k) {
     static const char *wl[] = { "SoundInactive", "MusicInactive", "SpeechInactive",
-                                "ManualCombat", "SpeedUnconstrain", "AutoSave" };
+                                "ManualCombat", "SpeedUnconstrain", "AutoSave",
+                                "GameSpeed" };   /* 遊戲速度檔位 (fps cap:20/30/60) */
     for (unsigned i = 0; i < sizeof(wl) / sizeof(wl[0]); i++)
         if (strcmp(k, wl[i]) == 0) return 1;
     return 0;
+}
+
+/* 供 main.c 直接讀寫 long 偏好 (遊戲速度);走同一持久化檔。 */
+long U3_PrefGetLong(const char *k, long dflt) {
+    prefs_load();
+    long *p = k ? pref_find(k) : NULL;
+    return p ? *p : dflt;
+}
+void U3_PrefSetLong(const char *k, long v) {
+    if (!k) return;
+    prefs_load();
+    pref_set(k, v);
 }
 void CFPreferencesSetAppValue(CFStringRef key, CFTypeRef value, CFStringRef appID) {
     (void)appID;

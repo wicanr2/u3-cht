@@ -13,6 +13,7 @@
 #include <SDL.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 /* ===== 視窗 ===== */
 /* 用 compat NewGWorld 建一塊與 bounds 同尺寸的 GrafPort 當視窗緩衝。 */
@@ -467,6 +468,8 @@ void GameOptionsDialog(void) {
     extern Boolean CFPreferencesGetAppBooleanValue(CFStringRef, CFStringRef, Boolean *);
     extern CFStringRef U3PrefSoundInactive, U3PrefMusicInactive, U3PrefManualCombat,
                        U3PrefSpeedUnconstrain, kCFPreferencesCurrentApplication;
+    extern int  U3_GetGameSpeedFps(void);
+    extern void U3_SetGameSpeedFps(int fps);
     #define PREF_OFF(k) CFPreferencesGetAppBooleanValue(k, kCFPreferencesCurrentApplication, NULL)
     if (getenv("U3_DBG_SCENE")) fprintf(stderr, "[SCENE] options-open\n");
     unsigned char buf[256];
@@ -476,12 +479,20 @@ void GameOptionsDialog(void) {
         Boolean mus  = !PREF_OFF(U3PrefMusicInactive);
         Boolean autc = !PREF_OFF(U3PrefManualCombat);
         Boolean fast =  PREF_OFF(U3PrefSpeedUnconstrain);
+        int fps = U3_GetGameSpeedFps();
+        const char *spd = (fps >= 60) ? "快" : (fps >= 30) ? "中" : "慢";
         char t[256];
-        snprintf(t, sizeof(t), "\n遊戲設定 (數字切換,0 返回):\n 1 音效 [%s]\n 2 音樂 [%s]\n"
-                 " 3 自動戰鬥 [%s]\n 4 快速移動 [%s]",
-                 snd ? "開" : "關", mus ? "開" : "關", autc ? "開" : "關", fast ? "開" : "關");
+        /* 逐行繪製,各行各自 UPrintWin 於明確 wy (13-18)。
+         * 不用單一含 \n 的長字串:UPrint 對多換行會逐 UIncTy 累加 ty,
+         * 6 行會讓末行落到 ty=20,NewPrint 在該列會卡住 (上游繪字邊界問題);
+         * 逐行則每次 ty=wy 固定、單次 NewPrint,ty 不超過 18,穩定。 */
         ClearBottom();
-        wx = 24; wy = 14; pstr(buf, t); UPrintWin(buf);
+        wx = 24; wy = 13; pstr(buf, "遊戲設定 (數字切換,0返回):"); UPrintWin(buf);
+        snprintf(t, sizeof(t), " 1 音效 [%s]",     snd  ? "開" : "關"); wx = 24; wy = 14; pstr(buf, t); UPrintWin(buf);
+        snprintf(t, sizeof(t), " 2 音樂 [%s]",     mus  ? "開" : "關"); wx = 24; wy = 15; pstr(buf, t); UPrintWin(buf);
+        snprintf(t, sizeof(t), " 3 自動戰鬥 [%s]", autc ? "開" : "關"); wx = 24; wy = 16; pstr(buf, t); UPrintWin(buf);
+        snprintf(t, sizeof(t), " 4 快速移動 [%s]", fast ? "開" : "關"); wx = 24; wy = 17; pstr(buf, t); UPrintWin(buf);
+        snprintf(t, sizeof(t), " 5 速度 [%s]",     spd);                wx = 24; wy = 18; pstr(buf, t); UPrintWin(buf);
         ForceUpdateMain();
         char k = CursorKey(false);
         if (k > 95) k -= 32;
@@ -490,6 +501,9 @@ void GameOptionsDialog(void) {
             case '2': HandleSpecialChoice(2); break;   /* MUSICID */
             case '3': HandleSpecialChoice(5); break;   /* AUTOCOMBATID */
             case '4': HandleSpecialChoice(4); break;   /* CONSTRAINID */
+            case '5':   /* 速度循環 慢(20)→中(30)→快(60)→慢 */
+                U3_SetGameSpeedFps(fps >= 60 ? 20 : fps >= 30 ? 60 : 30);
+                break;
             case '0': case 13: case 27: case 'Q': done = 1; break;
         }
     }

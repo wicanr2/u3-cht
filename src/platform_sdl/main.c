@@ -70,11 +70,27 @@ int gU3Done = 0;                /* SDL_QUIT 時設 1,供事件層查 */
 static int   gShotEvery = 0, gPresentCount = 0, gMaxFrames = 0;
 static char  gShotDir[512] = "";
 
-/* 影格率上限:原 Mac 主迴圈以 ~60 tick/回合計時,移植後每次輪詢都 present,
- * 在快 GPU 上達上千 fps → 回合/動畫快約 16 倍。把 present 節流到 ~60fps,
- * 使「count=60 次輪詢 ≈ 1 秒/回合」回到原速。U3_FPS_CAP=0 可關閉 (供無頭測試)。*/
-static Uint32 gFrameMinMs = 16;     /* 1000/60 ≈ 16ms */
+/* 影格率上限 = 遊戲速度節流。原 Mac 主迴圈每次輪詢都 present,快 GPU 上達上千 fps
+ * → 回合/動畫快約 16 倍。把 present 節流到固定 fps,使「count=60 次輪詢 ≈ N 秒/回合」。
+ * 速度檔位 (遊戲內「調整選項」可調,存 GameSpeed 偏好):
+ *   慢=20fps(~3s/回合,最接近 8086 DOS 慢板,預設)、中=30fps(~2s)、快=60fps(~1s)。
+ * U3_FPS_CAP 環境變數覆寫一切 (=0 關閉節流,供無頭測試)。 */
+#define U3_SPEED_DEFAULT 20
+static Uint32 gFrameMinMs = 1000 / U3_SPEED_DEFAULT;
 static Uint32 gLastPresentMs = 0;
+
+extern long U3_PrefGetLong(const char *k, long dflt);
+extern void U3_PrefSetLong(const char *k, long v);
+
+/* 目前速度 fps (0 = 不節流)。供選項對話顯示/循環。 */
+int U3_GetGameSpeedFps(void) {
+    return gFrameMinMs > 0 ? (int)(1000 / gFrameMinMs) : 0;
+}
+/* 設定速度 fps 並持久化 (選項對話呼叫)。 */
+void U3_SetGameSpeedFps(int fps) {
+    gFrameMinMs = (fps > 0) ? (Uint32)(1000 / fps) : 0;
+    U3_PrefSetLong("GameSpeed", fps);
+}
 
 /* 視窗像素座標 → 畫布座標。
  * present 用 RenderCopy(NULL,NULL) 把 gTexW×gTexH 畫布等比拉伸填滿整個視窗,
@@ -153,7 +169,13 @@ int main(int argc, char *argv[]) {
     const char *se = getenv("U3_SHOT_EVERY"); if (se) gShotEvery = atoi(se);
     const char *mf = getenv("U3_MAX_FRAMES"); if (mf) gMaxFrames = atoi(mf);
     const char *fc = getenv("U3_FPS_CAP");
-    if (fc) { int f = atoi(fc); gFrameMinMs = (f > 0) ? (Uint32)(1000 / f) : 0; }
+    if (fc) {   /* 環境變數覆寫 (測試用;=0 關閉節流) */
+        int f = atoi(fc);
+        gFrameMinMs = (f > 0) ? (Uint32)(1000 / f) : 0;
+    } else {    /* 否則用 GameSpeed 偏好 (預設慢 20fps) */
+        long fps = U3_PrefGetLong("GameSpeed", U3_SPEED_DEFAULT);
+        gFrameMinMs = (fps > 0) ? (Uint32)(1000 / fps) : 0;
+    }
 
     gWin = SDL_CreateWindow("Ultima III:末日 (中文版)",
         SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,

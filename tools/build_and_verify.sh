@@ -26,6 +26,8 @@ export XDG_RUNTIME_DIR=/tmp U3_LANG=zh-Hant
 export U3_NOSAVE=1
 # 略過開場動畫直達主選單,使驗證不受 ThreadSleepTicks 動畫時長影響 (可用 U3_SKIPINTRO=0 還原)。
 export U3_SKIPINTRO="${U3_SKIPINTRO:-1}"
+# 關閉影格節流 (GameSpeed 預設 20fps 會拖慢驗證);測試求快不求擬真速度。
+export U3_FPS_CAP="${U3_FPS_CAP:-0}"
 rm -f /work/u3-cht/u3save.dat /work/u3-cht/u3prefs.txt
 export U3_SHOT_DIR=/work/u3-cht/tests/shots U3_SHOT_EVERY="$EVERY"
 export U3_SCRIPT="/work/u3-cht/$SCRIPT"
