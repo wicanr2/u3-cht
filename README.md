@@ -10,6 +10,11 @@ Mac(Carbon / Cocoa / QuickDraw)移植到 **SDL2**,並以 **UTF-8 + SDL_ttf(Noto 
 世界觀、人物、發行史、台灣流通查證、在地化筆記與入門導覽(見下方
 [Ultima III 中文知識庫](#-ultima-iii-中文知識庫))。
 
+> 今年剛過 45，也算正式走到中年了。  
+> 人生總該做點事情留下紀念。  
+>  
+> 希望這些中文翻譯，能讓後來的人更容易認識那些經典 RPG，知道它們曾經有多迷人。
+
 > 《Ultima III: Exodus》(EA 官方繁中名 **《創世紀3:魔胎》**)由 Richard Garriott 設計、
 > 1983 年 Origin Systems 於 Apple II 發行,是「黑暗時代三部曲」終章。玩家組成**四人隊伍**,
 > 在 **Sosaria(索薩利亞)** 追查並終結 Mondain 與 Minax 的造物 **Exodus**。
