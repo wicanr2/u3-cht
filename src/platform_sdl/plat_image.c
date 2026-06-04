@@ -81,6 +81,8 @@ OSErr GetGraphicsImporterForFile(const FSSpec *fss, ComponentInstance *giOut) {
     SDL_Surface *conv = SDL_ConvertSurfaceFormat(raw, SDL_PIXELFORMAT_ARGB8888, 0);
     SDL_FreeSurface(raw);
     if (!conv) { *giOut = NULL; return fnfErr; }
+    if (getenv("U3_DBG_IMG")) fprintf(stderr, "[IMG] %s -> %dx%d pitch=%d (w*4=%d)\n",
+                                      path, conv->w, conv->h, conv->pitch, conv->w * 4);
 
     U3Importer *imp = (U3Importer *)calloc(1, sizeof(U3Importer));
     imp->surface = conv;
