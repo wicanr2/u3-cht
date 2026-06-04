@@ -33,4 +33,8 @@ SInt16   UThemePascalStringWidth(ConstStr255Param inPString, ThemeFontID inFontI
 void   U3_DrawUTF8(const char *utf8, SInt16 h, SInt16 v, SInt16 ptSize);
 SInt16 U3_UTF8Width(const char *utf8, SInt16 ptSize);
 
+/* F1 指令表 overlay:於 SDL_Renderer 上覆蓋繁中指令表 (main.c present 時呼叫)。 */
+struct SDL_Renderer;
+void U3_DrawHelpOverlay(struct SDL_Renderer *ren, int winW, int winH);
+
 #endif /* U3_COMPAT_QD_TEXT_H */

@@ -66,6 +66,7 @@ static SDL_Texture  *gTex;
 static int gTexW, gTexH;
 
 int gU3Done = 0;                /* SDL_QUIT 時設 1,供事件層查 */
+int gHelpOverlay = 0;           /* F1 指令表 overlay 開關 (plat_event.c 切換) */
 
 static int   gShotEvery = 0, gPresentCount = 0, gMaxFrames = 0;
 static char  gShotDir[512] = "";
@@ -126,6 +127,30 @@ void U3_PlatPresent(void) {
     SDL_UpdateTexture(gTex, NULL, s->pixels, s->pitch);
     SDL_RenderClear(gRen);
     SDL_RenderCopy(gRen, gTex, NULL, NULL);
+    if (gHelpOverlay) {   /* F1 指令表覆蓋於遊戲畫面之上 (純視覺) */
+        int ww = 0, wh = 0;
+        SDL_GetWindowSize(gWin, &ww, &wh);
+        U3_DrawHelpOverlay(gRen, ww, wh);
+    }
+
+    /* 截圖:overlay 開啟時,從 renderer 讀回 (才含 overlay);否則存遊戲畫布 surface
+     * (與既有 smoke 行為一致)。在 RenderPresent 前讀 backbuffer。 */
+    gPresentCount++;
+    if (gShotEvery > 0 && gShotDir[0] && (gPresentCount % gShotEvery) == 0) {
+        char path[640];
+        snprintf(path, sizeof(path), "%s/frame_%05d.png", gShotDir, gPresentCount);
+        SDL_Surface *cap = NULL;
+        if (gHelpOverlay) {
+            int rw = 0, rh = 0;
+            SDL_GetRendererOutputSize(gRen, &rw, &rh);
+            cap = SDL_CreateRGBSurfaceWithFormat(0, rw, rh, 32, SDL_PIXELFORMAT_ARGB8888);
+            int rr = (cap) ? SDL_RenderReadPixels(gRen, NULL, SDL_PIXELFORMAT_ARGB8888,
+                                                  cap->pixels, cap->pitch) : -2;
+            if (rr != 0) { if (cap) SDL_FreeSurface(cap); cap = NULL; }
+        }
+        IMG_SavePNG(cap ? cap : s, path);
+        if (cap) SDL_FreeSurface(cap);
+    }
     SDL_RenderPresent(gRen);
 
     /* 影格率節流:維持每格至少 gFrameMinMs,使遊戲回合/動畫回到原速。*/
@@ -136,12 +161,6 @@ void U3_PlatPresent(void) {
         gLastPresentMs = SDL_GetTicks();
     }
 
-    gPresentCount++;
-    if (gShotEvery > 0 && gShotDir[0] && (gPresentCount % gShotEvery) == 0) {
-        char path[640];
-        snprintf(path, sizeof(path), "%s/frame_%05d.png", gShotDir, gPresentCount);
-        IMG_SavePNG(s, path);
-    }
     if (gMaxFrames > 0 && gPresentCount >= gMaxFrames) {
         fprintf(stderr, "[game_tester] 達 U3_MAX_FRAMES=%d,結束\n", gMaxFrames);
         exit(0);
@@ -168,6 +187,7 @@ int main(int argc, char *argv[]) {
     if (sd && *sd) { snprintf(gShotDir, sizeof(gShotDir), "%s", sd); }
     const char *se = getenv("U3_SHOT_EVERY"); if (se) gShotEvery = atoi(se);
     const char *mf = getenv("U3_MAX_FRAMES"); if (mf) gMaxFrames = atoi(mf);
+    if (getenv("U3_HELP")) gHelpOverlay = 1;   /* 測試:啟動即開啟指令表 overlay (確定性截圖) */
     const char *fc = getenv("U3_FPS_CAP");
     if (fc) {   /* 環境變數覆寫 (測試用;=0 關閉節流) */
         int f = atoi(fc);

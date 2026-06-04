@@ -510,5 +510,8 @@ void GameOptionsDialog(void) {
     #undef PREF_OFF
 }
 
+/* 指令表 overlay 由 qd_text.c:U3_DrawHelpOverlay 於 present 時繪製,
+ * 開關 gHelpOverlay 由 plat_event.c (F1 / 腳本 H) 切換,不在此檔。 */
+
 /* ===== 系統事件雜項 (非 main.c 範圍的) ===== */
 void SystemClick(const EventRecord *event, WindowPtr window) { (void)event; (void)window; }

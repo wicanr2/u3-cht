@@ -11,6 +11,7 @@
 #include <stdlib.h>
 
 extern int gU3Done;
+extern int gHelpOverlay;        /* F1 指令表 overlay 開關 (main.c 定義) */
 void U3_PlatPresent(void);
 extern void HandleMouseDown(void);   /* UltimaMacIF.c:原由 Cocoa 事件迴圈呼叫 */
 extern EventRecord gTheEvent;        /* 上游全域事件記錄 */
@@ -67,6 +68,7 @@ static int script_next_key(void) {
         if (cmd=='W') { gWait = atoi(s); return -1; }
         if (cmd=='U') { gWaitUpdate = atoi(s); return script_next_key(); }
         if (cmd=='C') { int x=0,y=0; if(sscanf(s,"%d %d",&x,&y)==2){gPendClickX=x;gPendClickY=y;} return -1; }
+        if (cmd=='H') { gHelpOverlay = !gHelpOverlay; return -1; }  /* 測試:切換 F1 指令表 (等同按 F1) */
     }
     gScriptDone = 1; fclose(gScript); gScript = NULL;
     return -1;
@@ -137,8 +139,14 @@ Boolean WaitNextEvent(short mask, EventRecord *evt, unsigned long sleep, RgnHand
     while (SDL_PollEvent(&ev)) {
         if (ev.type == SDL_QUIT) { gU3Done = 1; exit(0); }
         if (ev.type == SDL_KEYDOWN && evt) {
+            SDL_Keycode sym = ev.key.keysym.sym;
+            /* F1:切換指令表 overlay (純視覺,不傳給遊戲)。
+             * overlay 開啟時,任意鍵關閉且不轉送 → 關閉鍵不會觸發遊戲動作。
+             * 腳本輸入走前段 (script_next_key),不經此 SDL 路徑,故自動測試不受影響。 */
+            if (sym == SDLK_F1) { gHelpOverlay = !gHelpOverlay; continue; }
+            if (gHelpOverlay)   { gHelpOverlay = 0; continue; }
             int ok = 0;
-            int mc = sdl_to_mac_key(ev.key.keysym.sym, ev.key.keysym.mod, &ok);
+            int mc = sdl_to_mac_key(sym, ev.key.keysym.mod, &ok);
             if (ok) {
                 evt->what = keyDown;
                 evt->message = (UInt32)(mc & charCodeMask);

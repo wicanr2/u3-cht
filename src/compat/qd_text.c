@@ -212,3 +212,85 @@ SInt16 U3_UTF8Width(const char *utf8, SInt16 ptSize) {
 int U3_ThemeFontSize(ThemeFontID id) { return size_for_theme(id); }
 int U3_FontAscent(int ptSize) { TTF_Font *f = font_for_size(ptSize); return f ? TTF_FontAscent(f) : ptSize; }
 int U3_FontHeight(int ptSize) { TTF_Font *f = font_for_size(ptSize); return f ? TTF_FontHeight(f) : ptSize; }
+
+/* ===== F1 指令表 Help overlay =====
+ * 在 main.c 的 present 之後、RenderPresent 之前呼叫,於整個視窗上覆蓋一張半透明
+ * 深色面板 + 繁中指令表。純視覺,不動遊戲狀態;切換由 plat_event.c 的 F1 處理。
+ * 自帶字型 (gFontPath),與遊戲畫面同字庫。 */
+static void overlay_line(SDL_Renderer *ren, TTF_Font *f, const char *s,
+                         int x, int y, SDL_Color col) {
+    if (!s || !*s) return;
+    SDL_Surface *surf = TTF_RenderUTF8_Blended(f, s, col);
+    if (!surf) return;
+    SDL_Texture *tex = SDL_CreateTextureFromSurface(ren, surf);
+    if (tex) {
+        SDL_Rect dst = { x, y, surf->w, surf->h };
+        SDL_RenderCopy(ren, tex, NULL, &dst);
+        SDL_DestroyTexture(tex);
+    }
+    SDL_FreeSurface(surf);
+}
+
+void U3_DrawHelpOverlay(SDL_Renderer *ren, int winW, int winH) {
+    if (!ren) return;
+    /* 半透明深色底 (蓋住整個視窗,留邊框) */
+    SDL_SetRenderDrawBlendMode(ren, SDL_BLENDMODE_BLEND);
+    SDL_SetRenderDrawColor(ren, 0, 0, 16, 222);
+    SDL_Rect bg = { 0, 0, winW, winH };
+    SDL_RenderFillRect(ren, &bg);
+
+    int pt = winH / 26; if (pt < 12) pt = 12; if (pt > 22) pt = 22;
+    TTF_Font *f = font_for_size(pt);
+    if (!f) return;
+    int lh = TTF_FontHeight(f) + 2;
+    SDL_Color title = { 255, 230, 90, 255 };
+    SDL_Color head  = { 120, 220, 255, 255 };
+    SDL_Color body  = { 235, 235, 235, 255 };
+
+    int y = lh;
+    overlay_line(ren, f, "指令表  (按 F1 或任意鍵關閉)", winW / 2 - winW / 4, y, title);
+    y += lh * 2;
+
+    /* 兩欄:左欄移動/進入互動,右欄狀態選單/戰鬥 */
+    int colL = winW / 16, colR = winW / 2 + winW / 16;
+    const char *left[] = {
+        "= 移動 / 進入 =",
+        "方向鍵  移動 / 行走",
+        "空白    等待 (過一回合)",
+        "E  進入城鎮 / 城堡 / 地城",
+        "T  交談 / 交易 (對 NPC)",
+        "B  登乘 (船 / 馬 / 載具)",
+        "X  離開載具 / 下船",
+        "G  開啟寶箱",
+        "K  攀爬 (上 / 下樓)",
+        "D  下樓 (地城)",
+        "U  開鎖    I  點火把",
+        "L  查看 (地城)",
+        NULL };
+    const char *right[] = {
+        "= 狀態 / 選單 =",
+        "Z  角色狀態 (Ztats)",
+        "M  調整隊伍順序",
+        "R  備妥武器  W  穿戴防具",
+        "J  分配金幣  Q  存檔",
+        "F1 顯示 / 關閉本指令表",
+        "",
+        "= 戰鬥 / 法術 =",
+        "A  攻擊      C  施展法術",
+        "F  發射船炮  S  偷竊",
+        "Y  呼喊 (升 / 降帆)",
+        "P  以寶石俯瞰地圖",
+        NULL };
+    int yy = y;
+    for (int i = 0; left[i]; i++) {
+        SDL_Color c = (left[i][0] == '=') ? head : body;
+        overlay_line(ren, f, left[i], colL, yy, c);
+        yy += lh;
+    }
+    yy = y;
+    for (int i = 0; right[i]; i++) {
+        SDL_Color c = (right[i][0] == '=') ? head : body;
+        overlay_line(ren, f, right[i], colR, yy, c);
+        yy += lh;
+    }
+}
