@@ -325,6 +325,7 @@ void U3_DrawHelpOverlay(SDL_Renderer *ren, int winW, int winH) {
         "R  備妥武器  W  穿戴防具",
         "J  分配金幣  Q  存檔",
         "F1 顯示 / 關閉本指令表",
+        "F2 顏色:彩色/綠磷光/琥珀/灰階",
         "",
         "= 戰鬥 / 法術 =",
         "A  攻擊      C  施展法術",

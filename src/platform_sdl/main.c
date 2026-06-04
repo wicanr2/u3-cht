@@ -93,6 +93,55 @@ void U3_SetGameSpeedFps(int fps) {
     U3_PrefSetLong("GameSpeed", fps);
 }
 
+/* ===== 畫面顏色模式 (renderer 層濾鏡) =====
+ * 原生多平台 tileset 切換 (U3PrefTileSet) 在上游影像管線渲染異常 (palette PNG 經
+ * GetGraphicTiledFile 的 GWorld/tile 佈局鏈失真),故單色/復古觀感改在 present 出口
+ * 逐像素套色:取亮度 y 後重新上色,不依賴 tileset。中文與畫面一起轉換 → 風格統一。
+ *   0=彩色(原樣) 1=綠磷光(Apple II 單色屏) 2=琥珀(amber CRT) 3=灰階
+ * F2 / 選項對話即時切換並持久化 ColorMode 偏好。 */
+int gColorMode = 0;
+static Uint32 *gFilterBuf = NULL;
+static size_t  gFilterCap = 0;   /* gFilterBuf 容量 (像素數) */
+
+int  U3_GetColorMode(void) { return gColorMode; }
+void U3_SetColorMode(int m) {
+    gColorMode = ((m % 4) + 4) % 4;
+    U3_PrefSetLong("ColorMode", gColorMode);
+}
+void U3_CycleColorMode(void) { U3_SetColorMode(gColorMode + 1); }
+
+/* 逐像素:ARGB8888 (0xAARRGGBB) → 取亮度 y,再依模式重新上色。整數運算。 */
+static void color_filter_apply(const Uint32 *src, Uint32 *dst, size_t n, int mode) {
+    for (size_t i = 0; i < n; i++) {
+        Uint32 p = src[i];
+        int a = (p >> 24) & 0xff, r = (p >> 16) & 0xff,
+            g = (p >> 8) & 0xff,  b = p & 0xff;
+        int y = (r * 77 + g * 150 + b * 29) >> 8;   /* luma (0.299/0.587/0.114) */
+        int nr, ng, nb;
+        switch (mode) {
+            case 1: nr = (y * 40) >> 8; ng = y;           nb = (y * 30) >> 8; break; /* 綠磷光 */
+            case 2: nr = y;             ng = (y * 191) >> 8; nb = 0;           break; /* 琥珀 */
+            default: nr = ng = nb = y;                                        break; /* 灰階 */
+        }
+        dst[i] = ((Uint32)a << 24) | ((Uint32)nr << 16) | ((Uint32)ng << 8) | (Uint32)nb;
+    }
+}
+
+/* 對畫面 surface 套濾鏡,回傳要上傳 texture 的像素緩衝 (彩色模式直接回 s->pixels)。
+ * 僅處理 pitch==w*4 的 ARGB8888 (mainPort 即此);否則保險退回原樣。 */
+static const void *color_filtered_pixels(SDL_Surface *s) {
+    if (gColorMode == 0) return s->pixels;
+    if (s->format->BytesPerPixel != 4 || s->pitch != s->w * 4) return s->pixels;
+    size_t n = (size_t)s->w * s->h;
+    if (gFilterCap < n) {
+        Uint32 *nb = (Uint32 *)realloc(gFilterBuf, n * sizeof(Uint32));
+        if (!nb) return s->pixels;
+        gFilterBuf = nb; gFilterCap = n;
+    }
+    color_filter_apply((const Uint32 *)s->pixels, gFilterBuf, n, gColorMode);
+    return gFilterBuf;
+}
+
 /* 視窗像素座標 → 畫布座標。
  * present 用 RenderCopy(NULL,NULL) 把 gTexW×gTexH 畫布等比拉伸填滿整個視窗,
  * 放大視窗後滑鼠座標需依「畫布/視窗」比例換回畫布座標,否則落點偏移
@@ -124,7 +173,7 @@ void U3_PlatPresent(void) {
          * 滑鼠座標由 U3_MapMouse 依比例換算。*/
         if (gWin) SDL_SetWindowSize(gWin, s->w, s->h);
     }
-    SDL_UpdateTexture(gTex, NULL, s->pixels, s->pitch);
+    SDL_UpdateTexture(gTex, NULL, color_filtered_pixels(s), s->pitch);
     SDL_RenderClear(gRen);
     SDL_RenderCopy(gRen, gTex, NULL, NULL);
     if (gHelpOverlay) {   /* F1 指令表覆蓋於遊戲畫面之上 (純視覺) */
@@ -140,7 +189,8 @@ void U3_PlatPresent(void) {
         char path[640];
         snprintf(path, sizeof(path), "%s/frame_%05d.png", gShotDir, gPresentCount);
         SDL_Surface *cap = NULL;
-        if (gHelpOverlay) {
+        /* overlay 或顏色濾鏡開啟時,從 renderer 讀回 (含 overlay/濾鏡);否則存遊戲畫布 s。 */
+        if (gHelpOverlay || gColorMode != 0) {
             int rw = 0, rh = 0;
             SDL_GetRendererOutputSize(gRen, &rw, &rh);
             cap = SDL_CreateRGBSurfaceWithFormat(0, rw, rh, 32, SDL_PIXELFORMAT_ARGB8888);
@@ -195,6 +245,11 @@ int main(int argc, char *argv[]) {
     } else {    /* 否則用 GameSpeed 偏好 (預設慢 20fps) */
         long fps = U3_PrefGetLong("GameSpeed", U3_SPEED_DEFAULT);
         gFrameMinMs = (fps > 0) ? (Uint32)(1000 / fps) : 0;
+    }
+    {   /* 顏色模式:env U3_COLORMODE 覆寫 (測試),否則 ColorMode 偏好 (0=彩色) */
+        const char *cm = getenv("U3_COLORMODE");
+        gColorMode = cm ? atoi(cm) : (int)U3_PrefGetLong("ColorMode", 0);
+        gColorMode = ((gColorMode % 4) + 4) % 4;
     }
 
     gWin = SDL_CreateWindow("Ultima III:末日 (中文版)",

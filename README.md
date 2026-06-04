@@ -42,6 +42,24 @@ Mac(Carbon / Cocoa / QuickDraw)移植到 **SDL2**,並以 **UTF-8 + SDL_ttf(Noto 
 > 截圖中**預設隊伍角色名**(Tatiana / Roderic / …)為原西式專有名詞、創角輸入提示中的
 > 鍵名 `Enter` 保留原文——詳見 [已知限制](#️-已知限制)。
 
+### 🎨 復古顏色模式(遊戲內按 `F2` 即時切換)
+
+仿單色顯示器 / CRT 觀感的 **renderer 層濾鏡**(取畫面亮度後重新上色),不改 tileset,
+中文與畫面一起轉換 → 單色風格統一。按 **`F2`** 循環四種模式,即時生效並記住設定
+(`ColorMode` 偏好):
+
+| 彩色(預設) | 綠磷光(Apple II 單色屏) |
+|---|---|
+| ![彩色](docs/screenshots/colormode-color-menu.png) | ![綠磷光](docs/screenshots/colormode-green-menu.png) |
+
+| 琥珀(amber CRT) | 灰階 |
+|---|---|
+| ![琥珀](docs/screenshots/colormode-amber-menu.png) | ![灰階](docs/screenshots/colormode-gray-menu.png) |
+
+綠磷光世界地圖實機(中文 sidebar 一併轉為單色):
+
+![綠磷光世界](docs/screenshots/colormode-green-world.png)
+
 ---
 
 ## ⬇️ 下載與執行(Release)
@@ -69,6 +87,7 @@ chmod +x Ultima3-CHT-x86_64.AppImage
 ## 🎮 遊戲操作 / 指令
 
 - **遊戲內按 `F1`** 隨時叫出 / 關閉指令表說明視窗(再按 `F1` 或任意鍵關閉)。
+- **遊戲內按 `F2`** 循環畫面顏色模式:彩色 → 綠磷光 → 琥珀 → 灰階(見上方 [復古顏色模式](#-復古顏色模式遊戲內按-f2-即時切換),設定會記住)。
 - **移動**:方向鍵。**`空白`**:等待一回合(原 Pass)。
 - **進城 / 城堡 / 地城**:走到該地圖格上,按 **`E`**(進入)。起點旁即有城堡與城鎮。
 - **調整選項**:主選單「調整選項」可切換 `1` 音效 / `2` 音樂 / `3` 自動戰鬥 / `4` 快速移動 /

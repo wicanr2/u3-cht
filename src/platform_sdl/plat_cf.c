@@ -227,7 +227,17 @@ CFTypeRef CFDictionaryGetValue(CFDictionaryRef dict, const void *key) {
 
 /* ===== CFPreferences (讀:回 NULL → game 用預設值;寫/同步:no-op) ===== */
 CFTypeRef CFPreferencesCopyAppValue(CFStringRef key, CFStringRef appID) {
-    (void)key; (void)appID;
+    (void)appID;
+    /* TileSet 偏好 — 讓既有 GetGraphics() 多平台 tileset 切換生效。
+     * 原 stub 永遠回 NULL → GetGraphics 鎖死 "Standard" (彩色)。
+     * 單色原始線條模式 POC:以 env U3_TILESET 餵入 tileset 名 (如 "Apple II Mono"
+     * / "Macintosh B&W");env-gated,未設時回 NULL 維持 Standard,不影響正常遊玩。
+     * 回 strdup 字串 (shim CFStringRef=const char*);CFRelease 不 free → 僅啟動時微 leak。
+     * 未來:改接 cf_bridge 字串偏好持久化 + 選項對話切換。 */
+    if (key && strcmp(cf_cstr(key), "TileSet") == 0) {
+        const char *v = getenv("U3_TILESET");
+        if (v && *v) return (CFStringRef)strdup(v);
+    }
     return NULL;
 }
 Boolean CFPreferencesAppSynchronize(CFStringRef appID) { (void)appID; return true; }

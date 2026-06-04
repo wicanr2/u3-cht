@@ -86,7 +86,8 @@ Boolean CFPreferencesGetAppBooleanValue(CFStringRef key, CFStringRef appID, Bool
 static int pref_persist(const char *k) {
     static const char *wl[] = { "SoundInactive", "MusicInactive", "SpeechInactive",
                                 "ManualCombat", "SpeedUnconstrain", "AutoSave",
-                                "GameSpeed" };   /* 遊戲速度檔位 (fps cap:20/30/60) */
+                                "GameSpeed",     /* 遊戲速度檔位 (fps cap:20/30/60) */
+                                "ColorMode" };   /* 畫面顏色模式 (0彩色1綠磷光2琥珀3灰階) */
     for (unsigned i = 0; i < sizeof(wl) / sizeof(wl[0]); i++)
         if (strcmp(k, wl[i]) == 0) return 1;
     return 0;

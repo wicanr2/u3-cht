@@ -69,6 +69,7 @@ static int script_next_key(void) {
         if (cmd=='U') { gWaitUpdate = atoi(s); return script_next_key(); }
         if (cmd=='C') { int x=0,y=0; if(sscanf(s,"%d %d",&x,&y)==2){gPendClickX=x;gPendClickY=y;} return -1; }
         if (cmd=='H') { gHelpOverlay = !gHelpOverlay; return -1; }  /* 測試:切換 F1 指令表 (等同按 F1) */
+        if (cmd=='V') { extern void U3_CycleColorMode(void); U3_CycleColorMode(); return -1; }  /* 測試:循環顏色模式 (等同 F2) */
     }
     gScriptDone = 1; fclose(gScript); gScript = NULL;
     return -1;
@@ -144,6 +145,7 @@ Boolean WaitNextEvent(short mask, EventRecord *evt, unsigned long sleep, RgnHand
              * overlay 開啟時,任意鍵關閉且不轉送 → 關閉鍵不會觸發遊戲動作。
              * 腳本輸入走前段 (script_next_key),不經此 SDL 路徑,故自動測試不受影響。 */
             if (sym == SDLK_F1) { gHelpOverlay = !gHelpOverlay; continue; }
+            if (sym == SDLK_F2) { extern void U3_CycleColorMode(void); U3_CycleColorMode(); continue; }  /* 切換畫面顏色模式 */
             if (gHelpOverlay)   { gHelpOverlay = 0; continue; }
             int ok = 0;
             int mc = sdl_to_mac_key(sym, ev.key.keysym.mod, &ok);
