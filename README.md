@@ -70,13 +70,17 @@ Apple II 彩色 → Apple II 單色 → Macintosh 黑白 → NES**。中文 UI /
 |---|---|
 | ![標準](docs/screenshots/tileset-standard.png) | ![PC VGA](docs/screenshots/tileset-pcvga.png) |
 
-| PC EGA(DOS 16 色) | Commodore 64(紫框) |
+| PC MCGA(DOS 256 色) | PC EGA(DOS 16 色) |
 |---|---|
-| ![PC EGA](docs/screenshots/tileset-pcega.png) | ![C64](docs/screenshots/tileset-c64.png) |
+| ![PC MCGA](docs/screenshots/tileset-pcmcga.png) | ![PC EGA](docs/screenshots/tileset-pcega.png) |
 
-Apple II 單色(原始綠磷光線條 tile,與 F2 綠磷光濾鏡不同 — 這是原始美術):
+| Commodore 64(紫框配色) | Apple II 單色(原始綠磷光線條) |
+|---|---|
+| ![C64](docs/screenshots/tileset-c64.png) | ![Apple II 單色](docs/screenshots/tileset-apple2mono.png) |
 
-![Apple II 單色](docs/screenshots/tileset-apple2mono.png)
+> **Apple II 單色**是原版**原始美術**(綠磷光線條 tile),與 F2 的綠磷光「濾鏡」不同;
+> 兩者可疊加 —— F2 對任意 tileset 套色、F3 換原始平台美術。同一世界位置、同樣的中文
+> sidebar / 底部訊息,在每種圖塊組下都正確顯示。
 
 > 註:此功能依賴上游 `GetGraphics()` 的多平台 tileset 切換機制。移植初期因
 > `mac_shim.h` 缺 CF 函式 prototype,上游隱式宣告回 `int` 截斷了 64-bit 指標,
