@@ -225,18 +225,30 @@ CFTypeRef CFDictionaryGetValue(CFDictionaryRef dict, const void *key) {
     return NULL;
 }
 
+/* ===== 多平台 tileset 名單 (F3 循環切換;index 0=Standard 預設) =====
+ * 對應 assets/graphics/<name>-Tiles.*;GetGraphics 找不到某 tileset 會回退 Standard。
+ * 順序:標準 → DOS (VGA/EGA/CGA) → C64 → Apple II (彩/單色) → Mac 黑白 → NES。 */
+static const char *kTileSets[] = {
+    "Standard", "PC VGA", "PC EGA", "PC CGA", "Commodore 64",
+    "Apple II Color", "Apple II Mono", "Macintosh B&W", "Nintendo"
+};
+int         U3_TileSetCount(void) { return (int)(sizeof(kTileSets) / sizeof(kTileSets[0])); }
+const char *U3_TileSetName(int i) { return (i >= 0 && i < U3_TileSetCount()) ? kTileSets[i] : "Standard"; }
+
 /* ===== CFPreferences (讀:回 NULL → game 用預設值;寫/同步:no-op) ===== */
 CFTypeRef CFPreferencesCopyAppValue(CFStringRef key, CFStringRef appID) {
     (void)appID;
-    /* TileSet 偏好 — 讓既有 GetGraphics() 多平台 tileset 切換生效。
-     * 原 stub 永遠回 NULL → GetGraphics 鎖死 "Standard" (彩色)。
-     * 單色原始線條模式 POC:以 env U3_TILESET 餵入 tileset 名 (如 "Apple II Mono"
-     * / "Macintosh B&W");env-gated,未設時回 NULL 維持 Standard,不影響正常遊玩。
-     * 回 strdup 字串 (shim CFStringRef=const char*);CFRelease 不 free → 僅啟動時微 leak。
-     * 未來:改接 cf_bridge 字串偏好持久化 + 選項對話切換。 */
+    /* TileSet 偏好 — 驅動 GetGraphics() 多平台 tileset 切換 (F3 循環)。
+     * 優先序:env U3_TILESET (測試覆寫) > TileSetIdx 偏好 (F3 持久化) > Standard。
+     * 回 strdup 字串 (shim CFStringRef=const char*);CFRelease 不 free → 僅重載時微 leak。
+     * idx=0 (Standard) 回 NULL → GetGraphics 走 defaultTilesRef。 */
     if (key && strcmp(cf_cstr(key), "TileSet") == 0) {
         const char *v = getenv("U3_TILESET");
         if (v && *v) return (CFStringRef)strdup(v);
+        extern long U3_PrefGetLong(const char *, long);
+        long idx = U3_PrefGetLong("TileSetIdx", 0);
+        if (idx > 0 && idx < U3_TileSetCount())
+            return (CFStringRef)strdup(U3_TileSetName((int)idx));
     }
     return NULL;
 }

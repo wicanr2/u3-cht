@@ -1,0 +1,50 @@
+# F3 圖塊組切換驗證:到世界後用 T (等同 F3) 循環 tileset,每次切換後移動一步觸發重繪 + 截圖。
+# 預期 tile 美術依序變化:標準 → PC VGA → PC EGA → PC CGA → Commodore 64 → ...
+W 120
+R
+W 120
+R
+W 120
+R
+W 120
+R
+W 120
+R
+W 120
+R
+U 5
+W 40
+KO
+U 6
+W 40
+KF
+W 120
+R
+W 40
+U 6
+W 40
+KB
+U 5
+W 40
+KJ
+U 3
+W 120
+# 在世界。循環圖塊組:T 切換 + M 移動觸發重繪 + W 等截圖
+T
+M 30
+W 70
+T
+M 31
+W 70
+T
+M 29
+W 70
+T
+M 28
+W 70
+T
+M 30
+W 70
+T
+M 31
+W 70

@@ -110,6 +110,28 @@ void U3_SetColorMode(int m) {
 }
 void U3_CycleColorMode(void) { U3_SetColorMode(gColorMode + 1); }
 
+/* ===== 圖塊組 (tileset) 切換 (F3) — 循環多平台 tile 美術並重載 =====
+ * TileSetIdx 偏好持久化 (0=Standard);GetGraphics() 依偏好重載 tilesPort/framePort 等。
+ * 重載後標記 gForceFullDraw,下一輪遊戲迴圈重畫整個地圖區即見新美術。 */
+extern void GetGraphics(void);
+extern void DrawMap(unsigned char x, unsigned char y);
+extern void ForceUpdateMain(void);
+extern int   xpos, ypos;
+extern short gUpdateWhere;
+extern int  U3_TileSetCount(void);
+extern const char *U3_TileSetName(int i);
+int  U3_GetTileSetIdx(void) { return (int)U3_PrefGetLong("TileSetIdx", 0); }
+const char *U3_GetTileSetName(void) { return U3_TileSetName(U3_GetTileSetIdx()); }
+void U3_CycleTileSet(void) {
+    long idx = ((long)U3_GetTileSetIdx() + 1) % U3_TileSetCount();
+    U3_PrefSetLong("TileSetIdx", idx);
+    GetGraphics();                       /* 重載 tile 美術 (依新 TileSetIdx) */
+    if (gUpdateWhere == 3) {             /* 世界地圖:即時重畫;其他狀態 (城鎮/戰鬥/地城) 靠下次自然重畫 */
+        DrawMap((unsigned char)xpos, (unsigned char)ypos);
+        ForceUpdateMain();
+    }
+}
+
 /* 逐像素:ARGB8888 (0xAARRGGBB) → 取亮度 y,再依模式重新上色。整數運算。 */
 static void color_filter_apply(const Uint32 *src, Uint32 *dst, size_t n, int mode) {
     for (size_t i = 0; i < n; i++) {

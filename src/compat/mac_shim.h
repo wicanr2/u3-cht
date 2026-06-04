@@ -214,7 +214,19 @@ extern CFStringRef kCFPreferencesCurrentApplication;
 /* 宣告與 src/text/strings.h 對齊;identifier 為 CFStringRef(實為 C 字串) */
 void GetPascalStringFromArrayByIndex(StringPtr pstringPtr, CFStringRef identifier, int index);
 
-/* ===== 平台層原型 (回傳指標/handle/CFTypeRef 者務必正確宣告) ===== */
+/* ===== 平台層原型 (回傳指標/handle/CFTypeRef 者務必正確宣告) =====
+ * CF 函式 prototype 必須在此 (被 -include 到所有上游 .c),否則上游隱式宣告回 int,
+ * 回 64-bit 指標 (CFArrayGetValueAtIndex 等) 者會被截斷 → GetGraphics 目錄掃描錯亂、
+ * tileset 載不進 (clang -Wno-implicit-function-declaration 壓掉了警告所以難察覺)。 */
+CFIndex            CFArrayGetCount(CFArrayRef arr);
+const void        *CFArrayGetValueAtIndex(CFArrayRef arr, CFIndex idx);
+CFTypeRef          CFPreferencesCopyAppValue(CFStringRef key, CFStringRef appID);
+CFURLRef           CFURLCreateCopyAppendingPathComponent(CFAllocatorRef alloc, CFURLRef base,
+                                                         CFStringRef comp, Boolean isDir);
+CFComparisonResult CFStringCompare(CFStringRef a, CFStringRef b, UInt32 flags);
+Boolean            CFStringHasPrefix(CFStringRef s, CFStringRef prefix);
+Boolean            CFURLGetFSRef(CFURLRef url, FSRef *fsr);
+
 #include "../platform_sdl/plat.h"
 
 #endif /* U3_COMPAT_MAC_SHIM_H */

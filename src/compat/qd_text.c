@@ -326,6 +326,7 @@ void U3_DrawHelpOverlay(SDL_Renderer *ren, int winW, int winH) {
         "J  分配金幣  Q  存檔",
         "F1 顯示 / 關閉本指令表",
         "F2 顏色:彩色/綠磷光/琥珀/灰階",
+        "F3 圖塊:標準/DOS/Apple2/C64...",
         "",
         "= 戰鬥 / 法術 =",
         "A  攻擊      C  施展法術",

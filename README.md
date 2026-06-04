@@ -60,6 +60,29 @@ Mac(Carbon / Cocoa / QuickDraw)移植到 **SDL2**,並以 **UTF-8 + SDL_ttf(Noto 
 
 ![綠磷光世界](docs/screenshots/colormode-green-world.png)
 
+### 🖼️ 多平台圖塊組(遊戲內按 `F3` 即時切換)
+
+復刻原版收錄的**多平台 tile 美術**,遊戲內按 **`F3`** 循環,即時生效並記住設定
+(`TileSetIdx` 偏好):**標準 → PC VGA → PC EGA → PC CGA → Commodore 64 →
+Apple II 彩色 → Apple II 單色 → Macintosh 黑白 → NES**。中文 UI / 字型不受影響。
+
+| 標準(預設) | PC VGA(DOS 256 色) |
+|---|---|
+| ![標準](docs/screenshots/tileset-standard.png) | ![PC VGA](docs/screenshots/tileset-pcvga.png) |
+
+| PC EGA(DOS 16 色) | Commodore 64(紫框) |
+|---|---|
+| ![PC EGA](docs/screenshots/tileset-pcega.png) | ![C64](docs/screenshots/tileset-c64.png) |
+
+Apple II 單色(原始綠磷光線條 tile,與 F2 綠磷光濾鏡不同 — 這是原始美術):
+
+![Apple II 單色](docs/screenshots/tileset-apple2mono.png)
+
+> 註:此功能依賴上游 `GetGraphics()` 的多平台 tileset 切換機制。移植初期因
+> `mac_shim.h` 缺 CF 函式 prototype,上游隱式宣告回 `int` 截斷了 64-bit 指標,
+> 導致目錄掃描錯亂、只能載入 Standard;補上 prototype 後全平台 tileset 正確渲染。
+> 詳見 [`docs/單色模式評估.md`](docs/單色模式評估.md)。
+
 ---
 
 ## ⬇️ 下載與執行(Release)
@@ -88,6 +111,7 @@ chmod +x Ultima3-CHT-x86_64.AppImage
 
 - **遊戲內按 `F1`** 隨時叫出 / 關閉指令表說明視窗(再按 `F1` 或任意鍵關閉)。
 - **遊戲內按 `F2`** 循環畫面顏色模式:彩色 → 綠磷光 → 琥珀 → 灰階(見上方 [復古顏色模式](#-復古顏色模式遊戲內按-f2-即時切換),設定會記住)。
+- **遊戲內按 `F3`** 循環多平台圖塊組:標準 → DOS (VGA/EGA/CGA) → C64 → Apple II → Mac 黑白 → NES(見上方 [多平台圖塊組](#️-多平台圖塊組遊戲內按-f3-即時切換),設定會記住)。
 - **移動**:方向鍵。**`空白`**:等待一回合(原 Pass)。
 - **進城 / 城堡 / 地城**:走到該地圖格上,按 **`E`**(進入)。起點旁即有城堡與城鎮。
 - **調整選項**:主選單「調整選項」可切換 `1` 音效 / `2` 音樂 / `3` 自動戰鬥 / `4` 快速移動 /
