@@ -97,6 +97,8 @@ GNU grep 預設把含高位元組的檔當 binary 靜默跳過 → **一律用 `
 
 - **AppImage**:Ubuntu 22.04 容器建置(求 glibc 相容),含資料 + Noto CJK 字型,AppRun 設字型/語言;排除 libc/GPU 驅動,其餘 `.so` 自含。
 - **Windows**:`clang --target=x86_64-w64-mingw32 -fuse-ld=lld -fpascal-strings` + binutils-mingw + gcc-mingw CRT + libsdl.org SDL2/image/ttf/mixer mingw devel;`cp -r assets`(含全部 tileset)+ `.bat` 啟動腳本(設語言/字型)。檔名含空格/`&` 的資產走目錄列舉不經 shell,安全。
+- 🔴 **雙擊 exe 閃退陷阱(必修)**:exe 用相對路徑讀 `assets/`,**依賴啟動工作目錄**。Windows 雙擊 exe、`.bat` 的 `start`、或從別處啟動時 cwd ≠ 解壓目錄 → 找不到 `assets/` → 資源載入後 NULL deref **閃退 (signal 11)**。**wine 從解壓目錄 `cd` 進去再跑不會重現**(工作目錄剛好對),要 `cd /tmp` 再用絕對路徑跑 exe 才複現。修:`main()` 啟動時若「exe 旁有 `assets/`」(`SDL_GetBasePath`+`stat`)就 `chdir` 過去(條件式 → 不破壞 exe 在 build/、assets 在 repo 根的開發/測試);AppImage 任意路徑啟動同樣受惠。
+- 🔴 **字型 fallback**:未設字型環境變數時,別只落到 Linux 系統字型路徑(Windows 不存在 → 中文變方塊)。fallback 到 exe 旁打包的字型(chdir 後相對路徑即可);`.bat` 雖設了字型 env,但使用者常直接雙擊 exe 繞過 bat。
 
 ## 上游修改納管(patch 流)
 
