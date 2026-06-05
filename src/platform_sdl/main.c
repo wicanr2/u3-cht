@@ -19,9 +19,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <signal.h>
+#include <sys/stat.h>   /* stat:偵測 exe 旁是否有 assets/ */
 #ifndef _WIN32
 #include <unistd.h>
 #include <execinfo.h>   /* backtrace:POSIX 限定 (Windows 無) */
+#else
+#include <direct.h>     /* _chdir */
 #endif
 
 /* 崩潰時印 backtrace (除錯用;-g -rdynamic 時有符號名)。Windows 無 backtrace。 */
@@ -249,11 +252,40 @@ int main(int argc, char *argv[]) {
     }
     IMG_Init(IMG_INIT_PNG);
 
+    /* 若 exe 所在目錄含 assets/,把工作目錄切過去 —— 修 Windows 雙擊 u3.exe /
+     * bat 的 start 或從別處啟動時 cwd 非解壓目錄 → 找不到 assets/ → 資源載入
+     * 失敗後崩潰 (signal 11)。開發/測試時 exe 在 build/、assets 在 repo 根
+     * (exe 旁無 assets) → 不切,維持原 cwd;AppImage 亦只在資料就在 exe 旁時才切。 */
+    {
+        char *base = SDL_GetBasePath();
+        if (base) {
+            char probe[1024];
+            struct stat st;
+            snprintf(probe, sizeof(probe), "%sassets", base);
+            if (stat(probe, &st) == 0 && (st.st_mode & S_IFDIR)) {
+#ifdef _WIN32
+                _chdir(base);
+#else
+                if (chdir(base) != 0) { /* 失敗則維持原 cwd */ }
+#endif
+            }
+            SDL_free(base);
+        }
+    }
+
     const char *lang = getenv("U3_LANG");
     Strings_SetLang(lang && *lang ? lang : "zh-Hant");
     Strings_SetRoot("assets/strings");
     const char *font = getenv("U3_FONT");
     if (font && *font) U3_SetFontPath(font);
+    else {   /* 未設 U3_FONT:優先用 exe 旁打包的字型 (Windows zip / AppImage 直接雙擊
+              * exe、沒走 .bat 設環境變數時,否則會落到 Linux 系統字型路徑 → Windows
+              * 找不到 → 中文變方塊)。chdir 已切到 exe 目錄,故用相對路徑即可。
+              * 開發機 repo 根無此檔 → 維持 qd_text DEFAULT_FONT (系統 Noto)。 */
+        struct stat fst;
+        if (stat("assets/fonts/U3Font.ttc", &fst) == 0)
+            U3_SetFontPath("assets/fonts/U3Font.ttc");
+    }
 
     const char *sd = getenv("U3_SHOT_DIR");
     if (sd && *sd) { snprintf(gShotDir, sizeof(gShotDir), "%s", sd); }
