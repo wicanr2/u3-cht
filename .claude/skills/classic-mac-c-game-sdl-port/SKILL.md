@@ -92,6 +92,7 @@ GNU grep 預設把含高位元組的檔當 binary 靜默跳過 → **一律用 `
 - **ASan**:會誤報上游良性溢位,真崩潰看 NULL deref。
 - **截圖陷阱**:`U3_SHOT_DIR` 須先 `mkdir`(否則 `IMG_SavePNG` 靜默失敗 = 0 截圖,易誤判凍結);timeout 殺進程時最後一張 PNG 可能半毀,取倒數第二張。
 - **wine smoke**:Windows exe 用 `xvfb-run wine`,腳本時序可能與真機不同 → 驗渲染用 env 直接設狀態(別只靠腳本熱鍵)。
+- **AppImage headless 驗證**:無 FUSE 時用 `--appimage-extract-and-run`;**務必從「非 AppImage 所在目錄」啟動**(如 `cd /tmp` 再跑絕對路徑 AppImage),否則驗不到上面的「雙擊閃退」修法對 AppImage 是否生效;同時驗「不設字型 env 時中文是否仍正常」(font fallback)。Windows zip 同理:解壓後 `cd /tmp` 再用絕對路徑跑 exe + **不設 U3_FONT**,才是最接近真機雙擊的測法。兩個交付物(`*.AppImage` / `*-windows-x64.zip`)都在 `dist/`(gitignore,靠重新打包產生)。
 
 ## 打包(Docker first)
 
