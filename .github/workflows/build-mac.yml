@@ -1,0 +1,73 @@
+name: build-mac
+
+# 在 GitHub macOS runner 原生編譯 Ultima III 繁中版 Universal .app + .dmg
+#（Linux 無法可靠跨編 Mach-O)。單一 macos-14(Apple Silicon)job 用 clang 一趟
+# -arch arm64 -arch x86_64 出 fat binary,SDL 系列由源碼編 Universal(不用 brew sdl2:
+# 那是架在 SDL3 的 shim,打包後玩家端會黑畫面)。詳見 tools/package_macos.sh。
+
+on:
+  workflow_dispatch:
+  push:
+    tags: [ 'v*' ]
+
+env:
+  U3_UPSTREAM: https://github.com/beastie/ultima3.git
+  U3_COMMIT: fd16e0cd695493348c56fe0a0cd6d684ea255ee6
+  # 從此 Release 的 Windows zip 取回被 .gitignore 的完整場景資產(9 張 .jpg、
+  # 中文 RaceClassInfo.gif、MainResources.rsrc)。這些 LairWare 美術刻意不進 git tree,
+  # 改由 Release 發佈;mac build 由此回填(見專案「引擎與資料分離」政策)。
+  U3_DATA_RELEASE: v1.0
+
+jobs:
+  build:
+    runs-on: macos-14        # Apple Silicon(M1);免費額度內原生 build
+    steps:
+      - name: 取出 cht repo(patches / tools / src / assets)
+        uses: actions/checkout@v4
+
+      - name: 安裝建置工具(cmake / ninja / dylibbundler)
+        run: |
+          brew update
+          brew install cmake ninja dylibbundler || true
+
+      - name: clone 上游 beastie/ultima3(pinned commit)
+        run: |
+          git clone "$U3_UPSTREAM" "$GITHUB_WORKSPACE/../ultima3"
+          git -C "$GITHUB_WORKSPACE/../ultima3" checkout "$U3_COMMIT"
+
+      - name: 回填 gitignore 掉的完整資產(從 Release 的 Windows zip,只補不覆蓋)
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release download "$U3_DATA_RELEASE" -R "$GITHUB_REPOSITORY" \
+            -p '*windows-x64.zip' -O /tmp/w.zip
+          mkdir -p /tmp/wz && unzip -q /tmp/w.zip -d /tmp/wz
+          # cp -Rn:repo 已提交的 assets 保留(較新),只填 repo 缺的(被 gitignore 的)。
+          cp -Rn /tmp/wz/Ultima3-CHT/assets/. "$GITHUB_WORKSPACE/assets/"
+          test -s "$GITHUB_WORKSPACE/assets/MainResources.rsrc"   # 關鍵資源必須到位
+          echo "回填後 assets 缺漏檢查:"
+          for f in Fountain.jpg Shrine.jpg SosariaMap.jpg TimeLord.jpg Rod.jpg \
+                   Disk-Background.jpg CharacterRecord.jpg DungeonShapes.jpg RaceClassInfo.gif; do
+            test -s "$GITHUB_WORKSPACE/assets/$f" || echo "  ⚠ 仍缺 $f"
+          done
+
+      - name: build + 打包 Universal .app / .dmg
+        env:
+          UPSTREAM: ${{ github.workspace }}/../ultima3
+        run: bash tools/package_macos.sh
+
+      - name: 上傳 artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Ultima3-CHT-macos-universal
+          path: |
+            dist/Ultima3-CHT-macos-universal.zip
+            dist/Ultima3-CHT-macos-universal.dmg
+
+      - name: 附到 Release(僅 tag)
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            dist/Ultima3-CHT-macos-universal.zip
+            dist/Ultima3-CHT-macos-universal.dmg

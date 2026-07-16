@@ -107,6 +107,18 @@ chmod +x Ultima3-CHT-x86_64.AppImage
 解壓 Ultima3-CHT-windows-x64.zip,執行其中的 .exe。
 ```
 
+### macOS — Universal .app(arm64 + x86_64)
+```text
+解壓 Ultima3-CHT-macos-universal.zip,把 Ultima3-CHT.app 拖進「應用程式」。
+```
+- 一個 `.app` 同時支援 Apple Silicon 與 Intel Mac,已內含遊戲資料與中文字型,解壓即玩。
+- 首次開啟被 Gatekeeper 擋(「無法驗證開發者」)時,二選一:
+  - 對 App 按右鍵 →「打開」→ 再按一次「打開」。
+  - 終端機:`xattr -dr com.apple.quarantine Ultima3-CHT.app`
+- 也提供 `.dmg` 版本(雙擊掛載後把 App 拖進「應用程式」)。
+- 由 GitHub Actions 的 macOS runner 原生建置(Linux 無法可靠跨編 Mach-O);
+  SDL 系列由源碼編成 Universal,詳見 [`tools/package_macos.sh`](tools/package_macos.sh)。
+
 > 也可依下節「**從原始碼建置**」自行產生 `dist/` 內的可執行檔。
 
 ---
