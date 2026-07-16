@@ -103,9 +103,14 @@ GAME_SUPP="-fpascal-strings -Wno-implicit-function-declaration -Wno-int-conversi
 GAME="UltimaAutocombat UltimaDngn UltimaGraphics UltimaMacIF UltimaMain UltimaMisc UltimaNew UltimaNewMap UltimaSpellCombat UltimaText"
 
 echo "[$(ts)] 編譯上游遊戲邏輯(fat)"
-for f in $GAME; do clang $CF $GAME_SUPP -c "$SRC/$f.c" -o "$OBJ/$f.o"; done
-# 註:繪字漏斗 UDrawThemePascalString/UThemePascalStringWidth 僅定義於 compat/qd_text.c,
-# UltimaText.c 不含其定義,故 macOS 無重複符號、免 objcopy weaken(Linux 那步是防禦性 no-op)。
+# UltimaText.c 自帶 UDrawThemePascalString/UThemePascalStringWidth 的 Mac 實作,與
+# compat/qd_text.c 的 SDL_ttf CJK 版同名 → 重複符號。Linux/Windows 靠 objcopy weaken 化解;
+# macOS 無 objcopy,改編譯期注入 weak 宣告(-include weaken_upstream_text.h)讓上游那份變 weak,
+# 連結時由 qd_text.c 強符號覆蓋。(該檔為 NEL 換行的 Classic Mac 編碼,普通 grep 會漏看其定義。)
+for f in $GAME; do
+  extra=""; [ "$f" = "UltimaText" ] && extra="-include $COMPAT/weaken_upstream_text.h"
+  clang $CF $GAME_SUPP $extra -c "$SRC/$f.c" -o "$OBJ/$f.o"
+done
 
 echo "[$(ts)] 編譯 compat / text / 平台層(fat)"
 for f in $COMPAT/qd_geometry $COMPAT/qd_port $COMPAT/qd_draw $COMPAT/qd_text $COMPAT/cf_bridge $TEXT/strings; do
