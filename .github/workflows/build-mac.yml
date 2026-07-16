@@ -56,8 +56,10 @@ jobs:
           [ -n "$ok" ] || { echo "✗ gh release download 三次皆失敗"; exit 1; }
           ls -l /tmp/w.zip
           rm -rf /tmp/wz && mkdir -p /tmp/wz && unzip -q /tmp/w.zip -d /tmp/wz
-          # cp -Rn:repo 已提交的 assets 保留(較新),只填 repo 缺的(被 gitignore 的)。
-          cp -Rn /tmp/wz/Ultima3-CHT/assets/. "$GITHUB_WORKSPACE/assets/"
+          # 只填 repo 缺的(被 gitignore 的),repo 已提交的 assets 保留。
+          # 用 rsync --ignore-existing 而非 cp -Rn:macOS(BSD)cp -n 跳過已存在檔會回
+          # 非 0 exit(GNU cp 回 0),配 set -e 會讓整步在「跳過第一個既有檔」時就中止。
+          rsync -a --ignore-existing /tmp/wz/Ultima3-CHT/assets/ "$GITHUB_WORKSPACE/assets/"
           test -s "$GITHUB_WORKSPACE/assets/MainResources.rsrc"   # 關鍵資源必須到位
           echo "回填後 assets 缺漏檢查:"
           for f in Fountain.jpg Shrine.jpg SosariaMap.jpg TimeLord.jpg Rod.jpg \
