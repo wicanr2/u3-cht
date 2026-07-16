@@ -10,6 +10,11 @@ on:
   push:
     tags: [ 'v*' ]
 
+# 讓預設 GITHUB_TOKEN 能更新 Release(附加 mac 產物);
+# 否則 softprops/action-gh-release 會被擋「Resource not accessible by integration」。
+permissions:
+  contents: write
+
 env:
   U3_UPSTREAM: https://github.com/beastie/ultima3.git
   U3_COMMIT: fd16e0cd695493348c56fe0a0cd6d684ea255ee6
